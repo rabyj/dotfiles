@@ -1,0 +1,9 @@
+Host *
+    ServerAliveInterval 30
+    ForwardAgent yes
+    IdentityFile ~/.ssh/id_ed25519
+    User rabyj
+Host narval
+    HostName narval.computecanada.ca
+Host ip29
+    HostName ip29.ccs.usherbrooke.ca

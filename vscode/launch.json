@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python : EpiLaP",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "assay",
+                "/home/local/USHERBROOKE/rabj2301/Projects/epilap/input/hparams/saccer3.json",
+                "/home/local/USHERBROOKE/rabj2301/Projects/epilap/input/hdf5_list/saccer3_2016-07/10kb_all_none.list",
+                "/home/local/USHERBROOKE/rabj2301/Projects/epilap/input/chromsizes/saccer3.can.chrom.sizes",
+                "/home/local/USHERBROOKE/rabj2301/Projects/epilap/input/metadata/saccer3_2016-07.json",
+                "/home/local/USHERBROOKE/rabj2301/Projects/epilap/output/logs/saccer3/test"
+            ]
+        }
+    ]
+}

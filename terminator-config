@@ -1,0 +1,80 @@
+[global_config]
+  handle_size = 3
+  geometry_hinting = True
+  title_hide_sizetext = True
+  suppress_multiple_term_dialog = True
+  always_split_with_profile = True
+[keybindings]
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+  [[Kat]]
+    background_darkness = 0.8
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    exit_action = hold
+[layouts]
+  [[default]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 996:27
+      maximised = False
+      fullscreen = False
+      size = 924, 1016
+      title = Terminator
+    [[[child1]]]
+      type = Notebook
+      parent = child0
+      order = 0
+      labels = local, narval
+      last_active_term = 2d687ad0-76cd-4702-b838-c9034c1e0822, d21ff444-751f-4236-898b-adf544c528ce
+      active_page = 0
+    [[[child2]]]
+      type = VPaned
+      parent = child1
+      order = 0
+      position = 486
+      ratio = 0.4989733059548255
+    [[[terminal3]]]
+      type = Terminal
+      parent = child2
+      order = 0
+      profile = Kat
+      title = local - EpiLaP
+      uuid = 2d687ad0-76cd-4702-b838-c9034c1e0822
+      directory = /home/local/USHERBROOKE/rabj2301/Projects/epilap/
+      command = env startup_cmd="code" startup_args="epilap.code-workspace" bash
+    [[[terminal4]]]
+      type = Terminal
+      parent = child2
+      order = 1
+      profile = Kat
+      title = local - git
+      uuid = 949f744d-cc13-4ae6-9ec0-c9af5e3bfb6b
+      directory = /home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/
+      command = env startup_cmd="git" startup_args="status" bash
+    [[[child5]]]
+      type = VPaned
+      parent = child1
+      order = 1
+      position = 486
+      ratio = 0.4989733059548255
+    [[[terminal6]]]
+      type = Terminal
+      parent = child5
+      order = 0
+      profile = Kat
+      title = narval - 1
+      uuid = d21ff444-751f-4236-898b-adf544c528ce
+      command = ssh narval
+    [[[terminal7]]]
+      type = Terminal
+      parent = child5
+      order = 1
+      profile = Kat
+      title = narval - 2
+      uuid = 8f02d83f-b209-465c-9227-c9614deff2e3
+      command = ssh narval
+[plugins]
