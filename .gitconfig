@@ -1,0 +1,7 @@
+# Ceci est le fichier de configuration personnel de Git.
+[user]
+# Veuillez adapter et décommenter les lignes suivantes :
+	name = rabyj
+	email = Joanny.Raby@usherbrooke.ca
+[gc]
+	autoDetach = false

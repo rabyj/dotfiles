@@ -1,0 +1,62 @@
+{
+    "workbench.colorTheme": "Monokai",
+    "python.languageServer": "Pylance",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+
+    "editor.renderWhitespace": "boundary",
+    "files.trimTrailingWhitespace": true,
+    "editor.fontFamily": "'Ubuntu Mono', monospace",
+    "sync.gist": "55f93d2ecc539264d697f33334b77203",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "[python]": {
+        "editor.tabSize": 4
+    },
+    "[markdown]": {
+        "editor.tabSize": 2
+    },
+    "markdownlint.config": {
+        "MD024": { "siblings_only": true },
+        "MD025": false,
+    },
+    "editor.rulers": [80,120],
+    "editor.detectIndentation": false,
+  // Configure glob patterns for excluding files and folders. For example, the files explorer decides which files and folders to show or hide based on this setting. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.vscode": true,
+    "**/__init__.py": true,
+    "**/*.pyc": true,
+    "**/__pycache__": true,
+    "**/venv": true,
+    "**/env": true
+  },
+  // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the `files.exclude` setting. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true
+  },
+  // Configure glob patterns of file paths to exclude from file watching. Patterns must match on absolute paths (i.e. prefix with ** or the full path to match properly). Changing this setting requires a restart. When you experience Code consuming lots of cpu time on startup, you can exclude large folders to reduce the initial load.
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/venv/**": true,
+    "**/env/**": true,
+    "**/logs/**": true,
+    "**/hdf5/**":true
+},
+"workbench.startupEditor": "newUntitledFile",
+"python.defaultInterpreterPath": "/usr/bin/python3",
+"cmake.configureOnOpen": true,
+"editor.suggestSelection": "first",
+"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+"gitlens.views.branches.branches.layout": "list",
+"security.workspace.trust.untrustedFiles": "newWindow",
+"workbench.editor.pinnedTabSizing": "shrink",
+"workbench.editor.scrollToSwitchTabs": true
+}
