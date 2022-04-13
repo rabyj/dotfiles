@@ -125,42 +125,26 @@ fi
 
 
 
-# Add user pylint
-# export PATH=$PATH:$HOME/.local/bin
+
+# -- Convenience commands --
+
+git-update() {
+    git fetch && git status
+}
 
 # automount narval
 alias mount-narval="sshfs -o follow_symlinks rabyj@narval.computecanada.ca:/home/rabyj/ $HOME/Projects/narval-mount/"
 
-# -- Convenience commands --
-alias git-update="git fetch && git status"
-myroot="$HOME/Projects"
-
 # tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
+myroot="$HOME/Projects"
 alias pytorch_source=". ${myroot}/epilap/venv-epilap-pytorch/bin/activate" # for epilap local venv
 
-
-
-
+# Add user pylint
+# export PATH=$PATH:$HOME/.local/bin
 
 # Change the depth of directory showed in terminal line
 export PROMPT_DIRTRIM=2
 
-# # Set the title string at the top of your current terminal window or terminal window tab
-# set-title() {
-#     # If the length of string stored in variable `PS1_BAK` is zero...
-#     # - See `man test` to know that `-z` means "the length of STRING is zero"
-#     if [[ -z "$PS1_BAK" ]]; then
-#         # Back up your current Bash Prompt String 1 (`PS1`) into a global backup variable `PS1_BAK`
-#         PS1_BAK=$PS1
-#     fi
-
-#     # Set the title escape sequence string with this format: `\[\e]2;new title\a\]`
-#     # - See: https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Customizing_the_terminal_window_title
-#     TITLE="\[\e]2;$@\a\]"
-#     # Now append the escaped title string to the end of your original `PS1` string (`PS1_BAK`), and set your
-#     # new `PS1` string to this new value
-#     PS1=${PS1_BAK}${TITLE}
-# }
 
 # Function to allow a user to arbitrarily set the terminal title to anything
 # Example: `set-title this is title 1`
@@ -185,6 +169,3 @@ fi
 if [[ -n "$TITLE_DEFAULT" ]]; then # If length of this is NONzero (see `man test`)
     set-title "$TITLE_DEFAULT"
 fi
-
-# hack to keep a bash open when starting it with a command
-[[ $startup_cmd ]] && { declare +x $startup_cmd; history -s "$startup_cmd $startup_args"; eval "$startup_cmd $startup_args"; }
