@@ -1,0 +1,64 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+alias htopme='htop -u rabyj'
+alias sqme='squeue -u rabyj'
+alias go-git="cd ~/project-rabyj/sources/epi_ml; ls; git status"
+alias go-epilap="cd ~/project-rabyj/epilap; ls"
+
+# vscode-hpc
+#module load cmake cuda scipy-stack/2020a ipykernel
+
+# EpiLaP Tensorflow
+# cuDNN+CUDA for tensorflow-gpu 1.13.1/1.14.0
+# ml nixpkgs/16.09 gcc/7.3.0 # for cuda+cudnn
+# ml cuda/10.0.130 # for cudnn
+# ml cudnn/7.4
+# ml python/3.5.4
+# export LD_LIBRARY_PATH=/cvmfs/soft.computecanada.ca/easybuild/software/2017/avx/Compiler/gcc5.4/cuda/9.0.176/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/gcc-7.3.0/lib:$LD_LIBRARY_PATH
+
+
+# EpiLaP pyTorch
+
+ml python/3.8
+
+
+# Function to allow a user to arbitrarily set the terminal title to anything
+# Example: `set-title this is title 1`
+set-title() {
+    # Set the PS1 title escape sequence; see "Customizing the terminal window title" here:
+    # https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Customizing_the_terminal_window_title
+    TITLE="\[\e]2;$@\a\]"
+    PS1=${PS1_BAK}${TITLE}
+}
+
+# Back up original PS1 Prompt 1 string when ~/.bashrc is first sourced upon bash opening
+if [[ -z "$PS1_BAK" ]]; then # If length of this str is zero (see `man test`)
+    PS1_BAK=$PS1
+fi
+
+# Set the title to a user-specified value if and only if TITLE_DEFAULT has been previously set and
+# exported by the user. This can be accomplished as follows:
+#   export TITLE_DEFAULT="my title"
+#   . ~/.bashrc
+# Note that sourcing the ~/.bashrc file is done automatically by bash each time you open a new bash
+# terminal, so long as it is an interactive (use `bash -i` if calling bash directly) type terminal
+if [[ -n "$TITLE_DEFAULT" ]]; then # If length of this is NONzero (see `man test`)
+    set-title "$TITLE_DEFAULT"
+fi
