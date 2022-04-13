@@ -45,7 +45,7 @@
       title = local - EpiLaP
       uuid = 2d687ad0-76cd-4702-b838-c9034c1e0822
       directory = /home/local/USHERBROOKE/rabj2301/Projects/epilap/
-      command = env startup_cmd="code" startup_args="epilap.code-workspace" bash
+      command = bash --rcfile <(echo ". ~/.bashrc && code epilap.code-workspace ")
     [[[terminal4]]]
       type = Terminal
       parent = child2
@@ -54,7 +54,7 @@
       title = local - git
       uuid = 949f744d-cc13-4ae6-9ec0-c9af5e3bfb6b
       directory = /home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/
-      command = env startup_cmd="git" startup_args="status" bash
+      command = bash --rcfile <(echo ". ~/.bashrc && git-update")
     [[[child5]]]
       type = VPaned
       parent = child1
@@ -68,7 +68,8 @@
       profile = Kat
       title = narval - 1
       uuid = d21ff444-751f-4236-898b-adf544c528ce
-      command = ssh narval
+      command = bash --rcfile <(echo ". ~/.bashrc && ssh narval")
+      directory = ""
     [[[terminal7]]]
       type = Terminal
       parent = child5
@@ -76,5 +77,6 @@
       profile = Kat
       title = narval - 2
       uuid = 8f02d83f-b209-465c-9227-c9614deff2e3
-      command = ssh narval
+      command = bash --rcfile <(echo ". ~/.bashrc && ssh narval")
+      directory = ""
 [plugins]

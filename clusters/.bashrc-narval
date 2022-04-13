@@ -18,8 +18,13 @@ export PATH
 # User specific aliases and functions
 alias htopme='htop -u rabyj'
 alias sqme='squeue -u rabyj'
-alias go-git="cd ~/project-rabyj/sources/epi_ml; ls; git status"
+alias go-git="cd ~/project-rabyj/sources/epi_ml; ls; git-update"
 alias go-epilap="cd ~/project-rabyj/epilap; ls"
+
+git-update() {
+    git fetch && git status
+}
+
 
 # vscode-hpc
 #module load cmake cuda scipy-stack/2020a ipykernel
