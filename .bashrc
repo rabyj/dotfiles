@@ -129,12 +129,18 @@ fi
 # export PATH=$PATH:$HOME/.local/bin
 
 # automount narval
-alias mount-narval='sshfs -o follow_symlinks rabyj@narval.computecanada.ca:/home/rabyj/ $HOME/Projects/narval-mount/'
+alias mount-narval="sshfs -o follow_symlinks rabyj@narval.computecanada.ca:/home/rabyj/ $HOME/Projects/narval-mount/"
 
-# for epilap local venv
-# tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
+# -- Convenience commands --
+alias git-update="git fetch && git status"
 myroot="$HOME/Projects"
-alias pytorch_source=". ${myroot}/epilap/venv-epilap-pytorch/bin/activate"
+
+# tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
+alias pytorch_source=". ${myroot}/epilap/venv-epilap-pytorch/bin/activate" # for epilap local venv
+
+
+
+
 
 # Change the depth of directory showed in terminal line
 export PROMPT_DIRTRIM=2
