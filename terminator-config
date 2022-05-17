@@ -45,7 +45,7 @@
       title = local - EpiLaP
       uuid = 2d687ad0-76cd-4702-b838-c9034c1e0822
       directory = /home/local/USHERBROOKE/rabj2301/Projects/epilap/
-      command = bash --rcfile <(echo ". ~/.bashrc && code epilap.code-workspace ")
+      command = bash --rcfile <(echo ". ~/.bashrc && code EPILAP.code-workspace ")
     [[[terminal4]]]
       type = Terminal
       parent = child2
