@@ -132,6 +132,8 @@ git-update() {
     git fetch && git status
 }
 
+alias htopme="htop -u rabj2301"
+
 # automount narval
 alias mount-narval="sshfs -o follow_symlinks rabyj@narval.computecanada.ca:/home/rabyj/ $HOME/Projects/narval-mount/"
 
