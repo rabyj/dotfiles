@@ -40,9 +40,8 @@ git-update() {
 
 
 # EpiLaP pyTorch
-
 ml python/3.8
-
+ml httpproxy
 
 # Function to allow a user to arbitrarily set the terminal title to anything
 # Example: `set-title this is title 1`
