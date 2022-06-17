@@ -136,6 +136,7 @@ alias htopme="htop -u rabj2301"
 
 # automount narval
 alias mount-narval="sshfs -o follow_symlinks rabyj@narval.computecanada.ca:/home/rabyj/ $HOME/Projects/narval-mount/"
+alias mount-beluga="sshfs -o follow_symlinks rabyj@beluga.computecanada.ca:/home/rabyj/ $HOME/Projects/beluga-mount/"
 
 # tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
 myroot="$HOME/Projects"

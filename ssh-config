@@ -5,5 +5,7 @@ Host *
     User rabyj
 Host narval
     HostName narval.computecanada.ca
+Host beluga
+    HostName beluga.computecanada.ca
 Host ip29
     HostName ip29.ccs.usherbrooke.ca
