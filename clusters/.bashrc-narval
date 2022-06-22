@@ -17,9 +17,16 @@ export PATH
 
 # User specific aliases and functions
 alias htopme='htop -u rabyj'
-alias sqme='squeue -u rabyj'
+
+export SLURM_TIME_FORMAT="%d %H:%M:%S"
+export SACCT_FIELDS="JobID,JobName%30,Timelimit,Elapsed,NCPU,ReqMem,ExitCode,State"
+alias sqme="sacct -X --format=${SACCT_FIELDS}"
+alias sqme2="squeue -u rabyj"
+
 alias go-git="cd ~/project-rabyj/sources/epi_ml; ls; git-update"
 alias go-epilap="cd ~/project-rabyj/epilap; ls"
+alias go-sub="cd ~/project-rabyj/epilap/output/sub; ls"
+alias go-logs="cd ~/project-rabyj/epilap/output/logs; ls"
 
 git-update() {
     git fetch && git status
