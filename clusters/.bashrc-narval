@@ -22,7 +22,7 @@ alias htopme="htop -u rabyj"
 eval "$(thefuck --alias)" #fuck
 
 export SLURM_TIME_FORMAT="%d %H:%M:%S"
-export SACCT_FIELDS="JobID,JobName%30,Timelimit,Elapsed,NCPU,ReqMem,ExitCode,State"
+export SACCT_FIELDS="JobID%8,JobName%30,Timelimit,Elapsed,NCPU%5,ReqMem%7,ExitCode,State%8,Priority%8,Submit%12,Account"
 alias sqme="sacct -X --format=${SACCT_FIELDS}"
 alias sqme2="squeue -u rabyj"
 
