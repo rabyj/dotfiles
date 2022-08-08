@@ -133,6 +133,7 @@ git-update() {
 }
 
 alias htopme="htop -u rabj2301"
+eval "$(thefuck --alias)" #fuck
 
 # automount narval
 alias mount-narval="sshfs -o follow_symlinks rabyj@narval.computecanada.ca:/home/rabyj/ $HOME/Projects/narval-mount/"
