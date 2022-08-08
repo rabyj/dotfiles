@@ -16,7 +16,10 @@ export PATH
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-alias htopme='htop -u rabyj'
+alias ll="ls -hlt"
+alias htopme="htop -u rabyj"
+
+eval "$(thefuck --alias)" #fuck
 
 export SLURM_TIME_FORMAT="%d %H:%M:%S"
 export SACCT_FIELDS="JobID,JobName%30,Timelimit,Elapsed,NCPU,ReqMem,ExitCode,State"
