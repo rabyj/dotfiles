@@ -5,6 +5,9 @@ Host *
     User rabyj
 Host narval
     HostName narval.computecanada.ca
+Host vscode-narval
+    HostName ncXXXXX
+    ProxyJump narval.computecanada.ca
 Host beluga
     HostName beluga.computecanada.ca
 Host ip29
