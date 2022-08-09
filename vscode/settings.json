@@ -1,18 +1,28 @@
 {
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.codeActionsOnSave": {"source.organizeImports": true},
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+      },
+    "isort.args":["--profile", "black"],
     "workbench.colorTheme": "Monokai",
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
-
+    "python.analysis.typeCheckingMode": "basic",
+    "python.linting.pylintArgs": [
+        "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/.pylintrc"
+    ],
     "editor.renderWhitespace": "boundary",
     "files.trimTrailingWhitespace": true,
     "editor.fontFamily": "'Ubuntu Mono', monospace",
     "sync.gist": "55f93d2ecc539264d697f33334b77203",
     "editor.multiCursorModifier": "ctrlCmd",
-    "[python]": {
-        "editor.tabSize": 4
-    },
     "[markdown]": {
+        "editor.tabSize": 2
+    },
+    "[shellscript]": {
         "editor.tabSize": 2
     },
     "markdownlint.config": {
@@ -55,8 +65,12 @@
 "cmake.configureOnOpen": true,
 "editor.suggestSelection": "first",
 "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-"gitlens.views.branches.branches.layout": "list",
 "security.workspace.trust.untrustedFiles": "newWindow",
 "workbench.editor.pinnedTabSizing": "shrink",
-"workbench.editor.scrollToSwitchTabs": true
+"workbench.editor.scrollToSwitchTabs": true,
+"javascript.suggest.autoImports": false,
+"remote.SSH.remotePlatform": {
+    "narval": "linux"
+},
+"vsintellicode.features.python.deepLearning": "enabled",
 }
