@@ -5,7 +5,7 @@
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true,
       },
-    "isort.args":["--profile", "black", "--line-length", "120", "--atomic", "--known-local-folder", "epi_ml"],
+    "isort.args":["--profile", "black", "--atomic", "--known-local-folder", "epi_ml"],
     "workbench.colorTheme": "Monokai",
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
@@ -28,6 +28,7 @@
     "markdownlint.config": {
         "MD024": { "siblings_only": true },
         "MD025": false,
+        "MD033": false,
     },
     "editor.rulers": [80,120],
     "editor.detectIndentation": false,
@@ -64,7 +65,6 @@
 "python.defaultInterpreterPath": "/usr/bin/python3",
 "cmake.configureOnOpen": true,
 "editor.suggestSelection": "first",
-"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 "security.workspace.trust.untrustedFiles": "newWindow",
 "workbench.editor.pinnedTabSizing": "shrink",
 "workbench.editor.scrollToSwitchTabs": true,
@@ -72,5 +72,173 @@
 "remote.SSH.remotePlatform": {
     "narval": "linux"
 },
-"vsintellicode.features.python.deepLearning": "enabled",
+"dash.languageIdToDocsetMap": {
+
+    "css": [
+        "css",
+        "bootstrap",
+        "foundation",
+        "less",
+        "awesome",
+        "cordova",
+        "phonegap"
+    ],
+    "cmake": [
+        "cmake"
+    ],
+    "cpp": [
+        "cpp",
+        "net",
+        "boost",
+        "qt",
+        "cvcpp",
+        "cocos2dx",
+        "c",
+        "manpages"
+    ],
+    "html": [
+        "html",
+        "svg",
+        "css",
+        "bootstrap",
+        "foundation",
+        "awesome",
+        "statamic",
+        "javascript",
+        "jquery",
+        "jqueryui",
+        "jquerym",
+        "angularjs",
+        "backbone",
+        "marionette",
+        "meteor",
+        "moo",
+        "prototype",
+        "ember",
+        "lodash",
+        "underscore",
+        "sencha",
+        "extjs",
+        "knockout",
+        "zepto",
+        "cordova",
+        "phonegap",
+        "yui"
+    ],
+    "javascript": [
+        "javascript",
+        "jquery",
+        "jqueryui",
+        "jquerym",
+        "react",
+        "angularjs",
+        "backbone",
+        "marionette",
+        "meteor",
+        "sproutcore",
+        "moo",
+        "prototype",
+        "bootstrap",
+        "foundation",
+        "lodash",
+        "underscore",
+        "ember",
+        "sencha",
+        "extjs",
+        "titanium",
+        "knockout",
+        "zepto",
+        "yui",
+        "d3",
+        "svg",
+        "dojo",
+        "coffee",
+        "nodejs",
+        "express",
+        "grunt",
+        "mongoose",
+        "moment",
+        "require",
+        "awsjs",
+        "jasmine",
+        "sails",
+        "sinon",
+        "chai",
+        "html",
+        "css",
+        "cordova",
+        "phonegap",
+        "unity3d"
+    ],
+    "latex": [
+        "latex"
+    ],
+    "less": [
+        "less"
+    ],
+    "markdown": [
+        "markdown"
+    ],
+    "perl": [
+        "perl",
+        "manpages"
+    ],
+    "php": [
+        "php",
+        "wordpress",
+        "drupal",
+        "zend",
+        "laravel",
+        "yii",
+        "joomla",
+        "ee",
+        "codeigniter",
+        "cakephp",
+        "phpunit",
+        "symfony",
+        "typo3",
+        "twig",
+        "smarty",
+        "craft",
+        "phpp",
+        "html",
+        "statamic",
+        "mysql",
+        "sqlite",
+        "mongodb",
+        "psql",
+        "redis"
+    ],
+    "python": [
+        "python",
+        "numpy",
+        "scipy",
+        "scikit",
+        "scikit-optimize",
+        "pandas",
+        "matplotlib",
+        "pytorch",
+        "torchmetrics",
+
+    ],
+    "r": [
+        "r"
+    ],
+    "shellscript": [
+        "bash",
+        "manpages"
+    ],
+    "sql": [
+        "mysql",
+        "sqlite",
+        "psql"
+    ],
+    "typescript": [
+        "typescript",
+        "javascript"
+    ],
+},
+"workbench.editor.closeOnFileDelete": true,
+"tabnine.experimentalAutoImports": false,
+"workbench.colorCustomizations": {}
 }
