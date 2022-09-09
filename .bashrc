@@ -141,7 +141,7 @@ alias mount-beluga="sshfs -o follow_symlinks rabyj@beluga.computecanada.ca:/home
 
 # tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
 myroot="$HOME/Projects"
-alias pytorch_source=". ${myroot}/epilap/venv-epilap-pytorch/bin/activate" # for epilap local venv
+alias source-epilap=". ${myroot}/epilap/venv-epilap-pytorch/bin/activate" # for epilap local venv
 
 # Add user pylint
 # export PATH=$PATH:$HOME/.local/bin

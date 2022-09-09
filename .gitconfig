@@ -5,3 +5,5 @@
 	email = Joanny.Raby@usherbrooke.ca
 [gc]
 	autoDetach = false
+[rerere]
+	enabled = true
