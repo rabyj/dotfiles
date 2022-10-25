@@ -133,6 +133,7 @@ git-update() {
 }
 
 alias htopme="htop -u rabj2301"
+alias open="xdg-open"
 eval "$(thefuck --alias)" #fuck
 
 # automount narval
