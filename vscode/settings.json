@@ -1,12 +1,22 @@
 {
+    "update.mode": "default",
     "[python]": {
         "editor.tabSize": 4,
-        "editor.codeActionsOnSave": {"source.organizeImports": true},
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true,
+        "editor.wordWrap": "off",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
       },
-    "isort.args":["--profile", "black", "--atomic", "--known-local-folder", "epi_ml"],
+    "python.formatting.provider": "none",
+    "black-formatter.importStrategy": "fromEnvironment",
+    "isort.args":["--profile", "black", "--atomic", "--known-local-folder", "epi_ml", "-l", "90"],
     "workbench.colorTheme": "Monokai",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.pinnedTabSizing": "shrink",
+    "workbench.editor.scrollToSwitchTabs": true,
+    "workbench.editor.closeOnFileDelete": true,
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
@@ -61,13 +71,10 @@
     "**/logs/**": true,
     "**/hdf5/**":true
 },
-"workbench.startupEditor": "newUntitledFile",
 "python.defaultInterpreterPath": "/usr/bin/python3",
 "cmake.configureOnOpen": true,
 "editor.suggestSelection": "first",
 "security.workspace.trust.untrustedFiles": "newWindow",
-"workbench.editor.pinnedTabSizing": "shrink",
-"workbench.editor.scrollToSwitchTabs": true,
 "javascript.suggest.autoImports": false,
 "remote.SSH.remotePlatform": {
     "narval": "linux"
@@ -238,7 +245,20 @@
         "javascript"
     ],
 },
-"workbench.editor.closeOnFileDelete": true,
 "tabnine.experimentalAutoImports": false,
-"workbench.colorCustomizations": {}
+"terminal.integrated.enableMultiLinePasteWarning": false,
+"notebook.lineNumbers": "on",
+"git.autofetch": true,
+"extensions.autoCheckUpdates": false,
+"editor.minimap.enabled": false,
+"docwriter.progress.trackClasses": true,
+"docwriter.style": "Google",
+"workbench.colorCustomizations": {},
+"settingsSync.ignoredExtensions": [
+    "correctnesslab.dafny-vscode",
+    "golang.go"
+],
+"black-formatter.args": [
+    "-l 90"
+],
 }
