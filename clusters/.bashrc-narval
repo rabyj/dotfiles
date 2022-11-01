@@ -1,4 +1,4 @@
-# .bashrc
+# ~/.bashrc: executed by bash(1) for non-login shells.
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -16,7 +16,7 @@ export PATH
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-alias ll="ls -hlt"
+alias ll="ls -hltr" #reverse time lookup (oldest end), w size prefixes
 alias htopme="htop -u rabyj"
 
 eval "$(thefuck --alias)" #fuck
