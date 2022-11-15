@@ -1,0 +1,45 @@
+{
+	"folders": [
+        {
+            "path": "/home/local/USHERBROOKE/rabj2301/Projects/epilap"
+        },
+        {
+            "path": "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/"
+        },
+        {
+            "path": "/home/local/USHERBROOKE/rabj2301/Documents/notes/"
+        }
+    ],
+    "settings": {
+        "black-formatter.interpreter": ["/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/python"],
+        "black-formatter.args" : ["--config", "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/pyproject.toml"],
+        "isort.interpreter": ["/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/python"],
+        "isort.args": ["--settings-path", "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/pyproject.toml"],
+        "python.defaultInterpreterPath": "/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/python",
+        "python.languageServer": "Pylance",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.linting.pylintPath": "/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/pylint",
+        "python.linting.pylintArgs": [
+            "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/.pylintrc"
+        ],
+        "python.analysis.extraPaths": [
+            "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml",
+        ],
+        "explorer.fileNesting.patterns": {
+            "*.ts": "${capture}.js",
+            "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+            "*.jsx": "${capture}.js",
+            "*.tsx": "${capture}.ts",
+            "tsconfig.json": "tsconfig.*.json",
+            "package.json": "package-lock.json, yarn.lock"
+        },
+        "explorer.fileNesting.enabled": false,
+        "explorer.fileNesting.expand": false,
+        "docwriter.style": "NumPy",
+        "docwriter.progress.trackMethods": false,
+        "docwriter.progress.trackClasses": true,
+        "docwriter.progress.trackTypes": false,
+        "docwriter.progress.trackFunctions": false,
+    }
+}

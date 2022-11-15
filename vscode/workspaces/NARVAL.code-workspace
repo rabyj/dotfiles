@@ -1,0 +1,42 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../scratch/envs"
+		}
+	],
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Python : Estimators-Debug",
+                "type": "python",
+                "request": "launch",
+                "program": "/lustre06/project/6007017/rabyj/sources/epi_ml/epi_ml/python/test/other_estimators_test.py",
+                "console": "integratedTerminal",
+                "justMyCode": true,
+                "envFile": "/lustre06/project/6007017/rabyj/epilap/input/small-test.env",
+                "args": [
+                    "biomaterial_type",
+                    "/lustre06/project/6007017/rabyj/epilap/input/hdf5_list/hg38_2022-epiatlas/estimator-debug.list",
+                    "/lustre06/project/6007017/rabyj/epilap/input/chromsizes/hg38.noy.chrom.sizes",
+                    "/lustre06/project/6007017/rabyj/epilap/input/metadata/merged_EpiAtlas_allmetadatav9.json",
+                    "/lustre07/scratch/rabyj/epilap-logs/2022-epiatlas/estimators-debug",
+                    "--tune",
+                    "--only-svm",
+                    "-n 2"
+                ]
+            },
+            {
+                "name": "Python : Attach",
+                "type": "python",
+                "request": "attach",
+                "processId":"${command:pickProcess}",
+                "justMyCode": true,
+            },
+        ]
+    },
+    "settings": {},
+}
