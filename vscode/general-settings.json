@@ -8,10 +8,10 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": true
         }
-      },
+    },
     "python.formatting.provider": "none",
     "black-formatter.importStrategy": "fromEnvironment",
-    "isort.args":["--profile", "black", "--atomic", "--known-local-folder", "epi_ml", "-l", "90"],
+    "isort.importStrategy": "fromEnvironment",
     "workbench.colorTheme": "Monokai",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.editor.pinnedTabSizing": "shrink",
@@ -254,11 +254,4 @@
 "docwriter.progress.trackClasses": true,
 "docwriter.style": "Google",
 "workbench.colorCustomizations": {},
-"settingsSync.ignoredExtensions": [
-    "correctnesslab.dafny-vscode",
-    "golang.go"
-],
-"black-formatter.args": [
-    "-l 90"
-],
 }

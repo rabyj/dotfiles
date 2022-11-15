@@ -1,0 +1,22 @@
+{
+    "black-formatter.interpreter": ["/home/rabyj/scratch/envs/epilap/bin/python"],
+    "black-formatter.args" : ["--config", "/home/local/USHERBROOKE/rabj2301/Projects/narval-mount/project-rabyj/sources/epi_ml/pyproject.toml"],
+    "isort.interpreter": ["/home/rabyj/scratch/envs/epilap/bin/python"],
+    "isort.args": ["--settings-path", "/home/local/USHERBROOKE/rabj2301/Projects/narval-mount/project-rabyj/sources/epi_ml/pyproject.toml"],
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintPath": "/home/rabyj/scratch/envs/epilap/bin/pylint",
+    "python.linting.pylintArgs": [
+        "--rcfile=/home/rabyj/project-rabyj/sources/epi_ml/.pylintrc"
+    ],
+    "python.venvPath": "/home/rabyj/scratch/envs/",
+    "python.analysis.extraPaths": [
+        "/home/rabyj/scratch/envs/epilap/lib/python3.8/site-packages",
+        "/home/rabyj/project-rabyj/sources/epi_ml"
+    ],
+    "python.autoComplete.extraPaths": [
+        "/home/rabyj/scratch/envs/epilap/lib/python3.8/site-packages",
+        "/home/rabyj/project-rabyj/sources/epi_ml"
+    ],
+    "python.languageServer": "Pylance",
+    "http.proxySupport": "on",
+}
