@@ -21,6 +21,7 @@
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticMode": "openFilesOnly",
     "python.linting.pylintArgs": [
         "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/.pylintrc"
     ],

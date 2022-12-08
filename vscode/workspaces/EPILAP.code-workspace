@@ -21,7 +21,7 @@
         "python.linting.pylintEnabled": true,
         "python.linting.pylintPath": "/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/pylint",
         "python.linting.pylintArgs": [
-            "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/.pylintrc"
+            "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/pyproject.toml"
         ],
         "python.analysis.extraPaths": [
             "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml",
