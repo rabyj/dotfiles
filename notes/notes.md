@@ -60,6 +60,14 @@ Add cursors: select text + press alt
 
 If right click is misbehaving (context menu dissapears if not holding right click), make sure terminal zoom is reset.
 
+### local debug with attach
+
+Might need to do this command if debug server unable to attach
+
+`echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope`
+
+See <https://askubuntu.com/questions/146160/what-is-the-ptrace-scope-workaround-for-wine-programs-and-are-there-any-risks>
+
 ### Debug on compute node
 
 Remote Development on Clusters with VSCode (Sharcnet HPC) (past 53:15)

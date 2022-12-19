@@ -17,6 +17,7 @@
         "isort.args": ["--settings-path", "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/pyproject.toml"],
         "python.defaultInterpreterPath": "/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/python",
         "python.languageServer": "Pylance",
+        "python.analysis.diagnosticMode": "openFilesOnly",
         "python.linting.enabled": true,
         "python.linting.pylintEnabled": true,
         "python.linting.pylintPath": "/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/pylint",
