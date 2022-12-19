@@ -22,13 +22,9 @@
     "python.linting.pylintEnabled": true,
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.diagnosticMode": "openFilesOnly",
-    "python.linting.pylintArgs": [
-        "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/.pylintrc"
-    ],
     "editor.renderWhitespace": "boundary",
     "files.trimTrailingWhitespace": true,
     "editor.fontFamily": "'Ubuntu Mono', monospace",
-    "sync.gist": "55f93d2ecc539264d697f33334b77203",
     "editor.multiCursorModifier": "ctrlCmd",
     "[markdown]": {
         "editor.tabSize": 2
@@ -255,4 +251,5 @@
 "docwriter.progress.trackClasses": true,
 "docwriter.style": "Google",
 "workbench.colorCustomizations": {},
+"files.autoSave": "afterDelay",
 }
