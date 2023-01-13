@@ -11,5 +11,18 @@
 	editor = code --wait
 [diff]
     tool = default-difftool
+[diff "jupyternotebook"]
+	command = git-nbdiffdriver diff --ignore-outputs --ignore-metadata --ignore-details
+[difftool]
+	prompt = false
 [difftool "default-difftool"]
-    cmd = code --wait --diff $LOCAL $REMOTE
+    cmd = code --wait --diff $LOCAL $REMOTE --ignore
+[difftool "nbdime"]
+	cmd = git-nbdifftool diff --ignore-outputs --ignore-metadata --ignore-details \"$LOCAL\" \"$REMOTE\" \"$BASE\"
+[merge "jupyternotebook"]
+	driver = git-nbmergedriver merge %O %A %B %L %P
+	name = jupyter notebook merge driver
+[mergetool "nbdime"]
+	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+	prompt = false
