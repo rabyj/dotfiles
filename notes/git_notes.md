@@ -44,6 +44,9 @@ git checkout rabyj  # move back to original branch
 [How to revert a "git rm -r ."?](https://stackoverflow.com/questions/2125710/how-to-revert-a-git-rm-r/48628225#48628225)
 
 ~~~bash
+# Remove from tracked files, but do not affect file on disk
+git rm --cached file
+
 # undo git rm
 git rm file             # delete file & update index
 git checkout HEAD file  # restore file & index from HEAD
@@ -66,10 +69,13 @@ Uncommitted changes includes not staged changes, staged changes but not committe
 ## Other commands
 
 ~~~bash
-# other
+# info collectiong
 git diff --staged # see changes from "git add" but non commited
-git fetch --all --prune # find new/rm remote branches
+git diff --stat --summary 5524541 cff1e7a # See diff as you would in a fast-forward merge/pull
 git log --graph --decorate --oneline --all #see branches tree
+
+# Update branches
+git fetch --all --prune # find new/rm remote branches
 
 # reseting
 git reset --soft HEAD~1 # move back one commit while retaining local changes
