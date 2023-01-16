@@ -1,7 +1,5 @@
 # Linux / Coding notes
 
-[Replication terms](https://www.encodeproject.org/data-standards/terms/)
-
 ## collapsible markdown
 
 <details><summary>CLICK ME</summary>
@@ -66,7 +64,7 @@ Might need to do this command if debug server unable to attach
 
 `echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope`
 
-See <https://askubuntu.com/questions/146160/what-is-the-ptrace-scope-workaround-for-wine-programs-and-are-there-any-risks>
+See [What is the 'ptrace_scope' workaround for Wine programs and are there any risks?](https://askubuntu.com/questions/146160/what-is-the-ptrace-scope-workaround-for-wine-programs-and-are-there-any-risks)
 
 ### Debug on compute node
 
@@ -97,6 +95,16 @@ virtualenv VENV
 . VENV/bin/activate
 pip list # verif, supposed to be almost empty
 pip install -r requirements.txt
+~~~
+
+### Documenting code
+
+
+[pdoc - best practices for GitHub pages?](https://github.com/pdoc3/pdoc/issues/55)
+
+~~~bash
+# from git root
+pdoc3 --html -o docs/epi_ml/ src/python/ # --force
 ~~~
 
 ### pylint

@@ -25,6 +25,8 @@ If we want to bring all x and y commits to master:
 
 ONLY DEV SHOULD MERGE INTO MASTER
 
+DO NOT SQUASH FEATURE BRANCHES, YOU LOSE COMMIT HISTORY CONNECTIONS (only ok for a very small amount of redundant commits)
+
 ## How to bring commits from rabyj to dev (while being in the rabyj branch)
 
 ~~~bash
