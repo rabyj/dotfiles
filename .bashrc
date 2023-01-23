@@ -128,6 +128,8 @@ fi
 
 
 # -- Convenience commands --
+alias cp="cp -v --no-clobber"
+alias mv="mv -v --no-clobber"
 
 git-update() {
     git fetch && git status
