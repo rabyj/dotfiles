@@ -119,3 +119,7 @@ Link each commit (and merge) with the correct issue ('ref #123' or '!123' in com
 <https://about.gitlab.com/2016/03/08/gitlab-tutorial-its-all-connected/>
 
 Crée de merge requests pour tous les changements pour que je puisse commenter et approuver.
+
+## GitKraken
+
+Compare two arbitrary commits: shift+click on each commit. gitlens also lets you do that in a more complex way.
