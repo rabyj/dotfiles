@@ -27,6 +27,8 @@ export HISTSIZE=1000000
 export HISTFILESIZE=1000000000
 
 # User specific aliases and functions
+alias cp="cp -v --no-clobber"
+alias mv="mv -v --no-clobber"
 
 alias htopme="htop -u rabyj"
 
