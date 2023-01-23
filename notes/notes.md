@@ -1,5 +1,24 @@
 # Linux / Coding notes
 
+## Keyboard mapping
+
+[Ctrl + Page UP / Page Down are reversed](https://unix.stackexchange.com/questions/524250/ctrl-page-up-page-down-are-reversed)
+
+Fix fn/function key to work as F-X as default, not special action
+https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux]
+
+~~~bash
+echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
+sudo update-initramfs -u -k all #kill service that keeps value from changing
+reboot
+~~~
+
+Switching esc with caps lock???
+`setxkbmap -option caps:swapescape`
+    caps:swapescape                Swap Esc and Caps Lock
+    caps:escape                    Make Caps Lock an additional Esc
+    caps:escape_shifted_capslock   Make Caps Lock an additional Esc, but Shift + Caps Lock is the regular Caps Lock
+
 ## collapsible markdown
 
 <details><summary>CLICK ME</summary>
