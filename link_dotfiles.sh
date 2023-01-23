@@ -16,7 +16,13 @@ fi
 
 if [ "$1" = "narval" ];
 then
-  folder="$HOME/project-rabyj/sources/dotfiles/vscode/workspaces"
-  ln -svf "${folder}/NARVAL.code-workspace" /home/rabyj/project-rabyj/NARVAL.code-workspace
-  ln -svf "${folder}/narval-server-settings.json" /home/rabyj/.vscode-server/data/Machine/settings.json
+  gen_folder="$HOME/project-rabyj/sources/dotfiles"
+  ln -svf "${gen_folder}/.inputrc" ~/.inputrc
+
+  vs_folder="${gen_folder}/vscode/workspaces"
+  ln -svf "${vs_folder}/NARVAL.code-workspace" /home/rabyj/project-rabyj/NARVAL.code-workspace
+  ln -svf "${vs_folder}/narval-server-settings.json" /home/rabyj/.vscode-server/data/Machine/settings.json
+
+  cluster_folder="${gen_folder}/clusters"
+  ln -svf "${cluster_folder}/.bashrc-narval" ~/.bashrc
 fi
