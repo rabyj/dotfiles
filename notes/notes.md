@@ -4,8 +4,7 @@
 
 [Ctrl + Page UP / Page Down are reversed](https://unix.stackexchange.com/questions/524250/ctrl-page-up-page-down-are-reversed)
 
-Fix fn/function key to work as F-X as default, not special action
-https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux]
+[Fix fn/function key to work as F-X as default](https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux), not special action:
 
 ~~~bash
 echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
@@ -117,7 +116,6 @@ pip install -r requirements.txt
 ~~~
 
 ### Documenting code
-
 
 [pdoc - best practices for GitHub pages?](https://github.com/pdoc3/pdoc/issues/55)
 
