@@ -89,7 +89,8 @@ fi
 
 # some more ls aliases
 alias llt="ls -ahlFtr" #reverse time lookup (oldest last), w size prefixes
-alias ll='ls -ahlF'
+alias lla='ls -ahlF'
+alias ll='ls -hlF'
 alias la='ls -A'
 alias l='ls -CF'
 
