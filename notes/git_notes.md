@@ -39,7 +39,17 @@ git push  # push local updated/merged branch to remote
 git checkout rabyj  # move back to original branch
 ~~~
 
-# git rm and its dangers
+## tags
+
+~~~bash
+git push origin <tag_name> # push single tag
+git push --tags # push all tags
+git config --global push.followTags true # change the setting
+git tag --delete tagname # delete local tag
+git push origin :refs/tags/tagname # delete remote tag
+~~~
+
+## git rm and its dangers
 
 [How to revert a "git rm -r ."?](https://stackoverflow.com/questions/2125710/how-to-revert-a-git-rm-r/48628225#48628225)
 
