@@ -26,6 +26,9 @@ shopt -s histappend
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000000
 
+# save the commands for every session into the same source
+export PROMPT_COMMAND='history -a'
+
 # User specific aliases and functions
 alias cp="cp -v --no-clobber"
 alias mv="mv -v --no-clobber"
