@@ -1,5 +1,9 @@
 # Linux / Coding notes
 
+## apt update
+
+err 503 --> change update server (software-properties-gtk)
+
 ## Keyboard mapping
 
 [Ctrl + Page UP / Page Down are reversed](https://unix.stackexchange.com/questions/524250/ctrl-page-up-page-down-are-reversed)
