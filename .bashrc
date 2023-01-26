@@ -10,7 +10,9 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth:erasedups
+
+HISTIGNORE="&:ls:ll:exit:pwd:clear:mount:umount:?:??:history"
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -21,6 +23,13 @@ export HISTFILESIZE=1000000000
 
 # save the commands for every session into the same source
 export PROMPT_COMMAND='history -a'
+
+HISTTIMEFORMAT=''       # Save the timestamp, but don't output it
+#HISTTIMEFORMAT='%F_%T ' # output the time in 'history' see "ht" alias
+
+# History Aliases...
+h()  { history 30; }                          # last few history commands
+ht() { HISTTIMEFORMAT='%F_%T  ' history 30; } # history with time stamps
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
