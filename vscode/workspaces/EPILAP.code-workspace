@@ -42,5 +42,6 @@
         "docwriter.progress.trackClasses": true,
         "docwriter.progress.trackTypes": false,
         "docwriter.progress.trackFunctions": false,
+        "python.testing.cwd": "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/tests/",
     }
 }

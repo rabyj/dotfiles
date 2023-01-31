@@ -257,4 +257,5 @@
 },
 "remote.SSH.useLocalServer": false,
 "remote.SSH.connectTimeout": 30,
+"python.testing.pytestEnabled": true,
 }
