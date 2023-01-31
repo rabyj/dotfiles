@@ -214,9 +214,11 @@ pkill -9 -f nautilus # FORCED
 for i in $(ls | grep -Ev '\.merge'); do mv $i ${i}.merge; done
 
 # - redirection -
-command > out 2>error # different files
-command >out 2>&1 # same files
-command &> out # same files, not always supported
+command > out 2> error # different files
+command > out 2>&1 # same files, universal
+command &> out # same files, not always supported out of bash
+command 2>&1 # redirect stderr to stdout, useful with tee
+
 
 # - list number of files in multiple directories -
 find . -type f | cut -d/ -f2 | sort | uniq -c
