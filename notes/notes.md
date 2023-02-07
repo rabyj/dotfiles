@@ -1,5 +1,17 @@
 # Linux / Coding notes
 
+## collapsible markdown
+
+<details><summary>CLICK ME</summary>
+<p>
+
+~~~python
+print("hello world!")
+~~~
+
+</p>
+</details>
+
 ## apt update
 
 err 503 --> change update server (software-properties-gtk)
@@ -21,18 +33,6 @@ Switching esc with caps lock???
     caps:swapescape                Swap Esc and Caps Lock
     caps:escape                    Make Caps Lock an additional Esc
     caps:escape_shifted_capslock   Make Caps Lock an additional Esc, but Shift + Caps Lock is the regular Caps Lock
-
-## collapsible markdown
-
-<details><summary>CLICK ME</summary>
-<p>
-
-~~~python
-print("hello world!")
-~~~
-
-</p>
-</details>
 
 ## Useful locations
 
@@ -183,6 +183,13 @@ setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /fold
 ### - General -
 
 ~~~bash
+# tar commands
+tar -xvzf IFT870.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
+tar -cvzf file.tar.gz files_to_tar # c=compress
+
+# mv from pipe
+ls spam | grep -v "bam" | xargs mv -t destination
+
 # - find an app / upgrade an app (like code or google-chrome-stable) -
 dpkg --get-selections | grep 'spam'
 sudo apt-get --only-upgrade install spam

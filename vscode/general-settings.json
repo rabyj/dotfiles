@@ -51,7 +51,8 @@
     "**/*.pyc": true,
     "**/__pycache__": true,
     "**/venv": true,
-    "**/env": true
+    "**/env": true,
+    "**/.pytest_cache"
   },
   // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the `files.exclude` setting. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
   "search.exclude": {
@@ -60,8 +61,7 @@
   },
   // Configure glob patterns of file paths to exclude from file watching. Patterns must match on absolute paths (i.e. prefix with ** or the full path to match properly). Changing this setting requires a restart. When you experience Code consuming lots of cpu time on startup, you can exclude large folders to reduce the initial load.
   "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
+    "**/.git/**": true,
     "**/node_modules/*/**": true,
     "**/venv/**": true,
     "**/env/**": true,
@@ -69,7 +69,6 @@
     "**/hdf5/**":true
 },
 "python.defaultInterpreterPath": "/usr/bin/python3",
-"cmake.configureOnOpen": true,
 "editor.suggestSelection": "first",
 "security.workspace.trust.untrustedFiles": "newWindow",
 "javascript.suggest.autoImports": false,
@@ -258,4 +257,5 @@
 "remote.SSH.useLocalServer": false,
 "remote.SSH.connectTimeout": 30,
 "python.testing.pytestEnabled": true,
+"terminal.integrated.inheritEnv": false,
 }
