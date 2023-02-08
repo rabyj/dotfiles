@@ -110,6 +110,11 @@ It is better to attach a python debugger to a process rather than trying to make
 
 ## Python
 
+### conda
+
+create env
+`conda env create -n envname --file environment.yml`
+
 ### install venv from requirements
 
 ~~~bash

@@ -258,4 +258,7 @@
 "remote.SSH.connectTimeout": 30,
 "python.testing.pytestEnabled": true,
 "terminal.integrated.inheritEnv": false,
+"python.venvFolders": [
+    "/home/local/USHERBROOKE/rabj2301/miniconda3/envs/"
+],
 }
