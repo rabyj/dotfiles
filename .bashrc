@@ -139,7 +139,6 @@ fi
 
 
 
-
 # -- Convenience commands --
 alias cp="cp -v --no-clobber"
 alias mv="mv -v --no-clobber"
@@ -160,12 +159,14 @@ alias mount-beluga="sshfs -o follow_symlinks rabyj@beluga.computecanada.ca:/home
 myroot="$HOME/Projects"
 alias source-epilap=". ${myroot}/epilap/venv-epilap-pytorch/bin/activate" # for epilap local venv
 
-# Add user pylint
-# export PATH=$PATH:$HOME/.local/bin
+
+# -- Terminal prompt modifications --
 
 # Change the depth of directory showed in terminal line
 export PROMPT_DIRTRIM=2
 
+# https://web.archive.org/web/20160704140739/http://ithaca.arpinum.org/2013/01/02/git-prompt.html
+PS1="\$(__git_ps1 "[%s]")$PS1"
 
 # Function to allow a user to arbitrarily set the terminal title to anything
 # Example: `set-title this is title 1`
