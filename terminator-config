@@ -8,10 +8,12 @@
 [profiles]
   [[default]]
     cursor_color = "#aaaaaa"
+    scrollback_lines = 2000
   [[Kat]]
     background_darkness = 0.8
     background_type = transparent
     cursor_color = "#aaaaaa"
+    scrollback_lines = 2000
     exit_action = hold
 [layouts]
   [[default]]
