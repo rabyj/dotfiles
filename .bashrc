@@ -143,6 +143,7 @@ fi
 alias cp="cp -v --no-clobber"
 alias mv="mv -v --no-clobber"
 
+alias gs="git status"
 git-update() {
     git fetch && git status
 }
