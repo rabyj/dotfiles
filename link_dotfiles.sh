@@ -6,7 +6,8 @@ then
   ln -svf ~/dotfiles/.bashrc ~/.bashrc
   ln -svf ~/dotfiles/.inputrc ~/.inputrc
   ln -svf ~/dotfiles/.comet.config ~/.comet.config
-  ln -svf ~/dotfiles/.gitconfig ~/.gitconfig
+  ln -svf ~/dotfiles/git/.gitconfig ~/.gitconfig
+  ln -svf ~/dotfiles/git/attributes ~/.config/git/attributes
   ln -svf ~/dotfiles/terminator-config ~/.config/terminator/config
 
   ln -svf ~/dotfiles/vscode/.pylintrc ~/.pylintrc

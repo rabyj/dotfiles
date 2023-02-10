@@ -1,0 +1,19 @@
+default_stages: [commit, push]
+default_language_version:
+  python: python3.10
+repos:
+- repo: https://github.com/nbQA-dev/nbQA
+  rev: 1.6.1
+  hooks:
+   - id: nbqa-isort
+     name: isort
+     args: ["--settings-path=./pyproject.toml"]
+     additional_dependencies: [isort==5.12.0]
+   - id: nbqa-black
+     name: black
+     args: ["--config=./pyproject.toml"]
+     additional_dependencies: [black==22.6.0]
+   - id: nbqa-pylint
+     name: pylint
+     args: ["--rcfile=./pyproject.toml"]
+     additional_dependencies: [pylint==2.14.5]
