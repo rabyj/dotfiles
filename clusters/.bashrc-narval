@@ -39,9 +39,23 @@ h()  { history 30; }                          # last few history commands
 ht() { HISTTIMEFORMAT='%F_%T  ' history 30; } # history with time stamps
 
 # User specific aliases and functions
+## General stuff
 alias cp="cp -v --no-clobber"
 alias mv="mv -v --no-clobber"
 
+alias gs="git status"
+git-update() {
+    git fetch && git status
+}
+
+# some ls aliases
+alias llt="ls -ahlFtr" #reverse time lookup (oldest last), w size prefixes
+alias lla='ls -ahlF'
+alias ll='ls -hlF'
+alias la='ls -A'
+alias l='ls -CF'
+
+## narval specific
 alias htopme="htop -u rabyj"
 
 eval "$(thefuck --alias)" #fuck
@@ -56,34 +70,14 @@ alias go-epilap="cd ~/project-rabyj/epilap; ls"
 alias go-sub="cd ~/project-rabyj/epilap/output/sub; ls"
 alias go-logs="cd ~/project-rabyj/epilap/output/logs; ls"
 
-git-update() {
-    git fetch && git status
-}
-
-# some ls aliases
-alias llt="ls -ahlFtr" #reverse time lookup (oldest last), w size prefixes
-alias lla='ls -ahlF'
-alias ll='ls -hlF'
-alias la='ls -A'
-alias l='ls -CF'
-
-
-# vscode-hpc
-#module load cmake cuda scipy-stack/2020a ipykernel
-
-# EpiLaP Tensorflow
-# cuDNN+CUDA for tensorflow-gpu 1.13.1/1.14.0
-# ml nixpkgs/16.09 gcc/7.3.0 # for cuda+cudnn
-# ml cuda/10.0.130 # for cudnn
-# ml cudnn/7.4
-# ml python/3.5.4
-# export LD_LIBRARY_PATH=/cvmfs/soft.computecanada.ca/easybuild/software/2017/avx/Compiler/gcc5.4/cuda/9.0.176/extras/CUPTI/lib64:$LD_LIBRARY_PATH
-# export LD_LIBRARY_PATH=/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/gcc-7.3.0/lib:$LD_LIBRARY_PATH
-
-
 # EpiLaP pyTorch
 ml python/3.8
 ml httpproxy
+
+# -- Terminal prompt modifications --
+
+# https://web.archive.org/web/20160704140739/http://ithaca.arpinum.org/2013/01/02/git-prompt.html
+PS1="\$(__git_ps1 "[%s]")$PS1"
 
 # Function to allow a user to arbitrarily set the terminal title to anything
 # Example: `set-title this is title 1`
