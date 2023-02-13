@@ -38,8 +38,9 @@ HISTTIMEFORMAT=''       # Save the timestamp, but don't output it
 h()  { history 30; }                          # last few history commands
 ht() { HISTTIMEFORMAT='%F_%T  ' history 30; } # history with time stamps
 
-# User specific aliases and functions
-## General stuff
+
+# -- User specific aliases and functions --
+# Misc
 alias cp="cp -v --no-clobber"
 alias mv="mv -v --no-clobber"
 
@@ -48,14 +49,14 @@ git-update() {
     git fetch && git status
 }
 
-# some ls aliases
+# ls aliases
 alias llt="ls -ahlFtr" #reverse time lookup (oldest last), w size prefixes
 alias lla='ls -ahlF'
 alias ll='ls -hlF'
 alias la='ls -A'
 alias l='ls -CF'
 
-## narval specific
+# narval specific
 alias htopme="htop -u rabyj"
 
 eval "$(thefuck --alias)" #fuck
@@ -70,12 +71,17 @@ alias go-epilap="cd ~/project-rabyj/epilap; ls"
 alias go-sub="cd ~/project-rabyj/epilap/output/sub; ls"
 alias go-logs="cd ~/project-rabyj/epilap/output/logs; ls"
 
+
+# -- CVMFS Modules --
 # EpiLaP pyTorch
 ml python/3.8
 ml httpproxy
 
+
 # -- Terminal prompt modifications --
 
+# https://github.com/git/git/blob/v2.31.6/contrib/completion/git-prompt.sh
+source ~/.git-prompt.sh
 # https://web.archive.org/web/20160704140739/http://ithaca.arpinum.org/2013/01/02/git-prompt.html
 PS1="\$(__git_ps1 "[%s]")$PS1"
 
