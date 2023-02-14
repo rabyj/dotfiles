@@ -1,44 +1,52 @@
 {
-    "update.mode": "default",
-    "[python]": {
-        "editor.tabSize": 4,
-        "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.formatOnSave": true,
-        "editor.wordWrap": "off",
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": true
-        }
+  "update.mode": "default",
+  "[json]": {
+    "editor.tabSize": 2
+  },
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "off",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "python.formatting.provider": "none",
+  "black-formatter.importStrategy": "fromEnvironment",
+  "isort.importStrategy": "fromEnvironment",
+  "workbench.colorTheme": "Monokai",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.editor.pinnedTabSizing": "shrink",
+  "workbench.editor.scrollToSwitchTabs": true,
+  "workbench.editor.closeOnFileDelete": true,
+  "python.languageServer": "Pylance",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "editor.renderWhitespace": "boundary",
+  "files.trimTrailingWhitespace": true,
+  "editor.fontFamily": "'Ubuntu Mono', monospace",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "[markdown]": {
+    "editor.tabSize": 2
+  },
+  "[shellscript]": {
+    "editor.tabSize": 2
+  },
+  "markdownlint.config": {
+    "MD024": {
+      "siblings_only": true
     },
-    "python.formatting.provider": "none",
-    "black-formatter.importStrategy": "fromEnvironment",
-    "isort.importStrategy": "fromEnvironment",
-    "workbench.colorTheme": "Monokai",
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.editor.pinnedTabSizing": "shrink",
-    "workbench.editor.scrollToSwitchTabs": true,
-    "workbench.editor.closeOnFileDelete": true,
-    "python.languageServer": "Pylance",
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.diagnosticMode": "openFilesOnly",
-    "editor.renderWhitespace": "boundary",
-    "files.trimTrailingWhitespace": true,
-    "editor.fontFamily": "'Ubuntu Mono', monospace",
-    "editor.multiCursorModifier": "ctrlCmd",
-    "[markdown]": {
-        "editor.tabSize": 2
-    },
-    "[shellscript]": {
-        "editor.tabSize": 2
-    },
-    "markdownlint.config": {
-        "MD024": { "siblings_only": true },
-        "MD025": false,
-        "MD033": false,
-    },
-    "editor.rulers": [80,120],
-    "editor.detectIndentation": false,
+    "MD025": false,
+    "MD033": false
+  },
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "editor.detectIndentation": false,
   // Configure glob patterns for excluding files and folders. For example, the files explorer decides which files and folders to show or hide based on this setting. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
   "files.exclude": {
     "**/.git": true,
@@ -52,7 +60,7 @@
     "**/__pycache__": true,
     "**/venv": true,
     "**/env": true,
-    "**/.pytest_cache"
+    "**/.pytest_cache": true
   },
   // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the `files.exclude` setting. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
   "search.exclude": {
@@ -66,199 +74,196 @@
     "**/venv/**": true,
     "**/env/**": true,
     "**/logs/**": true,
-    "**/hdf5/**":true
-},
-"python.defaultInterpreterPath": "/usr/bin/python3",
-"editor.suggestSelection": "first",
-"security.workspace.trust.untrustedFiles": "newWindow",
-"javascript.suggest.autoImports": false,
-"remote.SSH.remotePlatform": {
+    "**/hdf5/**": true
+  },
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "editor.suggestSelection": "first",
+  "security.workspace.trust.untrustedFiles": "newWindow",
+  "javascript.suggest.autoImports": false,
+  "remote.SSH.remotePlatform": {
     "narval": "linux"
-},
-"dash.languageIdToDocsetMap": {
-
+  },
+  "dash.languageIdToDocsetMap": {
     "css": [
-        "css",
-        "bootstrap",
-        "foundation",
-        "less",
-        "awesome",
-        "cordova",
-        "phonegap"
+      "css",
+      "bootstrap",
+      "foundation",
+      "less",
+      "awesome",
+      "cordova",
+      "phonegap"
     ],
     "cmake": [
-        "cmake"
+      "cmake"
     ],
     "cpp": [
-        "cpp",
-        "net",
-        "boost",
-        "qt",
-        "cvcpp",
-        "cocos2dx",
-        "c",
-        "manpages"
+      "cpp",
+      "net",
+      "boost",
+      "qt",
+      "cvcpp",
+      "cocos2dx",
+      "c",
+      "manpages"
     ],
     "html": [
-        "html",
-        "svg",
-        "css",
-        "bootstrap",
-        "foundation",
-        "awesome",
-        "statamic",
-        "javascript",
-        "jquery",
-        "jqueryui",
-        "jquerym",
-        "angularjs",
-        "backbone",
-        "marionette",
-        "meteor",
-        "moo",
-        "prototype",
-        "ember",
-        "lodash",
-        "underscore",
-        "sencha",
-        "extjs",
-        "knockout",
-        "zepto",
-        "cordova",
-        "phonegap",
-        "yui"
+      "html",
+      "svg",
+      "css",
+      "bootstrap",
+      "foundation",
+      "awesome",
+      "statamic",
+      "javascript",
+      "jquery",
+      "jqueryui",
+      "jquerym",
+      "angularjs",
+      "backbone",
+      "marionette",
+      "meteor",
+      "moo",
+      "prototype",
+      "ember",
+      "lodash",
+      "underscore",
+      "sencha",
+      "extjs",
+      "knockout",
+      "zepto",
+      "cordova",
+      "phonegap",
+      "yui"
     ],
     "javascript": [
-        "javascript",
-        "jquery",
-        "jqueryui",
-        "jquerym",
-        "react",
-        "angularjs",
-        "backbone",
-        "marionette",
-        "meteor",
-        "sproutcore",
-        "moo",
-        "prototype",
-        "bootstrap",
-        "foundation",
-        "lodash",
-        "underscore",
-        "ember",
-        "sencha",
-        "extjs",
-        "titanium",
-        "knockout",
-        "zepto",
-        "yui",
-        "d3",
-        "svg",
-        "dojo",
-        "coffee",
-        "nodejs",
-        "express",
-        "grunt",
-        "mongoose",
-        "moment",
-        "require",
-        "awsjs",
-        "jasmine",
-        "sails",
-        "sinon",
-        "chai",
-        "html",
-        "css",
-        "cordova",
-        "phonegap",
-        "unity3d"
+      "javascript",
+      "jquery",
+      "jqueryui",
+      "jquerym",
+      "react",
+      "angularjs",
+      "backbone",
+      "marionette",
+      "meteor",
+      "sproutcore",
+      "moo",
+      "prototype",
+      "bootstrap",
+      "foundation",
+      "lodash",
+      "underscore",
+      "ember",
+      "sencha",
+      "extjs",
+      "titanium",
+      "knockout",
+      "zepto",
+      "yui",
+      "d3",
+      "svg",
+      "dojo",
+      "coffee",
+      "nodejs",
+      "express",
+      "grunt",
+      "mongoose",
+      "moment",
+      "require",
+      "awsjs",
+      "jasmine",
+      "sails",
+      "sinon",
+      "chai",
+      "html",
+      "css",
+      "cordova",
+      "phonegap",
+      "unity3d"
     ],
     "latex": [
-        "latex"
+      "latex"
     ],
     "less": [
-        "less"
+      "less"
     ],
     "markdown": [
-        "markdown"
+      "markdown"
     ],
     "perl": [
-        "perl",
-        "manpages"
+      "perl",
+      "manpages"
     ],
     "php": [
-        "php",
-        "wordpress",
-        "drupal",
-        "zend",
-        "laravel",
-        "yii",
-        "joomla",
-        "ee",
-        "codeigniter",
-        "cakephp",
-        "phpunit",
-        "symfony",
-        "typo3",
-        "twig",
-        "smarty",
-        "craft",
-        "phpp",
-        "html",
-        "statamic",
-        "mysql",
-        "sqlite",
-        "mongodb",
-        "psql",
-        "redis"
+      "php",
+      "wordpress",
+      "drupal",
+      "zend",
+      "laravel",
+      "yii",
+      "joomla",
+      "ee",
+      "codeigniter",
+      "cakephp",
+      "phpunit",
+      "symfony",
+      "typo3",
+      "twig",
+      "smarty",
+      "craft",
+      "phpp",
+      "html",
+      "statamic",
+      "mysql",
+      "sqlite",
+      "mongodb",
+      "psql",
+      "redis"
     ],
     "python": [
-        "python",
-        "numpy",
-        "scipy",
-        "scikit",
-        "scikit-optimize",
-        "pandas",
-        "matplotlib",
-        "pytorch",
-        "torchmetrics",
-
+      "python",
+      "numpy",
+      "scipy",
+      "scikit",
+      "scikit-optimize",
+      "pandas",
+      "matplotlib",
+      "pytorch",
+      "torchmetrics",
     ],
     "r": [
-        "r"
+      "r"
     ],
     "shellscript": [
-        "bash",
-        "manpages"
+      "bash",
+      "manpages"
     ],
     "sql": [
-        "mysql",
-        "sqlite",
-        "psql"
+      "mysql",
+      "sqlite",
+      "psql"
     ],
     "typescript": [
-        "typescript",
-        "javascript"
-    ],
-},
-"tabnine.experimentalAutoImports": false,
-"terminal.integrated.enableMultiLinePasteWarning": false,
-"notebook.lineNumbers": "on",
-"git.autofetch": true,
-"extensions.autoCheckUpdates": false,
-"editor.minimap.enabled": false,
-"docwriter.progress.trackClasses": true,
-"docwriter.style": "Google",
-"workbench.colorCustomizations": {},
-"files.autoSave": "afterDelay",
-"files.associations": {
+      "typescript",
+      "javascript"
+    ]
+  },
+  "tabnine.experimentalAutoImports": false,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "notebook.lineNumbers": "on",
+  "git.autofetch": true,
+  "extensions.autoCheckUpdates": false,
+  "editor.minimap.enabled": false,
+  "docwriter.progress.trackClasses": true,
+  "docwriter.style": "Google",
+  "files.autoSave": "afterDelay",
+  "files.associations": {
     ".inputrc": "shellscript"
-},
-"remote.SSH.useLocalServer": false,
-"remote.SSH.connectTimeout": 30,
-"python.testing.pytestEnabled": true,
-"terminal.integrated.inheritEnv": false,
-"python.venvFolders": [
+  },
+  "remote.SSH.useLocalServer": false,
+  "remote.SSH.connectTimeout": 30,
+  "python.testing.pytestEnabled": true,
+  "terminal.integrated.inheritEnv": false,
+  "python.venvFolders": [
     "/home/local/USHERBROOKE/rabj2301/miniconda3/envs/"
-],
+  ],
 }
