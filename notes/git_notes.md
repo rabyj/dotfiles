@@ -42,12 +42,17 @@ git checkout rabyj  # move back to original branch
 ## tags
 
 ~~~bash
+git tag -a v1.5 -m "Release v1.5 created"
 git push origin <tag_name> # push single tag
 git push --tags # push all tags
 git config --global push.followTags true # change the setting
 git tag --delete tagname # delete local tag
 git push origin :refs/tags/tagname # delete remote tag
 ~~~
+
+## Recover lost commits
+
+<https://stackoverflow.com/questions/134882/undoing-a-git-rebase>
 
 ## git rm and its dangers
 
