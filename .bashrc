@@ -99,7 +99,7 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+# -- ls aliases --
 alias llt="ls -ahlFtr" #reverse time lookup (oldest last), w size prefixes
 alias lla='ls -ahlF'
 alias ll='ls -hlF'
@@ -153,8 +153,10 @@ alias open="xdg-open"
 eval "$(thefuck --alias)" #fuck
 
 # automount narval
-alias mount-narval="sshfs -o follow_symlinks rabyj@narval.computecanada.ca:/home/rabyj/ $HOME/Projects/narval-mount/"
-alias mount-beluga="sshfs -o follow_symlinks rabyj@beluga.computecanada.ca:/home/rabyj/ $HOME/Projects/beluga-mount/"
+mounts="$HOME/mounts"
+alias mount-narval="sshfs -o follow_symlinks rabyj@narval.computecanada.ca:/home/rabyj/ ${mounts}/narval-mount/"
+alias mount-beluga="sshfs -o follow_symlinks rabyj@beluga.computecanada.ca:/home/rabyj/ ${mounts}/beluga-mount/"
+alias mount-ip29="sshfs -o follow_symlinks rabyj@ip29.ccs.usherbrooke.ca:/home/rabyj/ ${mounts}/ip29-mount/"
 
 # tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
 myroot="$HOME/Projects"
