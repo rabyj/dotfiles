@@ -265,5 +265,6 @@
   "terminal.integrated.inheritEnv": false,
   "python.venvFolders": [
     "/home/local/USHERBROOKE/rabj2301/miniconda3/envs/"
-  ],
+],
+"workbench.colorCustomizations": {}
 }
