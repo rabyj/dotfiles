@@ -1,5 +1,8 @@
 # Linux / Coding notes
 
+Double commander won't directly open (double click / open action) executable files.
+https://ghisler.ch/board/viewtopic.php?t=9073
+
 ## collapsible markdown
 
 <details><summary>CLICK ME</summary>
@@ -202,7 +205,7 @@ dpkg --get-selections | grep 'spam'
 sudo apt-get --only-upgrade install spam
 
 # - links -
-ln -s src file #create link for src
+ln -s src file #create link from src to file
 
 # - command line navigation -
 ctrl+r #search in command history
@@ -233,13 +236,19 @@ command > out 2>&1 # same files, universal
 command &> out # same files, not always supported out of bash
 command 2>&1 # redirect stderr to stdout, useful with tee
 
-
-# - list number of files in multiple directories -
+# -- find --
+# list number of files in multiple directories
 find . -type f | cut -d/ -f2 | sort | uniq -c
 
-# - list files with full paths in directory (give full path to find) -
+# list files with full paths in directory (give full path to find)
 a_path=$(pwd -P)
 find ${a_path} -mindepth 1 | grep "value.hdf5" | sort -u > a_list.list
+
+# seek specific files
+find . -type f | grep ".sh"
+
+# Do an action on each file with result of find
+find . -type f | grep ".sh" | xargs -I{} chmod a-x {}
 
 # - Iterate over an array -
 array=( one two three )
@@ -345,7 +354,3 @@ cat temp_sqme.txt | grep 'chr' | tr -s ' ' | cut -d ' ' -f2,5 | sort -V -k2 > te
 cat temp_jobID.txt | grep "assay" > assay_jobID.txt
 cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
 ~~~
-
-### venv problematic modules
-
-h5py scipy matplotlib sklearn tensorflow numpy
