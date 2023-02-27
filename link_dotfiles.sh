@@ -11,6 +11,7 @@ then
   ln -svf ~/dotfiles/terminator-config ~/.config/terminator/config
 
   ln -svf ~/dotfiles/vscode/.pylintrc ~/.pylintrc
+  ln -svf ~/dotfiles/vscode/.shellcheckrc ~/.shellcheckrc
   ln -svf ~/dotfiles/vscode/general-settings.json /home/local/USHERBROOKE/rabj2301/.config/Code/User/settings.json
   ln -svf ~/dotfiles/vscode/workspaces/EPILAP.code-workspace /home/local/USHERBROOKE/rabj2301/Projects/epilap/EPILAP.code-workspace
 fi
@@ -23,6 +24,7 @@ then
   vs_folder="${gen_folder}/vscode/workspaces"
   ln -svf "${vs_folder}/NARVAL.code-workspace" /home/rabyj/project-rabyj/NARVAL.code-workspace
   ln -svf "${vs_folder}/narval-server-settings.json" /home/rabyj/.vscode-server/data/Machine/settings.json
+  ln -svf ~/dotfiles/vscode/.shellcheckrc ~/.shellcheckrc
 
   cluster_folder="${gen_folder}/clusters"
   ln -svf "${cluster_folder}/.bashrc-narval" ~/.bashrc

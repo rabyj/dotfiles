@@ -1,0 +1,2 @@
+disable=SC2317  # Don't warn about unreachable commands in this file
+disable=SC2086  # Don't warn about double quoting
