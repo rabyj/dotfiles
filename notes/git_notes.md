@@ -48,6 +48,10 @@ git push --tags # push all tags
 git config --global push.followTags true # change the setting
 git tag --delete tagname # delete local tag
 git push origin :refs/tags/tagname # delete remote tag
+
+# Refresh all tags (sync local w remote), https://stackoverflow.com/questions/1841341/remove-local-git-tags-that-are-no-longer-on-the-remote-repository
+git tag -l | xargs git tag -d # rm all tags
+git fetch --tags
 ~~~
 
 ## Recover lost commits

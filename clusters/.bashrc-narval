@@ -45,6 +45,8 @@ alias cp="cp -v --no-clobber"
 alias mv="mv -v --no-clobber"
 
 alias gs="git status"
+alias gd="git diff"
+alias gds="git diff --staged"
 git-update() {
     git fetch && git status
 }
