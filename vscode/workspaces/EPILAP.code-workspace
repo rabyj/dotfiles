@@ -16,14 +16,14 @@
     ],
     "black-formatter.args": [
       "--config",
-      "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/pyproject.toml"
+      "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
     ],
     "isort.interpreter": [
       "/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/python"
     ],
     "isort.args": [
       "--settings-path",
-      "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/pyproject.toml"
+      "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
     ],
     "python.defaultInterpreterPath": "/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/python",
     "python.languageServer": "Pylance",
@@ -32,7 +32,7 @@
     "python.linting.pylintEnabled": true,
     "python.linting.pylintPath": "/home/local/USHERBROOKE/rabj2301/Projects/epilap/venv-epilap-pytorch/bin/pylint",
     "python.linting.pylintArgs": [
-      "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/pyproject.toml"
+      "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
     ],
     "python.analysis.extraPaths": [
       "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml"
