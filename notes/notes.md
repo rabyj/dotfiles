@@ -1,7 +1,7 @@
 # Linux / Coding notes
 
 Double commander won't directly open (double click / open action) executable files.
-https://ghisler.ch/board/viewtopic.php?t=9073
+<https://ghisler.ch/board/viewtopic.php?t=9073>
 
 ## collapsible markdown
 
@@ -74,7 +74,6 @@ cut -f1 hg19_1kb_all_blklst_pearson.mat | tail -n +2 | sort -u | grep -v "^[[:sp
 
 ### Shortcuts
 
-regex to find and replace 'foo' and capture part of it: `'([\w \(\)\.]*)'`
 outdent: shift + tab
 cursor at end of lines: shift+ctrl+alt+l
 Add cursors: select text + press alt
@@ -110,6 +109,13 @@ Host vscode-narval
 Make sure once the vscode server is running that you are not in restricted mode.
 
 It is better to attach a python debugger to a process rather than trying to make a launch task, since the virtual environment can be extremely finicky.
+
+## Regex
+
+vscode: regex to find and replace 'foo' and capture part of it: `'([\w \(\)\.]*)'`
+
+<https://stackoverflow.com/questions/977251/regular-expressions-and-negating-a-whole-character-group>
+python: To match a string which does not contain the multi-character sequence `ab`, you want to use a negative lookahead: `^(?:(?!ab).)+$`
 
 ## Python
 
@@ -324,7 +330,14 @@ When the job is created, a copy of the script file is made and that copy cannot 
 #SBATCH --gres=gpu:1
 #SBATCH --mail-user=joanny.raby@usherbrooke.ca
 #SBATCH --mail-type=END
+
+#Variables
+${SLURM_JOB_ID} (%j)
+${SLURM_JOB_NAME} (%x)
 ~~~
+
+<https://stackoverflow.com/questions/65677339/how-to-retrieve-the-content-of-slurm-script>
+Recuperate launch script: `scontrol write batch_script <job_id> <optional_filename>`
 
 ### Collect resources via seff
 

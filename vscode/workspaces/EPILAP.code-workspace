@@ -35,7 +35,7 @@
       "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
     ],
     "python.analysis.extraPaths": [
-      "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml"
+      "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python"
     ],
     "explorer.fileNesting.patterns": {
       "*.ts": "${capture}.js",
