@@ -202,6 +202,7 @@ setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /fold
 # tar commands
 tar -xvzf IFT870.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
 tar -cvzf file.tar.gz files_to_tar # c=compress
+tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
 
 # mv from pipe
 ls spam | grep -v "bam" | xargs mv -t destination
@@ -274,7 +275,19 @@ done
 # memory management / disk usage
 du -sh
 ncdu
-diskusage_report
+diskusage_report # for hpc
+
+# -- rsync --
+rsync -r -p rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios,  -p=preserve permissions
+
+# Add news files from source to ".". Trailing slash important, means copy content and not parent directory.
+rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch/frosig/local_ihec_data/EpiAtlas-WGBS-100kb/hg38/hdf5/100kb_all_none/ .
+
+# Following recursively syncs a folder tree and it's final csvs to a specified location
+# -R = Relative
+# /./ marks beginning of folder to sync
+# <https://unix.stackexchange.com/questions/321219/rsync-using-part-of-a-relative-path>
+rsync -aR narval:~/path/to/folder/./folder/tree/to/sync/*.csv /destination/folder
 ~~~
 
 ### Sed commands
@@ -317,7 +330,25 @@ When the job is created, a copy of the script file is made and that copy cannot 
 <https://docs.computecanada.ca/wiki/Getting_started/fr>
 <https://docs.computecanada.ca/wiki/Globus/fr>
 
-### sbatch file (.sh)
+#### Slurm job scheduler commands
+
+~~~bash
+# useful
+squeueme # my queued jobs
+seff JOBID # job info summary
+scancel JOBID # kill/cancel job
+scancel -u rabyj # kill all my jobs
+salloc --account=def-jacquesp # log on a compute node
+diskusage_report
+
+# get IDs from squeue
+sqme > temp_sqme.txt
+cat temp_sqme.txt | grep 'chr' | tr -s ' ' | cut -d ' ' -f2,5 | sort -V -k2 > temp_jobID.txt
+cat temp_jobID.txt | grep "assay" > assay_jobID.txt
+cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
+~~~
+
+#### sbatch file (.sh)
 
 ~~~bash
 #!/bin/bash
@@ -339,31 +370,10 @@ ${SLURM_JOB_NAME} (%x)
 <https://stackoverflow.com/questions/65677339/how-to-retrieve-the-content-of-slurm-script>
 Recuperate launch script: `scontrol write batch_script <job_id> <optional_filename>`
 
-### Collect resources via seff
+#### Collect resources via seff
 
 ~~~bash
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'Wall' | grep -oE '[0-9]{2}:[0-9]{2}:[0-9]{2}'
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'Memory Utilized' | grep -oE '[0-9]{1,2}\.[0-9]{1,2} .B'
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'CPU Efficiency:' | grep -oE '[0-9]{1,2}\.[0-9]{1,2}\%'
-~~~
-
-### Other commands
-
-~~~bash
-squeueme #my queued jobs
-seff JOBID #job info summary
-scancel JOBID #kill/cancel job
-scancel -u rabyj #kill all my jobs
-salloc --account=def-jacquesp #log on a compute node
-rsync -r -p rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios,  -p=preserve permissions
-rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch/frosig/local_ihec_data/EpiAtlas-WGBS-100kb/hg38/hdf5/100kb_all_none/ . #Add news files from source to ".". Trailing slash important, means copy content and not parent directory.
-tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
-diskusage_report
-
-
-# get IDs from squeue
-sqme > temp_sqme.txt
-cat temp_sqme.txt | grep 'chr' | tr -s ' ' | cut -d ' ' -f2,5 | sort -V -k2 > temp_jobID.txt
-cat temp_jobID.txt | grep "assay" > assay_jobID.txt
-cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
 ~~~
