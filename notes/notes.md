@@ -31,11 +31,13 @@ sudo update-initramfs -u -k all #kill service that keeps value from changing
 reboot
 ~~~
 
-Switching esc with caps lock???
+Switching esc with caps lock. Semi-permanent (works on reboot)
 `setxkbmap -option caps:swapescape`
     caps:swapescape                Swap Esc and Caps Lock
     caps:escape                    Make Caps Lock an additional Esc
     caps:escape_shifted_capslock   Make Caps Lock an additional Esc, but Shift + Caps Lock is the regular Caps Lock
+
+`setxkbmap -layout us -option` to reset US layout.
 
 ## Useful locations
 
@@ -57,9 +59,6 @@ Switching esc with caps lock???
 /run/user/1810992820/gvfs/sftp:host=cedar.computecanada.ca,user=rabyj/home/rabyj/
 /run/user/1810992820/gvfs/sftp:host=mp2b.calculquebec.ca,user=rabyj/home/rabyj/
 sftp://rabyj@ip29.ccs.usherbrooke.ca/home/rabyj/rabyj # add folder on VSCode, not via local terminal like others
-
-#force unmount
-umount -f -l /mnt/myfolder
 ~~~
 
 ## Other tricks
@@ -199,10 +198,21 @@ setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /fold
 ### - General -
 
 ~~~bash
+# execute series of commands via nohup
+nohup sh -c 'XZ_DEFAULTS="-6e -T2" && tar --xz -cf 2023-01-epiatlas-freeze.tar.xz 2023-01-epiatlas-freeze/' > /dev/null 2>&1 &
+
+# put commands to background and safe for closing terminal
+ctrl+z
+bg
+disown -h # jobs will ignore hangup signal, but stay in the job table
+
 # tar commands
+tar -xf file.tar.extension #recognizes many compression extensions
 tar -xvzf IFT870.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
 tar -cvzf file.tar.gz files_to_tar # c=compress
 tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
+tar -tvf file.tar # list files
+export XZ_DEFAULTS="-6e -T2" #2 cores, level 6 extreme
 
 # mv from pipe
 ls spam | grep -v "bam" | xargs mv -t destination
@@ -219,7 +229,7 @@ ctrl+r #search in command history
 ctrl+a #place cursor to beginning of line
 ctrl+e #place cursor to end of line
 
-# - kill mount -
+# - kill mount / unmount-
 # kill processes keeping from unmounting
 lsof | grep 'mountpoint'
 kill -9 PID
@@ -227,6 +237,7 @@ kill -9 PID
 fuser -kim /address
 # force unmount
 fusermount -uz /address
+umount -f -l /mnt/myfolder
 
 
 # kill nautilus
@@ -242,6 +253,8 @@ command > out 2> error # different files
 command > out 2>&1 # same files, universal
 command &> out # same files, not always supported out of bash
 command 2>&1 # redirect stderr to stdout, useful with tee
+command 2>&1 >/dev/null | grep 'something' #piping the error to a tool like grep:The first operation is the 2>&1, which means 'connect stderr to the file descriptor that stdout is currently going to'. The second operation is 'change stdout so it goes to /dev/null', leaving stderr going to the original stdout, the pipe.
+
 
 # -- find --
 # list number of files in multiple directories
@@ -273,12 +286,13 @@ do
 done
 
 # memory management / disk usage
+df -H # total storage info
 du -sh
 ncdu
 diskusage_report # for hpc
 
 # -- rsync --
-rsync -r -p rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios,  -p=preserve permissions
+rsync -ra rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios
 
 # Add news files from source to ".". Trailing slash important, means copy content and not parent directory.
 rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch/frosig/local_ihec_data/EpiAtlas-WGBS-100kb/hg38/hdf5/100kb_all_none/ .
