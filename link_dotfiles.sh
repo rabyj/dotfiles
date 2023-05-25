@@ -1,30 +1,34 @@
-#!/bin/bash
+#!/usr/bin/env bash
 echo "Use 'local' or 'narval'."
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+
 if [ "$1" = "local" ];
 then
-  ln -svf ~/dotfiles/ssh-config ~/.ssh/config
-  ln -svf ~/dotfiles/.bashrc ~/.bashrc
-  ln -svf ~/dotfiles/.inputrc ~/.inputrc
-  ln -svf ~/dotfiles/.comet.config ~/.comet.config
-  ln -svf ~/dotfiles/git/.gitconfig ~/.gitconfig
-  ln -svf ~/dotfiles/git/attributes ~/.config/git/attributes
-  ln -svf ~/dotfiles/terminator-config ~/.config/terminator/config
+  ln -svf ${SCRIPT_DIR}/ssh-config ~/.ssh/config
+  ln -svf ${SCRIPT_DIR}/.bashrc ~/.bashrc
+  ln -svf ${SCRIPT_DIR}/.inputrc ~/.inputrc
+  ln -svf ${SCRIPT_DIR}/.comet.config ~/.comet.config
+  ln -svf ${SCRIPT_DIR}/git/.gitconfig ~/.gitconfig
+  ln -svf ${SCRIPT_DIR}/git/attributes ~/.config/git/attributes
+  ln -svf ${SCRIPT_DIR}/terminator-config ~/.config/terminator/config
 
-  ln -svf ~/dotfiles/vscode/.pylintrc ~/.pylintrc
-  ln -svf ~/dotfiles/vscode/.shellcheckrc ~/.shellcheckrc
-  ln -svf ~/dotfiles/vscode/general-settings.json /home/local/USHERBROOKE/rabj2301/.config/Code/User/settings.json
-  ln -svf ~/dotfiles/vscode/workspaces/EPILAP.code-workspace /home/local/USHERBROOKE/rabj2301/Projects/epilap/EPILAP.code-workspace
+  ln -svf ${SCRIPT_DIR}/vscode/.pylintrc ~/.pylintrc
+  ln -svf ${SCRIPT_DIR}/vscode/.shellcheckrc ~/.shellcheckrc
+  ln -svf ${SCRIPT_DIR}/vscode/general-settings.json /home/local/USHERBROOKE/rabj2301/.config/Code/User/settings.json
+  ln -svf ${SCRIPT_DIR}/vscode/workspaces/EPILAP.code-workspace /home/local/USHERBROOKE/rabj2301/Projects/epilap/EPILAP.code-workspace
 fi
 
 if [ "$1" = "narval" ];
 then
-  gen_folder="$HOME/project-rabyj/sources/dotfiles"
+  gen_folder=$SCRIPT_DIR
   ln -svf "${gen_folder}/.inputrc" ~/.inputrc
 
   vs_folder="${gen_folder}/vscode/workspaces"
   ln -svf "${vs_folder}/NARVAL.code-workspace" /home/rabyj/project-rabyj/NARVAL.code-workspace
   ln -svf "${vs_folder}/narval-server-settings.json" /home/rabyj/.vscode-server/data/Machine/settings.json
-  ln -svf ~/dotfiles/vscode/.shellcheckrc ~/.shellcheckrc
+  ln -svf ${gen_folder}/vscode/.shellcheckrc ~/.shellcheckrc
 
   cluster_folder="${gen_folder}/clusters"
   ln -svf "${cluster_folder}/.bashrc-narval" ~/.bashrc
