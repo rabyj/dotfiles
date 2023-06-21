@@ -207,8 +207,8 @@ bg
 disown -h # jobs will ignore hangup signal, but stay in the job table
 
 # tar commands
-tar -xf file.tar.extension #recognizes many compression extensions
-tar -xvzf IFT870.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
+tar -xvzf file.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
+tar -xf file.tar.extension # recognizes many compression extensions
 tar -cvzf file.tar.gz files_to_tar # c=compress
 tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
 tar -tvf file.tar # list files
@@ -222,7 +222,8 @@ dpkg --get-selections | grep 'spam'
 sudo apt-get --only-upgrade install spam
 
 # - links -
-ln -s src file #create link from src to file
+ln -s src new_link_file #create a soft link from src to link
+find . -type f -name '*.hdf5' -printf '%n %p\n' | grep -v "1 ." | grep -v "rank_files" > all_hardlinked_hdf5_WIP.list #finding hardlinked files
 
 # - command line navigation -
 ctrl+r #search in command history
@@ -270,6 +271,10 @@ find . -type f | grep ".sh"
 # Do an action on each file with result of find
 find . -type f | grep ".sh" | xargs -I{} chmod a-x {}
 
+# Specific formatting for printf portion
+find . -type f -printf '%s %p\n' # size + filepath
+https://man7.org/linux/man-pages/man1/find.1.html
+
 # - Iterate over an array -
 array=( one two three )
 for i in "${array[@]}"; do
@@ -302,6 +307,10 @@ rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch
 # /./ marks beginning of folder to sync
 # <https://unix.stackexchange.com/questions/321219/rsync-using-part-of-a-relative-path>
 rsync -aR narval:~/path/to/folder/./folder/tree/to/sync/*.csv /destination/folder
+
+# show true command, not alias
+type command
+\command # use unaliased command
 ~~~
 
 ### Sed commands
@@ -379,6 +388,7 @@ cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
 #Variables
 ${SLURM_JOB_ID} (%j)
 ${SLURM_JOB_NAME} (%x)
+$SLURM_CPUS_PER_TASK
 ~~~
 
 <https://stackoverflow.com/questions/65677339/how-to-retrieve-the-content-of-slurm-script>
