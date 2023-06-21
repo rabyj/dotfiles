@@ -265,7 +265,12 @@
     "python.testing.pytestEnabled": true,
     "terminal.integrated.inheritEnv": false,
     "python.venvFolders": [
-        "/home/local/USHERBROOKE/rabj2301/miniconda3/envs/"
+        "/home/local/USHERBROOKE/rabj2301/miniconda3/envs/",
+        "/home/local/USHERBROOKE/rabj2301/Projects/envs"
     ],
-    "workbench.colorCustomizations": {}
+    "workbench.colorCustomizations": {},
+    "editor.inlineSuggest.enabled": true,
+    "git.openRepositoryInParentFolders": "never",
+    "notebook.output.wordWrap": true,
+    "jupyter.askForKernelRestart": false
 }
