@@ -162,7 +162,7 @@ alias mount-ip29="sshfs -o follow_symlinks rabyj@ip29.ccs.usherbrooke.ca:/home/r
 
 # tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
 myroot="$HOME/Projects"
-alias source-epilap=". ${myroot}/epilap/venv-epilap-pytorch/bin/activate" # for epilap local venv
+alias source-epiclass=". ${myroot}/envs/epiclass/bin/activate"
 
 
 # -- Terminal prompt modifications --
