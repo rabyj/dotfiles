@@ -162,6 +162,19 @@ type: ignore # as a comment, to disable pylance warning
 
 To turn on/off formatting for some lines, use a line `#fmt: off`, and then after `#fmt: on`.
 
+### pytest
+
+The `pytest -lvs` command is a combination of multiple options used with pytest. Here's the breakdown of each option:
+
+`-l` or `--showlocals`: This option displays local variables in tracebacks for test failures. It provides additional context by showing the values of local variables at the time of the failure.
+
+`-v` or `--verbose`: This option enables verbose mode and provides more detailed information about the tests being executed. It displays the names of the tests, along with the test outcomes (pass or fail), and any captured output.
+
+`-s` or `--capture=no`: This option disables the capture of stdout and stderr during test execution. It allows the output from print statements and other standard output streams to be displayed in the console.
+
+Disable warnings in config:
+[action:message:category:module:line](https://docs.python.org/3/library/warnings.html#warning-filter)
+
 ### Problems
 
 Getting first dict value : In Python 3 the dict.values() method returns a dictionary view object, not a list like it does in Python 2. Dictionary views have a length, can be iterated, and support membership testing, but don't support indexing.
@@ -264,6 +277,9 @@ find . -type f | cut -d/ -f2 | sort | uniq -c
 # list files with full paths in directory (give full path to find)
 a_path=$(pwd -P)
 find ${a_path} -mindepth 1 | grep "value.hdf5" | sort -u > a_list.list
+
+# list non directory on current level
+find . -maxdepth 1 -type f
 
 # seek specific files
 find . -type f | grep ".sh"
