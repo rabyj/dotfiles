@@ -13,6 +13,7 @@ then
   ln -svf ${SCRIPT_DIR}/git/.gitconfig ~/.gitconfig
   ln -svf ${SCRIPT_DIR}/git/attributes ~/.config/git/attributes
   ln -svf ${SCRIPT_DIR}/terminator-config ~/.config/terminator/config
+  ln -svf ${SCRIPT_DIR}/doublecmd_shortcuts.scf ~/.config/doublecmd/shortcuts.scf
 
   ln -svf ${SCRIPT_DIR}/vscode/.pylintrc ~/.pylintrc
   ln -svf ${SCRIPT_DIR}/vscode/.shellcheckrc ~/.shellcheckrc
