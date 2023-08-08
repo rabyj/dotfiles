@@ -31,7 +31,8 @@
     "editor.fontFamily": "'Ubuntu Mono', monospace",
     "editor.multiCursorModifier": "ctrlCmd",
     "[markdown]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "files.trimTrailingWhitespace": false,
     },
     "[shellscript]": {
         "editor.tabSize": 2
@@ -272,5 +273,11 @@
     "editor.inlineSuggest.enabled": true,
     "git.openRepositoryInParentFolders": "never",
     "notebook.output.wordWrap": true,
-    "jupyter.askForKernelRestart": false
+    "jupyter.askForKernelRestart": false,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": false,
+        "scminput": false
+    }
 }

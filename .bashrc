@@ -140,19 +140,21 @@ fi
 
 
 # -- Convenience commands --
+# Misc
 alias cp="cp -v --no-clobber"
 alias mv="mv -v --no-clobber"
+alias pwdp="pwd -P"
+alias htopme="htop -u rabj2301"
+alias open="xdg-open"
+eval "$(thefuck --alias)" #fuck
 
+# git
 alias gs="git status"
 alias gd="git diff"
 alias gds="git diff --staged"
 git-update() {
     git fetch && git status
 }
-
-alias htopme="htop -u rabj2301"
-alias open="xdg-open"
-eval "$(thefuck --alias)" #fuck
 
 # automount narval
 mounts="$HOME/mounts"
