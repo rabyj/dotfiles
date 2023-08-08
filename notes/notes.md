@@ -77,6 +77,13 @@ outdent: shift + tab
 cursor at end of lines: shift+ctrl+alt+l
 Add cursors: select text + press alt
 
+### Rename with regex
+
+rename md5s
+
+(\w{32}) # capture group, refer with $1
+/lustre07/scratch/rabyj/local_ihec_data/epiatlas/hg38/hdf5/EpiAtlas_dfreeze_100kb/$1_100kb_all_none_value.hdf5
+
 ### Notes
 
 If right click is misbehaving (context menu dissapears if not holding right click), make sure terminal zoom is reset.
@@ -243,6 +250,9 @@ ctrl+r #search in command history
 ctrl+a #place cursor to beginning of line
 ctrl+e #place cursor to end of line
 
+# - reactivate "repeat key" functionality -
+xset r on
+
 # - kill mount / unmount-
 # kill processes keeping from unmounting
 lsof | grep 'mountpoint'
@@ -297,9 +307,6 @@ for i in "${array[@]}"; do
   echo $i
 done
 
-# - reactivate "repeat key" functionality -
-xset r on
-
 # loop through range
 for i in {1..5}
 do
@@ -315,6 +322,10 @@ diskusage_report # for hpc
 # -- rsync --
 rsync -ra rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios
 
+rsync --progress -va spam bam # show progress bar and file names
+
+rsync --dry-run -va spam bam # see what would be copied
+
 # Add news files from source to ".". Trailing slash important, means copy content and not parent directory.
 rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch/frosig/local_ihec_data/EpiAtlas-WGBS-100kb/hg38/hdf5/100kb_all_none/ .
 
@@ -323,6 +334,12 @@ rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch
 # /./ marks beginning of folder to sync
 # <https://unix.stackexchange.com/questions/321219/rsync-using-part-of-a-relative-path>
 rsync -aR narval:~/path/to/folder/./folder/tree/to/sync/*.csv /destination/folder
+
+# mirror directory structure
+rsync -a --include='*/' --exclude='*' source/ destination/
+
+
+# -- other --
 
 # show true command, not alias
 type command
