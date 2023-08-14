@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=bash -c "sleep 10 && xmodmap /home/local/USHERBROOKE/rabj2301/.Xmodmap && setxkbmap -option caps:swapescape"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_CA]=0-Remap keys
+Name=Remap keys
+Comment[en_CA]=Invert pageUp/pageDown + caps lock/esc
+Comment=Invert pageUp/pageDown + caps lock/esc
