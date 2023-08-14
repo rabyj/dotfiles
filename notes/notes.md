@@ -26,18 +26,26 @@ err 503 --> change update server (software-properties-gtk)
 [Fix fn/function key to work as F-X as default](https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux), not special action:
 
 ~~~bash
+# Change fn/function key mode
 echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
 sudo update-initramfs -u -k all #kill service that keeps value from changing
 reboot
 ~~~
 
-Switching esc with caps lock. Semi-permanent (works on reboot)
+Switching esc with caps lock. Resets on reboot.
 `setxkbmap -option caps:swapescape`
     caps:swapescape                Swap Esc and Caps Lock
     caps:escape                    Make Caps Lock an additional Esc
     caps:escape_shifted_capslock   Make Caps Lock an additional Esc, but Shift + Caps Lock is the regular Caps Lock
 
-`setxkbmap -layout us -option` to reset US layout.
+`-option` to reset US layout.
+
+Be careful with modifications through `gnome-tweaks`. You could forget about them when trying to modify something else.
+
+## File manager
+
+Change file picker to KDE overall, makes Ubuntu slower at login.
+`export GTK_USE_PORTAL=1` in `/etc/profile`
 
 ## Useful locations
 
@@ -299,6 +307,7 @@ find . -type f | grep ".sh" | xargs -I{} chmod a-x {}
 
 # Specific formatting for printf portion
 find . -type f -printf '%s %p\n' # size + filepath
+# %c is time
 https://man7.org/linux/man-pages/man1/find.1.html
 
 # - Iterate over an array -
