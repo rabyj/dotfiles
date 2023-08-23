@@ -210,7 +210,7 @@ chmod 775 # rwxrwxr-x
 chmod 2755 # directory IHEC_share drwxr-sr-x.
 chmod 2750 # directory IHEC_share drwxr-s---.
 find /path/to/directory -type d -exec chmod 750 {} \; # recursive give r+x permissions to directories # drwxr-x---
-find /path/to/directory -type f -exec chmod 640 {} \; # recursive give r permission files # drw-r-----
+find /path/to/directory -type f -exec chmod 640 {} \; # recursive give r permission files # -rw-r-----
 chmod -R g+rwX . # set recursively read and write permissions on all files, and add execute permission on folders.
 chmod -R u+rwX,g+rX,o= . # pretty explicit
 
