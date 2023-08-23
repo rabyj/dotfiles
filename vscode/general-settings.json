@@ -3,8 +3,6 @@
     "[json]": {
         "editor.tabSize": 2
     },
-    "editor.formatOnSave": true,
-    "editor.formatOnType": false,
     "[python]": {
         "editor.tabSize": 4,
         "editor.defaultFormatter": "ms-python.black-formatter",
@@ -13,23 +11,44 @@
             "source.organizeImports": true
         }
     },
-    "python.formatting.provider": "none",
     "black-formatter.importStrategy": "fromEnvironment",
+    "editor.detectIndentation": false,
+    "editor.fontFamily": "'Ubuntu Mono', monospace",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": false,
+    "editor.inlineSuggest.enabled": true,
+    "editor.minimap.enabled": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.renderWhitespace": "boundary",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "files.trimTrailingWhitespace": true,
+    "files.autoSave": "afterDelay",
+    "files.associations": {
+        ".inputrc": "shellscript"
+    },
     "isort.importStrategy": "fromEnvironment",
-    "workbench.colorTheme": "Monokai",
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.editor.pinnedTabSizing": "shrink",
-    "workbench.editor.scrollToSwitchTabs": true,
-    "workbench.editor.closeOnFileDelete": true,
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "python.analysis.diagnosticMode": "openFilesOnly",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.experiments.enabled": false,
+    "python.formatting.provider": "none",
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
-    "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.diagnosticMode": "openFilesOnly",
-    "editor.renderWhitespace": "boundary",
-    "files.trimTrailingWhitespace": true,
-    "editor.fontFamily": "'Ubuntu Mono', monospace",
-    "editor.multiCursorModifier": "ctrlCmd",
+    "python.testing.pytestEnabled": true,
+    "python.venvFolders": [
+        "/home/local/USHERBROOKE/rabj2301/miniconda3/envs/",
+        "/home/local/USHERBROOKE/rabj2301/Projects/envs"
+    ],
+    "workbench.colorTheme": "Monokai",
+    "workbench.editor.closeOnFileDelete": true,
+    "workbench.editor.pinnedTabSizing": "shrink",
+    "workbench.editor.scrollToSwitchTabs": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorCustomizations": {},
     "[markdown]": {
         "editor.tabSize": 2,
         "files.trimTrailingWhitespace": false,
@@ -44,11 +63,6 @@
         "MD025": false,
         "MD033": false
     },
-    "editor.rulers": [
-        80,
-        120
-    ],
-    "editor.detectIndentation": false,
     // Configure glob patterns for excluding files and folders. For example, the files explorer decides which files and folders to show or hide based on this setting. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
     "files.exclude": {
         "**/.git": true,
@@ -78,7 +92,6 @@
         "**/logs/**": true,
         "**/hdf5/**": true
     },
-    "python.defaultInterpreterPath": "/usr/bin/python3",
     "editor.suggestSelection": "first",
     "security.workspace.trust.untrustedFiles": "newWindow",
     "javascript.suggest.autoImports": false,
@@ -249,35 +262,21 @@
             "javascript"
         ]
     },
-    "tabnine.experimentalAutoImports": false,
     "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.inheritEnv": false,
     "notebook.lineNumbers": "on",
-    "git.autofetch": true,
+    "notebook.output.wordWrap": true,
+    "notebook.output.scrolling": true,
     "extensions.autoCheckUpdates": false,
-    "editor.minimap.enabled": false,
-    "docwriter.progress.trackClasses": true,
-    "docwriter.style": "Google",
-    "files.autoSave": "afterDelay",
-    "files.associations": {
-        ".inputrc": "shellscript"
-    },
     "remote.SSH.useLocalServer": false,
     "remote.SSH.connectTimeout": 30,
-    "python.testing.pytestEnabled": true,
-    "terminal.integrated.inheritEnv": false,
-    "python.venvFolders": [
-        "/home/local/USHERBROOKE/rabj2301/miniconda3/envs/",
-        "/home/local/USHERBROOKE/rabj2301/Projects/envs"
-    ],
-    "workbench.colorCustomizations": {},
-    "editor.inlineSuggest.enabled": true,
-    "git.openRepositoryInParentFolders": "never",
-    "notebook.output.wordWrap": true,
     "jupyter.askForKernelRestart": false,
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "never",
     "github.copilot.enable": {
         "*": true,
-        "plaintext": true,
+        "plaintext": false,
         "markdown": false,
         "scminput": false
-    }
+    },
 }
