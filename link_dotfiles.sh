@@ -11,6 +11,7 @@ then
   ln -svf ${SCRIPT_DIR}/linux/Xmodmap ~/.Xmodmap # for keyboard mapping, use in startup apps
   ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
   ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
+  ln -svf ${SCRIPT_DIR}/linux/mimeapps.list ~/.config/mimeapps.list
   ln -svf ${SCRIPT_DIR}/linux/remap_keys.desktop ~/.config/autostart/remap_keys.desktop
   ln -svf ${SCRIPT_DIR}/git/gitconfig ~/.gitconfig
   ln -svf ${SCRIPT_DIR}/git/attributes ~/.config/git/attributes
