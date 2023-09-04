@@ -3,6 +3,10 @@
 Double commander won't directly open (double click / open action) executable files.
 <https://ghisler.ch/board/viewtopic.php?t=9073>
 
+## memory handling
+
+reset swap: `sudo swapoff -a; sudo swapon -a`
+
 ## collapsible markdown
 
 <details><summary>CLICK ME</summary>
