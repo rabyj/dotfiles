@@ -112,6 +112,8 @@ git stash apply "stash@{n}" # apply a stash and keep it in the stash cache
 
 # working on multiple branches at same time
 git worktree add <path> [<branch>] # Create <path> and checkout <branch> into it. The new working directory is linked to the current repository, sharing everything except working directory specific files such as HEAD, index, etc.
+
+git rebase --interactive [new base commit, commit is not included in rebasing]
 ~~~
 
 ## How do I delete a Git branch locally and remotely?
