@@ -1,7 +1,11 @@
 # Linux / Coding notes
 
 Double commander won't directly open (double click / open action) executable files.
-https://ghisler.ch/board/viewtopic.php?t=9073
+<https://ghisler.ch/board/viewtopic.php?t=9073>
+
+## memory handling
+
+reset swap: `sudo swapoff -a; sudo swapon -a`
 
 ## collapsible markdown
 
@@ -26,16 +30,26 @@ err 503 --> change update server (software-properties-gtk)
 [Fix fn/function key to work as F-X as default](https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux), not special action:
 
 ~~~bash
+# Change fn/function key mode
 echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
 sudo update-initramfs -u -k all #kill service that keeps value from changing
 reboot
 ~~~
 
-Switching esc with caps lock???
+Switching esc with caps lock. Resets on reboot.
 `setxkbmap -option caps:swapescape`
     caps:swapescape                Swap Esc and Caps Lock
     caps:escape                    Make Caps Lock an additional Esc
     caps:escape_shifted_capslock   Make Caps Lock an additional Esc, but Shift + Caps Lock is the regular Caps Lock
+
+`-option` to reset US layout.
+
+Be careful with modifications through `gnome-tweaks`. You could forget about them when trying to modify something else.
+
+## File manager
+
+Change file picker to KDE overall, makes Ubuntu slower at login.
+`export GTK_USE_PORTAL=1` in `/etc/profile`
 
 ## Useful locations
 
@@ -57,9 +71,6 @@ Switching esc with caps lock???
 /run/user/1810992820/gvfs/sftp:host=cedar.computecanada.ca,user=rabyj/home/rabyj/
 /run/user/1810992820/gvfs/sftp:host=mp2b.calculquebec.ca,user=rabyj/home/rabyj/
 sftp://rabyj@ip29.ccs.usherbrooke.ca/home/rabyj/rabyj # add folder on VSCode, not via local terminal like others
-
-#force unmount
-umount -f -l /mnt/myfolder
 ~~~
 
 ## Other tricks
@@ -74,10 +85,16 @@ cut -f1 hg19_1kb_all_blklst_pearson.mat | tail -n +2 | sort -u | grep -v "^[[:sp
 
 ### Shortcuts
 
-regex to find and replace 'foo' and capture part of it: `'([\w \(\)\.]*)'`
 outdent: shift + tab
 cursor at end of lines: shift+ctrl+alt+l
 Add cursors: select text + press alt
+
+### Rename with regex
+
+rename md5s
+
+(\w{32}) # capture group, refer with $1
+/lustre07/scratch/rabyj/local_ihec_data/epiatlas/hg38/hdf5/EpiAtlas_dfreeze_100kb/$1_100kb_all_none_value.hdf5
 
 ### Notes
 
@@ -110,6 +127,13 @@ Host vscode-narval
 Make sure once the vscode server is running that you are not in restricted mode.
 
 It is better to attach a python debugger to a process rather than trying to make a launch task, since the virtual environment can be extremely finicky.
+
+## Regex
+
+vscode: regex to find and replace 'foo' and capture part of it: `'([\w \(\)\.]*)'`
+
+<https://stackoverflow.com/questions/977251/regular-expressions-and-negating-a-whole-character-group>
+python: To match a string which does not contain the multi-character sequence `ab`, you want to use a negative lookahead: `^(?:(?!ab).)+$`
 
 ## Python
 
@@ -157,6 +181,19 @@ type: ignore # as a comment, to disable pylance warning
 
 To turn on/off formatting for some lines, use a line `#fmt: off`, and then after `#fmt: on`.
 
+### pytest
+
+The `pytest -lvs` command is a combination of multiple options used with pytest. Here's the breakdown of each option:
+
+`-l` or `--showlocals`: This option displays local variables in tracebacks for test failures. It provides additional context by showing the values of local variables at the time of the failure.
+
+`-v` or `--verbose`: This option enables verbose mode and provides more detailed information about the tests being executed. It displays the names of the tests, along with the test outcomes (pass or fail), and any captured output.
+
+`-s` or `--capture=no`: This option disables the capture of stdout and stderr during test execution. It allows the output from print statements and other standard output streams to be displayed in the console.
+
+Disable warnings in config:
+[action:message:category:module:line](https://docs.python.org/3/library/warnings.html#warning-filter)
+
 ### Problems
 
 Getting first dict value : In Python 3 the dict.values() method returns a dictionary view object, not a list like it does in Python 2. Dictionary views have a length, can be iterated, and support membership testing, but don't support indexing.
@@ -177,7 +214,7 @@ chmod 775 # rwxrwxr-x
 chmod 2755 # directory IHEC_share drwxr-sr-x.
 chmod 2750 # directory IHEC_share drwxr-s---.
 find /path/to/directory -type d -exec chmod 750 {} \; # recursive give r+x permissions to directories # drwxr-x---
-find /path/to/directory -type f -exec chmod 640 {} \; # recursive give r permission files # drw-r-----
+find /path/to/directory -type f -exec chmod 640 {} \; # recursive give r permission files # -rw-r-----
 chmod -R g+rwX . # set recursively read and write permissions on all files, and add execute permission on folders.
 chmod -R u+rwX,g+rX,o= . # pretty explicit
 
@@ -193,9 +230,21 @@ setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /fold
 ### - General -
 
 ~~~bash
+# execute series of commands via nohup
+nohup sh -c 'XZ_DEFAULTS="-6e -T2" && tar --xz -cf 2023-01-epiatlas-freeze.tar.xz 2023-01-epiatlas-freeze/' > /dev/null 2>&1 &
+
+# put commands to background and safe for closing terminal
+ctrl+z
+bg
+disown -h # jobs will ignore hangup signal, but stay in the job table
+
 # tar commands
-tar -xvzf IFT870.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
+tar -xvzf file.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
+tar -xf file.tar.extension # recognizes many compression extensions
 tar -cvzf file.tar.gz files_to_tar # c=compress
+tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
+tar -tvf file.tar # list files
+export XZ_DEFAULTS="-6e -T2" #2 cores, level 6 extreme
 
 # mv from pipe
 ls spam | grep -v "bam" | xargs mv -t destination
@@ -205,14 +254,18 @@ dpkg --get-selections | grep 'spam'
 sudo apt-get --only-upgrade install spam
 
 # - links -
-ln -s src file #create link from src to file
+ln -s src new_link_file #create a soft link from src to link
+find . -type f -name '*.hdf5' -printf '%n %p\n' | grep -v "1 ." | grep -v "rank_files" > all_hardlinked_hdf5_WIP.list #finding hardlinked files
 
 # - command line navigation -
 ctrl+r #search in command history
 ctrl+a #place cursor to beginning of line
 ctrl+e #place cursor to end of line
 
-# - kill mount -
+# - reactivate "repeat key" functionality -
+xset r on
+
+# - kill mount / unmount-
 # kill processes keeping from unmounting
 lsof | grep 'mountpoint'
 kill -9 PID
@@ -220,6 +273,7 @@ kill -9 PID
 fuser -kim /address
 # force unmount
 fusermount -uz /address
+umount -f -l /mnt/myfolder
 
 
 # kill nautilus
@@ -235,6 +289,8 @@ command > out 2> error # different files
 command > out 2>&1 # same files, universal
 command &> out # same files, not always supported out of bash
 command 2>&1 # redirect stderr to stdout, useful with tee
+command 2>&1 >/dev/null | grep 'something' #piping the error to a tool like grep:The first operation is the 2>&1, which means 'connect stderr to the file descriptor that stdout is currently going to'. The second operation is 'change stdout so it goes to /dev/null', leaving stderr going to the original stdout, the pipe.
+
 
 # -- find --
 # list number of files in multiple directories
@@ -244,20 +300,25 @@ find . -type f | cut -d/ -f2 | sort | uniq -c
 a_path=$(pwd -P)
 find ${a_path} -mindepth 1 | grep "value.hdf5" | sort -u > a_list.list
 
+# list non directory on current level
+find . -maxdepth 1 -type f
+
 # seek specific files
 find . -type f | grep ".sh"
 
 # Do an action on each file with result of find
 find . -type f | grep ".sh" | xargs -I{} chmod a-x {}
 
+# Specific formatting for printf portion
+find . -type f -printf '%s %p\n' # size + filepath
+# %c is time
+https://man7.org/linux/man-pages/man1/find.1.html
+
 # - Iterate over an array -
 array=( one two three )
 for i in "${array[@]}"; do
   echo $i
 done
-
-# - reactivate "repeat key" functionality -
-xset r on
 
 # loop through range
 for i in {1..5}
@@ -266,9 +327,36 @@ do
 done
 
 # memory management / disk usage
+df -H # total storage info
 du -sh
 ncdu
-diskusage_report
+diskusage_report # for hpc
+
+# -- rsync --
+rsync -ra rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios
+
+rsync --progress -va spam bam # show progress bar and file names
+
+rsync --dry-run -va spam bam # see what would be copied
+
+# Add news files from source to ".". Trailing slash important, means copy content and not parent directory.
+rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch/frosig/local_ihec_data/EpiAtlas-WGBS-100kb/hg38/hdf5/100kb_all_none/ .
+
+# Following recursively syncs a folder tree and it's final csvs to a specified location
+# -R = Relative
+# /./ marks beginning of folder to sync
+# <https://unix.stackexchange.com/questions/321219/rsync-using-part-of-a-relative-path>
+rsync -aR narval:~/path/to/folder/./folder/tree/to/sync/*.csv /destination/folder
+
+# mirror directory structure
+rsync -a --include='*/' --exclude='*' source/ destination/
+
+
+# -- other --
+
+# show true command, not alias
+type command
+\command # use unaliased command
 ~~~
 
 ### Sed commands
@@ -311,7 +399,25 @@ When the job is created, a copy of the script file is made and that copy cannot 
 <https://docs.computecanada.ca/wiki/Getting_started/fr>
 <https://docs.computecanada.ca/wiki/Globus/fr>
 
-### sbatch file (.sh)
+#### Slurm job scheduler commands
+
+~~~bash
+# useful
+squeueme # my queued jobs
+seff JOBID # job info summary
+scancel JOBID # kill/cancel job
+scancel -u rabyj # kill all my jobs
+salloc --account=def-jacquesp # log on a compute node
+diskusage_report
+
+# get IDs from squeue
+sqme > temp_sqme.txt
+cat temp_sqme.txt | grep 'chr' | tr -s ' ' | cut -d ' ' -f2,5 | sort -V -k2 > temp_jobID.txt
+cat temp_jobID.txt | grep "assay" > assay_jobID.txt
+cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
+~~~
+
+#### sbatch file (.sh)
 
 ~~~bash
 #!/bin/bash
@@ -324,33 +430,20 @@ When the job is created, a copy of the script file is made and that copy cannot 
 #SBATCH --gres=gpu:1
 #SBATCH --mail-user=joanny.raby@usherbrooke.ca
 #SBATCH --mail-type=END
+
+#Variables
+${SLURM_JOB_ID} (%j)
+${SLURM_JOB_NAME} (%x)
+$SLURM_CPUS_PER_TASK
 ~~~
 
-### Collect resources via seff
+<https://stackoverflow.com/questions/65677339/how-to-retrieve-the-content-of-slurm-script>
+Recuperate launch script: `scontrol write batch_script <job_id> <optional_filename>`
+
+#### Collect resources via seff
 
 ~~~bash
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'Wall' | grep -oE '[0-9]{2}:[0-9]{2}:[0-9]{2}'
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'Memory Utilized' | grep -oE '[0-9]{1,2}\.[0-9]{1,2} .B'
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'CPU Efficiency:' | grep -oE '[0-9]{1,2}\.[0-9]{1,2}\%'
-~~~
-
-### Other commands
-
-~~~bash
-squeueme #my queued jobs
-seff JOBID #job info summary
-scancel JOBID #kill/cancel job
-scancel -u rabyj #kill all my jobs
-salloc --account=def-jacquesp #log on a compute node
-rsync -r -p rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios,  -p=preserve permissions
-rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch/frosig/local_ihec_data/EpiAtlas-WGBS-100kb/hg38/hdf5/100kb_all_none/ . #Add news files from source to ".". Trailing slash important, means copy content and not parent directory.
-tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
-diskusage_report
-
-
-# get IDs from squeue
-sqme > temp_sqme.txt
-cat temp_sqme.txt | grep 'chr' | tr -s ' ' | cut -d ' ' -f2,5 | sort -V -k2 > temp_jobID.txt
-cat temp_jobID.txt | grep "assay" > assay_jobID.txt
-cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
 ~~~

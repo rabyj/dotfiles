@@ -6,6 +6,8 @@
 
 REPOSITORY NEEDS TO EXIST ONLINE BEFORE TRYING TO PUSH TO IT.
 
+Find watched issues and such (subscriptions): <https://github.com/notifications/subscriptions>
+
 ## General merge guidelines
 
 We want to resolve conflicts in the farthest branches from master.
@@ -90,7 +92,8 @@ Uncommitted changes includes not staged changes, staged changes but not committe
 ~~~bash
 # info collectiong
 git diff --staged # see changes from "git add" but non commited
-git diff --stat --summary 5524541 cff1e7a # See diff as you would in a fast-forward merge/pull
+git diff --stat --summary [from commit1] [to commit2] # See diff as you would in a fast-forward merge/pull
+git diff --stat --summary origin/rabyj HEAD # what would be pushed
 git log --graph --decorate --oneline --all #see branches tree
 
 # Update branches
@@ -109,6 +112,8 @@ git stash apply "stash@{n}" # apply a stash and keep it in the stash cache
 
 # working on multiple branches at same time
 git worktree add <path> [<branch>] # Create <path> and checkout <branch> into it. The new working directory is linked to the current repository, sharing everything except working directory specific files such as HEAD, index, etc.
+
+git rebase --interactive [new base commit, commit is not included in rebasing]
 ~~~
 
 ## How do I delete a Git branch locally and remotely?
