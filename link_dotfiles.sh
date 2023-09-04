@@ -37,4 +37,5 @@ then
 
   cluster_folder="${gen_folder}/clusters"
   ln -svf "${cluster_folder}/bashrc-narval" ~/.bashrc
+  echo "Please manually copy .comet.config content (api key kept out of git)"
 fi
