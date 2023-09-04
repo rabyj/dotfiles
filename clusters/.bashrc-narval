@@ -43,7 +43,11 @@ ht() { HISTTIMEFORMAT='%F_%T  ' history 30; } # history with time stamps
 # Misc
 alias cp="cp -v --no-clobber"
 alias mv="mv -v --no-clobber"
+alias pwdp="pwd -P"
+alias htopme="htop -u rabyj"
+eval "$(thefuck --alias)" #fuck
 
+# git
 alias gs="git status"
 alias gd="git diff"
 alias gds="git diff --staged"
@@ -59,13 +63,11 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # narval specific
-alias htopme="htop -u rabyj"
-
-eval "$(thefuck --alias)" #fuck
-
 export SLURM_TIME_FORMAT="%d %H:%M:%S"
 export SACCT_FIELDS="JobID%8,JobName%30,Timelimit,Elapsed,NCPU%5,ReqMem%7,ExitCode,State%8,Priority%8,Submit%12,Account"
+export SACCT_FIELDS2="JobID%8,JobName%100,Timelimit,Elapsed,NCPU%5,ReqMem%7,ExitCode,State%8,Priority%8,Submit%12,Account"
 alias sqme="sacct -X --format=${SACCT_FIELDS}"
+alias sqme-fullname="sacct -X --format=${SACCT_FIELDS2}"
 alias sqme2="squeue -u rabyj"
 
 alias go-git="cd ~/project-rabyj/sources/epi_ml; ls; git-update"
