@@ -19,7 +19,6 @@ then
   ln -svf ${SCRIPT_DIR}/other_programs/terminator-config ~/.config/terminator/config
   ln -svf ${SCRIPT_DIR}/other_programs/doublecmd_shortcuts.scf ~/.config/doublecmd/shortcuts.scf
 
-  ln -svf ${SCRIPT_DIR}/vscode/pylintrc ~/.pylintrc
   ln -svf ${SCRIPT_DIR}/vscode/shellcheckrc ~/.shellcheckrc
   ln -svf ${SCRIPT_DIR}/vscode/general-settings.json /home/local/USHERBROOKE/rabj2301/.config/Code/User/settings.json
   ln -svf ${SCRIPT_DIR}/vscode/workspaces/EPILAP.code-workspace /home/local/USHERBROOKE/rabj2301/Projects/epilap/EPILAP.code-workspace
