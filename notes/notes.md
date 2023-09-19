@@ -1,7 +1,16 @@
 # Linux / Coding notes
 
+## File manager
+
+### Double commander
+
 Double commander won't directly open (double click / open action) executable files.
 <https://ghisler.ch/board/viewtopic.php?t=9073>
+
+### KDE
+
+Change file picker to KDE overall, makes Ubuntu slower at login.
+`export GTK_USE_PORTAL=1` in `/etc/profile`
 
 ## memory handling
 
@@ -22,6 +31,13 @@ print("hello world!")
 ## apt update
 
 err 503 --> change update server (software-properties-gtk)
+
+## Gnome / Ubuntu specific extensions
+
+Use an [extension](https://extensions.gnome.org/) manager to modify some things on Ubuntu (gnome),
+e.g. adding things on upper bar (ram usage, different clock formatting, and more)
+There is browser connector or a local version on flatpak
+`flatpak install flathub com.mattjakeman.ExtensionManager`
 
 ## Keyboard mapping
 
@@ -46,16 +62,9 @@ Switching esc with caps lock. Resets on reboot.
 
 Be careful with modifications through `gnome-tweaks`. You could forget about them when trying to modify something else.
 
-## File manager
-
-Change file picker to KDE overall, makes Ubuntu slower at login.
-`export GTK_USE_PORTAL=1` in `/etc/profile`
-
 ## Useful locations
 
 ~~~bash
-# local
-/home/local/USHERBROOKE/rabj2301/Projects/epi_ml/epi_ml/python/core/data/
 # helios
 /home/laperlej/public/saccer3/10kb_all_none
 # mp2b
@@ -64,21 +73,6 @@ Change file picker to KDE overall, makes Ubuntu slower at login.
 /nfs3_ib/10.0.219.38/jbodpool/ihec_data/share/2019-11/*/{assembly}/* #ethernet
 /nfs3_ib/ip29/ip29/jacques_group/local_ihec_data/
 /project/6007017/jacques_group/geec_share/public_dsets & /project/6007017/jacques_group/geec_share/saccer
-
-
-# mounts
-/run/user/1810992820/gvfs/sftp:host=helios.calculquebec.ca,user=rabyj/home/rabyj/
-/run/user/1810992820/gvfs/sftp:host=cedar.computecanada.ca,user=rabyj/home/rabyj/
-/run/user/1810992820/gvfs/sftp:host=mp2b.calculquebec.ca,user=rabyj/home/rabyj/
-sftp://rabyj@ip29.ccs.usherbrooke.ca/home/rabyj/rabyj # add folder on VSCode, not via local terminal like others
-~~~
-
-## Other tricks
-
-Get md5sums from matrix
-
-~~~bash
-cut -f1 hg19_1kb_all_blklst_pearson.mat | tail -n +2 | sort -u | grep -v "^[[:space:]]*$" > hg19_1kb_all_blklst_pearson.md5
 ~~~
 
 ## VSCode
@@ -275,6 +269,8 @@ fuser -kim /address
 fusermount -uz /address
 umount -f -l /mnt/myfolder
 
+# create a mount point, you can alias it
+sshfs -o follow_symlinks user@remote:/mount/point /path/to/local/folder
 
 # kill nautilus
 nautilus -q # graceful
@@ -370,9 +366,11 @@ sed -n LINE_NUMBERp file.txt
 ### Grep commands
 
 ~~~bash
-cat hg38.json | grep -oE '"md5sum": "[[:alnum:]]+"' #get all md5sums from json
-cat hg38_metadata.md5 | grep -oE '[[:alnum:]]{32}' | head
-find ~/ihec_datasets/2018-10/ -name "ce520a74fd1d56335671e6cde5408b44" | grep 'hg38'
+# Get md5sums from different files
+cat hg38.json | grep -oE '"md5sum": "[[:alnum:]]+"' # json
+cat hg38_metadata.md5 | grep -oE '[[:alnum:]]{32}' | head # md5
+cut -f1 hg19_1kb_all_blklst_pearson.mat | tail -n +2 | sort -u | grep -v "^[[:space:]]*$" > hg19_1kb_all_blklst_pearson.md5 # matrix
+
 cat 10kb_all_none_plus.list | grep -v '\.hdf5' # check for bad files/folders in list
 ~~~
 
