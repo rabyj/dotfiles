@@ -7,9 +7,10 @@ SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
 if [ "$1" = "local" ];
 then
+  ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
+
   ln -svf ${SCRIPT_DIR}/linux/ssh-config ~/.ssh/config
   ln -svf ${SCRIPT_DIR}/linux/Xmodmap ~/.Xmodmap # for keyboard mapping, use in startup apps
-  ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
   ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
   ln -svf ${SCRIPT_DIR}/linux/mimeapps.list ~/.config/mimeapps.list
   ln -svf ${SCRIPT_DIR}/linux/remap_keys.desktop ~/.config/autostart/remap_keys.desktop
@@ -26,9 +27,10 @@ fi
 
 if [ "$1" = "home" ];
 then
+  ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
+
   ln -svf ${SCRIPT_DIR}/linux/ssh-config ~/.ssh/config
   ln -svf ${SCRIPT_DIR}/linux/Xmodmap ~/.Xmodmap # for keyboard mapping, use in startup apps
-  ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
   ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
   ln -svf ${SCRIPT_DIR}/linux/mimeapps.list ~/.config/mimeapps.list
   ln -svf ${SCRIPT_DIR}/git/gitconfig ~/.gitconfig
@@ -52,5 +54,8 @@ then
 
   cluster_folder="${gen_folder}/clusters"
   ln -svf "${cluster_folder}/bashrc-narval" ~/.bashrc
+
   echo "Please manually copy .comet.config content (api key kept out of git)"
 fi
+
+ln -svf ${SCRIPT_DIR}/linux/bash_aliases ~/.bash_aliases
