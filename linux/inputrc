@@ -1,10 +1,14 @@
 $include /etc/inputrc
 
-# https://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
+# <https://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/>
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 "\e[C": forward-char
 "\e[D": backward-char
 
-# https://superuser.com/questions/302230/how-to-prevent-bash-from-altering-history
+# Is set to history-search-* in Narval so need to remove them to avoid conflicts
+"\e[5~": noop
+"\e[6~": noop
+
+# <https://superuser.com/questions/302230/how-to-prevent-bash-from-altering-history>
 set revert-all-at-newline on

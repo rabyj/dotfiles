@@ -27,7 +27,10 @@
     "files.trimTrailingWhitespace": true,
     "files.autoSave": "afterDelay",
     "files.associations": {
-        ".inputrc": "shellscript"
+        ".inputrc": "shellscript",
+        "inputrc": "shellscript",
+        "bashrc-narval": "shellscript",
+        "bashrc": "shellscript"
     },
     "isort.importStrategy": "fromEnvironment",
     "python.defaultInterpreterPath": "/usr/bin/python3",
