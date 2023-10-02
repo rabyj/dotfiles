@@ -344,9 +344,14 @@ rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch
 # <https://unix.stackexchange.com/questions/321219/rsync-using-part-of-a-relative-path>
 rsync -aR narval:~/path/to/folder/./folder/tree/to/sync/*.csv /destination/folder
 
-# mirror directory structure
+# mirror directory structure (no files)
 rsync -a --include='*/' --exclude='*' source/ destination/
 
+# Copy list of files from a list of absolute paths (without first root /) to current folder
+# sort list beforehand
+# https://unix.stackexchange.com/questions/174674/rsync-a-list-of-directories-with-absolute-path-in-text-file
+# https://stackoverflow.com/questions/16647476/how-to-rsync-only-a-specific-list-of-files/30176688#30176688
+rsync -a --no-dirs --no-relative --files-from=FILE.list narval:/ .
 
 # -- other --
 
