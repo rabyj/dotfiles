@@ -8,6 +8,8 @@ case $- in
       *) return;;
 esac
 
+# --- History control ---
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth:erasedups
@@ -27,9 +29,8 @@ export PROMPT_COMMAND='history -a'
 HISTTIMEFORMAT=''       # Save the timestamp, but don't output it
 #HISTTIMEFORMAT='%F_%T ' # output the time in 'history' see "ht" alias
 
-# History Aliases...
-h()  { history 30; }                          # last few history commands
-ht() { HISTTIMEFORMAT='%F_%T  ' history 30; } # history with time stamps
+
+# --- Prompt control and color ---
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -99,26 +100,6 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# -- ls aliases --
-alias llt="ls -ahlFtr" #reverse time lookup (oldest last), w size prefixes
-alias lla='ls -ahlF'
-alias ll='ls -hlF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -130,6 +111,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+
+
 # Verification du mount du repertoire reseau personnel
 #vdmdrrp8nov2012 (tag de validation)
 MOUNT_COUNT=$(mount -v | egrep $USER/Lecteurs_Reseau/Personnel --count )
@@ -138,23 +122,21 @@ MOUNT_COUNT=$(mount -v | egrep $USER/Lecteurs_Reseau/Personnel --count )
 fi
 
 
+# -- Alias definitions --
 
-# -- Convenience commands --
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+
+# -- Convenience commands (specific to env) --
+
 # Misc
-alias cp="cp -v --no-clobber"
-alias mv="mv -v --no-clobber"
-alias pwdp="pwd -P"
 alias htopme="htop -u rabj2301"
-alias open="xdg-open"
-eval "$(thefuck --alias)" #fuck
-
-# git
-alias gs="git status"
-alias gd="git diff"
-alias gds="git diff --staged"
-git-update() {
-    git fetch && git status
-}
 
 # automount narval
 mounts="$HOME/mounts"
