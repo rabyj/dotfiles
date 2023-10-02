@@ -38,6 +38,7 @@ Use an [extension](https://extensions.gnome.org/) manager to modify some things 
 e.g. adding things on upper bar (ram usage, different clock formatting, and more)
 There is browser connector or a local version on flatpak
 `flatpak install flathub com.mattjakeman.ExtensionManager`
+clock override in GUI settings: `%F %H:%M`
 
 ## Keyboard mapping
 
