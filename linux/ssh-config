@@ -3,6 +3,10 @@ Host *
     ForwardAgent yes
     IdentityFile ~/.ssh/id_ed25519
     User rabyj
+Host narval beluga
+    ControlPath ~/.ssh/cm-%r@%h:%p
+    ControlMaster auto
+    ControlPersist 48h
 Host narval
     HostName narval.computecanada.ca
 Host vscode-narval
