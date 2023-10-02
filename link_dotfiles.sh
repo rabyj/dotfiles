@@ -5,6 +5,8 @@ echo "Use one of the following arguments: [local, narval, home]"
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
 
+ln -svf ${SCRIPT_DIR}/linux/bash_aliases ~/.bash_aliases
+
 if [ "$1" = "local" ];
 then
   ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
@@ -23,6 +25,7 @@ then
   ln -svf ${SCRIPT_DIR}/vscode/shellcheckrc ~/.shellcheckrc
   ln -svf ${SCRIPT_DIR}/vscode/general-settings.json ~/.config/Code/User/settings.json
   ln -svf ${SCRIPT_DIR}/vscode/workspaces/EPILAP.code-workspace ~/Projects/epilap/EPILAP.code-workspace
+  exit
 fi
 
 if [ "$1" = "home" ];
@@ -40,6 +43,7 @@ then
   ln -svf ${SCRIPT_DIR}/vscode/shellcheckrc ~/.shellcheckrc
   # ln -svf ${SCRIPT_DIR}/vscode/general-settings.json ~/.config/Code/User/settings.json
   # ln -svf ${SCRIPT_DIR}/vscode/workspaces/EPILAP.code-workspace ~/Projects/epilap/EPILAP.code-workspace
+  exit
 fi
 
 if [ "$1" = "narval" ];
@@ -56,6 +60,5 @@ then
   ln -svf "${cluster_folder}/bashrc-narval" ~/.bashrc
 
   echo "Please manually copy .comet.config content (api key kept out of git)"
+  exit
 fi
-
-ln -svf ${SCRIPT_DIR}/linux/bash_aliases ~/.bash_aliases
