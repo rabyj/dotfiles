@@ -66,6 +66,14 @@ ml httpproxy # for comet-ml
 
 # -- Terminal prompt modifications --
 
+# Change prompt color
+# https://bash-prompt-generator.org/
+# https://unix.stackexchange.com/questions/16120/in-bash-how-can-i-change-the-color-of-my-command-prompt
+bold_orange="\[\e[38;5;202;1m\]"
+reset="\[\e[0m\]"
+PS1="${bold_orange}[\u@\h \W]\\$ ${reset}"
+
+
 # https://github.com/git/git/blob/v2.31.6/contrib/completion/git-prompt.sh
 source ~/.git-prompt.sh
 # https://web.archive.org/web/20160704140739/http://ithaca.arpinum.org/2013/01/02/git-prompt.html
