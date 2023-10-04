@@ -56,7 +56,7 @@
       title = local - git
       uuid = 949f744d-cc13-4ae6-9ec0-c9af5e3bfb6b
       directory = /home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/
-      command = bash --rcfile <(echo ". ~/.bashrc && git-update")
+      command = bash --rcfile <(echo ". ~/.bashrc && git fetch --all && git status")
     [[[child5]]]
       type = VPaned
       parent = child1
