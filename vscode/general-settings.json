@@ -283,4 +283,8 @@
         "scminput": false
     },
     "extensions.ignoreRecommendations": true,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "right"
+    },
 }
