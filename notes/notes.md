@@ -1,38 +1,16 @@
 # Linux / Coding notes
 
-## File manager
+## Slack
 
-### Double commander
+Use shift+esc to read all messages in a workspace
 
-Double commander won't directly open (double click / open action) executable files.
-<https://ghisler.ch/board/viewtopic.php?t=9073>
+## Linux
 
-### KDE
-
-Change file picker to KDE overall, makes Ubuntu slower at login.
-`export GTK_USE_PORTAL=1` in `/etc/profile`
-
-## memory handling
+### Memory handling
 
 reset swap: `sudo swapoff -a; sudo swapon -a`
 
-## collapsible markdown
-
-<details><summary>CLICK ME</summary>
-<p>
-
-~~~python
-print("hello world!")
-~~~
-
-</p>
-</details>
-
-## apt update
-
-err 503 --> change update server (software-properties-gtk)
-
-## Gnome / Ubuntu specific extensions
+### Gnome / Ubuntu specific extensions
 
 Use an [extension](https://extensions.gnome.org/) manager to modify some things on Ubuntu (gnome),
 e.g. adding things on upper bar (ram usage, different clock formatting, and more)
@@ -40,7 +18,11 @@ There is browser connector or a local version on flatpak
 `flatpak install flathub com.mattjakeman.ExtensionManager`
 clock override in GUI settings: `%F %H:%M`
 
-## Keyboard mapping
+### apt update
+
+err 503 --> change update server (software-properties-gtk)
+
+### Keyboard mapping
 
 [Ctrl + Page UP / Page Down are reversed](https://unix.stackexchange.com/questions/524250/ctrl-page-up-page-down-are-reversed)
 
@@ -62,6 +44,32 @@ Switching esc with caps lock. Resets on reboot.
 `-option` to reset US layout.
 
 Be careful with modifications through `gnome-tweaks`. You could forget about them when trying to modify something else.
+
+### File manager
+
+#### Double commander
+
+Double commander won't directly open (double click / open action) executable files.
+<https://ghisler.ch/board/viewtopic.php?t=9073>
+
+#### KDE
+
+Change file picker to KDE overall, makes Ubuntu slower at login.
+`export GTK_USE_PORTAL=1` in `/etc/profile`
+
+## Markdown
+
+### Collapsible markdown
+
+<details><summary>CLICK ME</summary>
+<p>
+
+~~~python
+print("hello world!")
+~~~
+
+</p>
+</details>
 
 ## Useful locations
 
@@ -95,7 +103,7 @@ rename md5s
 
 If right click is misbehaving (context menu dissapears if not holding right click), make sure terminal zoom is reset.
 
-### local debug with attach
+### Local debug with attach
 
 Might need to do this command if debug server unable to attach
 
@@ -194,8 +202,8 @@ Disable warnings in config:
 Getting first dict value : In Python 3 the dict.values() method returns a dictionary view object, not a list like it does in Python 2. Dictionary views have a length, can be iterated, and support membership testing, but don't support indexing.
 solution : next(iter(dict.values())) --> first value
 
-[Having options in argparse with a dash](https://stackoverflow.com/questions/12834785/having-options-in-argparse-with-a-dash)
 Unfortunately, dash-to-underscore replacement doesn't work for positional arguments (not prefixed by --) like `logs-dir`
+[Having options in argparse with a dash](https://stackoverflow.com/questions/12834785/having-options-in-argparse-with-a-dash)
 [Related issue](https://github.com/python/cpython/issues/59330)
 
 ## Bash
@@ -359,6 +367,9 @@ rsync -a --no-dirs --no-relative --files-from=FILE.list narval:/ .
 # show true command, not alias
 type command
 \command # use unaliased command
+
+# rename (perl syntax, sed syntax)
+rename 's/\s+/_/g' * # replace spaces with underscores
 ~~~
 
 ### Sed commands
