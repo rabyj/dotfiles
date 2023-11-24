@@ -8,9 +8,6 @@
         "python.testing.pytestArgs": [
             "-c /home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
         ],
-        "black-formatter.interpreter": [
-            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass/bin/python"
-        ],
         "black-formatter.args": [
             "--config",
             "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
@@ -23,11 +20,11 @@
             "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
         ],
         "python.defaultInterpreterPath": "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass/bin/python",
-        "python.linting.enabled": true,
-        "python.linting.pylintEnabled": true,
-        "python.linting.pylintPath": "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass/bin/pylint",
-        "python.linting.pylintArgs": [
+        "pylint.args": [
             "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
+        ],
+        "pylint.path": [
+            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass/bin/pylint"
         ],
         "python.analysis.extraPaths": [
             "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python"
