@@ -2,9 +2,16 @@
 
 ## Slack
 
-Use shift+esc to read all messages in a workspace
+Read all messages in a workspace: shift+esc
+Hide/Show worspaces: Ctrl + Shift + S
+Reload Slack: Ctrl + Shift + R
+Slack tweaks (remove new sidebar): <https://gist.github.com/Kenny-MWI/6b1a88ad38b5ffef347527a82becf054>
 
 ## Linux
+
+### Ubuntu Desktop
+
+hold down the Super key and press ↑
 
 ### Memory handling
 
