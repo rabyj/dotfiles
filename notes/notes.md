@@ -147,6 +147,12 @@ python: To match a string which does not contain the multi-character sequence `a
 
 ## Python
 
+### Imports
+
+[Sibling package imports](https://stackoverflow.com/questions/6323860/sibling-package-imports)
+[Relative imports in Python 3](https://stackoverflow.com/questions/16981921/relative-imports-in-python-3)
+[Relative imports for the billionth time](https://stackoverflow.com/questions/14132789/relative-imports-for-the-billionth-time)
+
 ### conda
 
 create env
@@ -243,7 +249,7 @@ setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /fold
 # execute series of commands via nohup
 nohup sh -c 'XZ_DEFAULTS="-6e -T2" && tar --xz -cf 2023-01-epiatlas-freeze.tar.xz 2023-01-epiatlas-freeze/' > /dev/null 2>&1 &
 
-# put commands to background and safe for closing terminal
+# put commands to background and safe for closing terminal, nohup like
 ctrl+z
 bg
 disown -h # jobs will ignore hangup signal, but stay in the job table
@@ -281,8 +287,9 @@ lsof | grep 'mountpoint'
 kill -9 PID
 # kill any processes accessing address
 fuser -kim /address
+# lazy unmount
+fusermount -uz /address # (-u=unmount, -z=lazy)
 # force unmount
-fusermount -uz /address
 umount -f -l /mnt/myfolder
 
 # create a mount point, you can alias it
@@ -325,6 +332,9 @@ find . -type f | grep ".sh" | xargs -I{} chmod a-x {}
 find . -type f -printf '%s %p\n' # size + filepath
 # %c is time
 https://man7.org/linux/man-pages/man1/find.1.html
+
+# List number of files in each folder
+find . -type f | cut -d/ -f2 | sort | uniq -c
 
 # - Iterate over an array -
 array=( one two three )
@@ -385,6 +395,8 @@ rename 's/\s+/_/g' * # replace spaces with underscores
 sed 's@/home/local/USHERBROOKE/rabj2301/Projects/epi_ml/epi_ml/python/core/data/@/home/laperlej/public/saccer3/10kb_all_none/@g'
 sed 's@1mb_gene_none/@/home/laperlej/public/hg38/1mb_gene_none/@g'
 sed -n LINE_NUMBERp file.txt
+sed -i 's/STRING_TO_REPLACE/STRING_TO_REPLACE_WITH/g' filename # inplace
+sed -i '8i This is Line 8' filename # insert text at line number (inplace)
 ~~~
 
 ### Grep commands
@@ -452,6 +464,7 @@ cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
 #SBATCH --gres=gpu:1
 #SBATCH --mail-user=joanny.raby@usherbrooke.ca
 #SBATCH --mail-type=END
+#SBATCH --dependency=afterok:<JOBID>
 
 #Variables
 ${SLURM_JOB_ID} (%j)
