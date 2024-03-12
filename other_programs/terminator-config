@@ -44,10 +44,10 @@
       parent = child2
       order = 0
       profile = Kat
-      title = local - EpiLaP
+      title = local - EpiClass
       uuid = 2d687ad0-76cd-4702-b838-c9034c1e0822
-      directory = /home/local/USHERBROOKE/rabj2301/Projects/epilap/
-      command = bash --rcfile <(echo ". ~/.bashrc && code EPILAP.code-workspace ")
+      directory = /home/local/USHERBROOKE/rabj2301/Projects/epiclass/
+      command = bash --rcfile <(echo ". ~/.bashrc && code epiclass.code-workspace ")
     [[[terminal4]]]
       type = Terminal
       parent = child2
