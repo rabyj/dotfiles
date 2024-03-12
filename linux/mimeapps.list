@@ -33,6 +33,7 @@ application/zip=org.gnome.FileRoller.desktop;
 application/x-ipynb+json=code.desktop;
 image/svg+xml=firefox.desktop;
 text/x-matlab=code.desktop;
+text/x-chdr=code.desktop;
 
 [Default Applications]
 application/json=code.desktop
@@ -64,3 +65,4 @@ application/zip=org.gnome.FileRoller.desktop;
 application/x-ipynb+json=code.desktop;
 image/svg+xml=firefox.desktop;
 text/x-matlab=code.desktop;
+text/x-chdr=code.desktop;
