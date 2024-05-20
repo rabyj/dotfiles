@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="1.0.10">
-  <Hotkeys Version="53">
+<doublecmd DCVersion="1.1.12 gamma">
+  <Hotkeys Version="63">
     <Form Name="Main">
-      <Hotkey>
-        <Shortcut>F1</Shortcut>
-        <Command>cm_About</Command>
-      </Hotkey>
-      <Hotkey>
-        <Shortcut>F3</Shortcut>
-        <Command>cm_View</Command>
-      </Hotkey>
       <Hotkey>
         <Shortcut>F4</Shortcut>
         <Command>cm_Edit</Command>
@@ -387,6 +379,23 @@
         <Command>cm_Search</Command>
       </Hotkey>
       <Hotkey>
+        <Shortcut>F1</Shortcut>
+        <Command>cm_HelpIndex</Command>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>F3</Shortcut>
+        <Command>cm_View</Command>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Shift+F3</Shortcut>
+        <Command>cm_View</Command>
+        <Param>cursor=1</Param>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Ctrl+Shift+A</Shortcut>
+        <Command>cm_ShowTabsList</Command>
+      </Hotkey>
+      <Hotkey>
         <Shortcut>Del</Shortcut>
         <Command>cm_Delete</Command>
         <Control>Files Panel</Control>
@@ -487,7 +496,7 @@
         <Command>cm_LoadNextFile</Command>
       </Hotkey>
       <Hotkey>
-        <Shortcut>Right</Shortcut>
+        <Shortcut>Alt+Right</Shortcut>
         <Command>cm_LoadNextFile</Command>
       </Hotkey>
       <Hotkey>
@@ -495,7 +504,7 @@
         <Command>cm_LoadPrevFile</Command>
       </Hotkey>
       <Hotkey>
-        <Shortcut>Left</Shortcut>
+        <Shortcut>Alt+Left</Shortcut>
         <Command>cm_LoadPrevFile</Command>
       </Hotkey>
       <Hotkey>
@@ -621,6 +630,18 @@
       <Hotkey>
         <Shortcut>W</Shortcut>
         <Command>cm_WrapText</Command>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>9</Shortcut>
+        <Command>cm_ShowCode</Command>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Ctrl+G</Shortcut>
+        <Command>cm_GotoLine</Command>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Ctrl+Z</Shortcut>
+        <Command>cm_Undo</Command>
       </Hotkey>
     </Form>
     <Form Name="Differ">
@@ -1019,6 +1040,12 @@
       <Hotkey>
         <Shortcut>Ctrl+Shift+F1</Shortcut>
         <Command>cm_PlgnExtMask</Command>
+      </Hotkey>
+    </Form>
+    <Form Name="Confirmation">
+      <Hotkey>
+        <Shortcut>F2</Shortcut>
+        <Command>cm_AddToQueue</Command>
       </Hotkey>
     </Form>
   </Hotkeys>
