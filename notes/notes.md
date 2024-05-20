@@ -246,6 +246,9 @@ setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /fold
 ### - General -
 
 ~~~bash
+# recursive touch
+find folder | xargs -I{} touch -ac {}
+
 # execute series of commands via nohup
 nohup sh -c 'XZ_DEFAULTS="-6e -T2" && tar --xz -cf 2023-01-epiatlas-freeze.tar.xz 2023-01-epiatlas-freeze/' > /dev/null 2>&1 &
 
@@ -310,6 +313,10 @@ command &> out # same files, not always supported out of bash
 command 2>&1 # redirect stderr to stdout, useful with tee
 command 2>&1 >/dev/null | grep 'something' #piping the error to a tool like grep:The first operation is the 2>&1, which means 'connect stderr to the file descriptor that stdout is currently going to'. The second operation is 'change stdout so it goes to /dev/null', leaving stderr going to the original stdout, the pipe.
 
+# -- tree --
+tree -L [number] # depth of tree
+tree -D # print date (day)
+tree --timefmt "%F %T" . #(iso day + time)
 
 # -- find --
 # list number of files in multiple directories
@@ -336,6 +343,9 @@ https://man7.org/linux/man-pages/man1/find.1.html
 # List number of files in each folder
 find . -type f | cut -d/ -f2 | sort | uniq -c
 
+# List md5s from hdf5 (epigeec file format)
+find . -type f -name "*.hdf5" | cut -d_ -f1 | cut -d/ -f2 | sort > ../list.md5
+
 # - Iterate over an array -
 array=( one two three )
 for i in "${array[@]}"; do
@@ -358,6 +368,7 @@ diskusage_report # for hpc
 rsync -ra rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios
 
 rsync --progress -va spam bam # show progress bar and file names
+rsync --info=progress2 -va spam bam # show alternative progress information: how many files have been found, and how many are transfered
 
 rsync --dry-run -va spam bam # see what would be copied
 
@@ -378,6 +389,10 @@ rsync -a --include='*/' --exclude='*' source/ destination/
 # https://unix.stackexchange.com/questions/174674/rsync-a-list-of-directories-with-absolute-path-in-text-file
 # https://stackoverflow.com/questions/16647476/how-to-rsync-only-a-specific-list-of-files/30176688#30176688
 rsync -a --no-dirs --no-relative --files-from=FILE.list narval:/ .
+
+# find file + rsync with dir structure preserved
+# the directory structure starting from the directories that match split* will be preserved in the destination directory.
+find split* -maxdepth 2 -type f -name '*prediction.csv' -print0 | rsync -av --files-from=- --from0 ./ $HOME/Projects/epiclass/output/paper/data/harmonized_sample_ontology_intermediate/all_splits/harmonized_sample_ontology_intermediate_1l_3000n/10fold-dfreeze-2/
 
 # -- other --
 
@@ -408,6 +423,9 @@ cat hg38_metadata.md5 | grep -oE '[[:alnum:]]{32}' | head # md5
 cut -f1 hg19_1kb_all_blklst_pearson.mat | tail -n +2 | sort -u | grep -v "^[[:space:]]*$" > hg19_1kb_all_blklst_pearson.md5 # matrix
 
 cat 10kb_all_none_plus.list | grep -v '\.hdf5' # check for bad files/folders in list
+
+# scratch delete list without empty paths
+grep -Ev '^"","' /scratch/to_delete/rabyj
 ~~~
 
 ## Job schedulers - HPC
