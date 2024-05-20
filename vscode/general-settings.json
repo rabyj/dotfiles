@@ -12,7 +12,6 @@
         }
     },
     "black-formatter.importStrategy": "useBundled",
-    "editor.detectIndentation": false,
     "editor.fontFamily": "'Ubuntu Mono', monospace",
     "editor.formatOnSave": true,
     "[cpp]": {
@@ -287,4 +286,6 @@
         "jupyter-notebook": "right"
     },
     "cmake.configureOnOpen": true,
+    "editor.indentSize": "tabSize",
+    "editor.detectIndentation": false,
 }
