@@ -95,7 +95,6 @@
     },
     "editor.suggestSelection": "first",
     "security.workspace.trust.untrustedFiles": "newWindow",
-    "javascript.suggest.autoImports": false,
     "remote.SSH.remotePlatform": {
         "narval": "linux"
     },
@@ -263,7 +262,7 @@
             "javascript"
         ]
     },
-    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.inheritEnv": false,
     "notebook.lineNumbers": "on",
     "notebook.output.wordWrap": true,
