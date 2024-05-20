@@ -289,6 +289,11 @@
     },
     "cmake.configureOnOpen": true,
     "github.copilot.chat.welcomeMessage": "never",
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.completeFunctionParens": true,
+    "notebook.diff.ignoreMetadata": true,
+    "notebook.diff.ignoreOutputs": true,
     "editor.indentSize": "tabSize",
     "editor.detectIndentation": false,
+    "cmake.options.statusBarVisibility": "visible",
 }
