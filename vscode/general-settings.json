@@ -1,4 +1,5 @@
 {
+    "keyboard.dispatch": "keyCode",
     "update.mode": "default",
     "[json]": {
         "editor.tabSize": 2
