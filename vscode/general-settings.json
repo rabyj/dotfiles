@@ -277,7 +277,10 @@
         "*": true,
         "plaintext": false,
         "markdown": false,
-        "scminput": false
+        "scminput": false,
+        "python": true,
+        "shellscript": true,
+        "cmake": true
     },
     "extensions.ignoreRecommendations": true,
     "notebook.cellToolbarLocation": {
@@ -285,6 +288,7 @@
         "jupyter-notebook": "right"
     },
     "cmake.configureOnOpen": true,
+    "github.copilot.chat.welcomeMessage": "never",
     "editor.indentSize": "tabSize",
     "editor.detectIndentation": false,
 }
