@@ -130,6 +130,9 @@ fi
 
 # Misc
 alias htopme="htop -u rabj2301"
+copy() {
+  echo -n "$1" | xclip -selection clipboard
+}
 
 # automount narval
 mounts="$HOME/mounts"
