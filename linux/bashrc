@@ -4,8 +4,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # --- History control ---
@@ -26,9 +26,8 @@ export HISTFILESIZE=1000000000
 # save the commands for every session into the same source
 export PROMPT_COMMAND='history -a'
 
-HISTTIMEFORMAT=''       # Save the timestamp, but don't output it
+HISTTIMEFORMAT='' # Save the timestamp, but don't output it
 #HISTTIMEFORMAT='%F_%T ' # output the time in 'history' see "ht" alias
-
 
 # --- Prompt control and color ---
 
@@ -45,12 +44,12 @@ shopt -s checkwinsize
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+  debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+xterm-color | *-256color) color_prompt=yes ;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -59,42 +58,41 @@ esac
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+xterm* | rxvt*)
+  PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+  ;;
+*) ;;
 esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  #alias dir='dir --color=auto'
+  #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
@@ -111,16 +109,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
-
-
 # Verification du mount du repertoire reseau personnel
 #vdmdrrp8nov2012 (tag de validation)
-MOUNT_COUNT=$(mount -v | egrep $USER/Lecteurs_Reseau/Personnel --count )
- if [ "$MOUNT_COUNT" = "0" ] ; then
-	echo -e "\\033[1;31m" "ATTENTION: Erreur lors du montage de votre espace réseau \n\t\t\t \"Personnel\"  " " \\033[0;39m"
+MOUNT_COUNT=$(mount -v | egrep $USER/Lecteurs_Reseau/Personnel --count)
+if [ "$MOUNT_COUNT" = "0" ]; then
+  echo -e "\\033[1;31m" "ATTENTION: Erreur lors du montage de votre espace réseau \n\t\t\t \"Personnel\"  " " \\033[0;39m"
 fi
-
 
 # -- Alias definitions --
 
@@ -129,9 +123,8 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
-
 
 # -- Convenience commands (specific to env) --
 
@@ -148,7 +141,6 @@ alias mount-ip29="sshfs -o follow_symlinks rabyj@ip29.ccs.usherbrooke.ca:/home/r
 myroot="$HOME/Projects"
 alias source-epiclass=". ${myroot}/envs/epiclass/bin/activate"
 
-
 # -- Terminal prompt modifications --
 
 # Change the depth of directory showed in terminal line
@@ -160,15 +152,15 @@ PS1="\$(__git_ps1 "[%s]")$PS1"
 # Function to allow a user to arbitrarily set the terminal title to anything
 # Example: `set-title this is title 1`
 set-title() {
-    # Set the PS1 title escape sequence; see "Customizing the terminal window title" here:
-    # https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Customizing_the_terminal_window_title
-    TITLE="\[\e]2;$@\a\]"
-    PS1=${PS1_BAK}${TITLE}
+  # Set the PS1 title escape sequence; see "Customizing the terminal window title" here:
+  # https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Customizing_the_terminal_window_title
+  TITLE="\[\e]2;$@\a\]"
+  PS1=${PS1_BAK}${TITLE}
 }
 
 # Back up original PS1 Prompt 1 string when ~/.bashrc is first sourced upon bash opening
 if [[ -z "$PS1_BAK" ]]; then # If length of this str is zero (see `man test`)
-    PS1_BAK=$PS1
+  PS1_BAK=$PS1
 fi
 
 # Set the title to a user-specified value if and only if TITLE_DEFAULT has been previously set and
@@ -178,6 +170,5 @@ fi
 # Note that sourcing the ~/.bashrc file is done automatically by bash each time you open a new bash
 # terminal, so long as it is an interactive (use `bash -i` if calling bash directly) type terminal
 if [[ -n "$TITLE_DEFAULT" ]]; then # If length of this is NONzero (see `man test`)
-    set-title "$TITLE_DEFAULT"
+  set-title "$TITLE_DEFAULT"
 fi
-
