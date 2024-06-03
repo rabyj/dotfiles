@@ -43,6 +43,9 @@ fi
 # -- Narval specific aliases and functions --
 
 alias htopme="htop -u rabyj"
+copy() {
+  echo -n "$1" | xclip -selection clipboard
+}
 
 export SLURM_TIME_FORMAT="%d %H:%M:%S"
 export SACCT_FIELDS="JobID%8,JobName%30,Timelimit,Elapsed,NCPU%5,ReqMem%7,ExitCode,State%8,Priority%8,Submit%12,Account"
@@ -58,6 +61,7 @@ alias go-logs="cd ~/project-rabyj/epilap/output/logs; ls"
 
 # -- CVMFS Modules --
 # EpiLaP pyTorch
+ml StdEnv/2020
 ml python/3.8
 ml httpproxy # for comet-ml
 
