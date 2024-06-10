@@ -34,6 +34,8 @@ application/x-ipynb+json=code.desktop;
 image/svg+xml=firefox.desktop;
 text/x-matlab=code.desktop;
 text/x-chdr=code.desktop;
+video/x-sgi-movie=kazam.desktop;
+application/xspf+xml=org.strawberrymusicplayer.strawberry.desktop;
 
 [Default Applications]
 application/json=code.desktop
@@ -66,3 +68,5 @@ application/x-ipynb+json=code.desktop;
 image/svg+xml=firefox.desktop;
 text/x-matlab=code.desktop;
 text/x-chdr=code.desktop;
+video/x-sgi-movie=kazam.desktop;
+application/xspf+xml=org.strawberrymusicplayer.strawberry.desktop;

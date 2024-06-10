@@ -54,6 +54,11 @@ Be careful with modifications through `gnome-tweaks`. You could forget about the
 
 ### File manager
 
+#### Change file association
+
+Open-with -> change default association and save (in doublecmd, restart app)
+Manually: change ~/.config/mimeapps.list
+
 #### Double commander
 
 Double commander won't directly open (double click / open action) executable files.
