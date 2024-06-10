@@ -52,6 +52,12 @@ Switching esc with caps lock. Resets on reboot.
 
 Be careful with modifications through `gnome-tweaks`. You could forget about them when trying to modify something else.
 
+Change default system volume increment (works for fn vol up/down keys)
+
+~~~bash
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-step 1
+~~~
+
 ### File manager
 
 #### Change file association
@@ -243,6 +249,7 @@ chmod -R u+rwX,g+rX,o= . # pretty explicit
 # - ACL permissions -
 # add specific permissions, recursive and "sticky"
 setfacl -Rm u:USERNAME:rwX,d:u:USERNAME:rwX /folder/to/modify
+getfacl folder # see acl permissions
 
 # equivalent to
 setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /folder/to/modify
@@ -263,11 +270,13 @@ bg
 disown -h # jobs will ignore hangup signal, but stay in the job table
 
 # tar commands
+tar -cf folder_name.tar folder_to_tar # c=create, create tar without compressing
 tar -xvzf file.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
 tar -xf file.tar.extension # recognizes many compression extensions
-tar -cvzf file.tar.gz files_to_tar # c=compress
+tar -cvzf file.tar.gz files_to_tar # create (c) + compress to gz (z)
 tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
 tar -tvf file.tar # list files
+tar -xf file.tar path/to/file/in/tar # extract a specific file
 export XZ_DEFAULTS="-6e -T2" #2 cores, level 6 extreme
 
 # mv from pipe
