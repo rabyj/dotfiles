@@ -9,6 +9,30 @@ Slack tweaks (remove new sidebar): <https://gist.github.com/Kenny-MWI/6b1a88ad38
 
 ## Linux
 
+## Journals/Logs
+
+~~~bash
+journalctl --disk-usage # check size used by journals
+journalctl --vacuum-size=1G # remove journals until under that size
+journalctl --vacuum-time=1s --unit=slack.desktop #remove specific entries
+sudo systemctl restart systemd-journald.service # force journal rotation
+nano /etc/systemd/journald.conf # SystemMaxUse=1G for max 1G used total
+~~~
+
+## Filesystem handling
+
+~~~bash
+sudo tune2fs -c 5 /dev/sda1 # check filesystem state each 5 startup/mounts
+sudo tune2fs -e remount-ro /dev/sda1 # if kernel error, remount drive as read-only, prevents corruption spreading.
+~~~
+
+## Music format conversion
+
+~~~bash
+# flac to opus, excellent for size, very probably transparent for my ears at this bitrate
+for path in */*.flac; do ffmpeg -i "$path" -vn -acodec libopus -ab 96k "${path%.flac}.opus"; done
+~~~
+
 ### Ubuntu Desktop
 
 hold down the Super key and press ↑
@@ -259,7 +283,7 @@ setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /fold
 
 ~~~bash
 # recursive touch
-find folder | xargs -I{} touch -ac {}
+find folder -type f -exec touch -ac {} + # a=access time, c=do not create file
 
 # execute series of commands via nohup
 nohup sh -c 'XZ_DEFAULTS="-6e -T2" && tar --xz -cf 2023-01-epiatlas-freeze.tar.xz 2023-01-epiatlas-freeze/' > /dev/null 2>&1 &
@@ -333,7 +357,7 @@ tree -D # print date (day)
 tree --timefmt "%F %T" . #(iso day + time)
 
 # -- find --
-# list number of files in multiple directories
+# list/count number of files in multiple directories
 find . -type f | cut -d/ -f2 | sort | uniq -c
 
 # list files with full paths in directory (give full path to find)
@@ -416,6 +440,9 @@ type command
 
 # rename (perl syntax, sed syntax)
 rename 's/\s+/_/g' * # replace spaces with underscores
+
+# script location/folder/directory
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ~~~
 
 ### Sed commands
@@ -438,8 +465,8 @@ cut -f1 hg19_1kb_all_blklst_pearson.mat | tail -n +2 | sort -u | grep -v "^[[:sp
 
 cat 10kb_all_none_plus.list | grep -v '\.hdf5' # check for bad files/folders in list
 
-# scratch delete list without empty paths
-grep -Ev '^"","' /scratch/to_delete/rabyj
+# scratch delete/purge list without empty paths
+grep -Ev '^"","' /scratch/to_delete/rabyj > ~/to_delete_rabyj.csv
 ~~~
 
 ## Job schedulers - HPC
