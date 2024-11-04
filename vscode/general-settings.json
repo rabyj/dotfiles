@@ -8,13 +8,13 @@
         "editor.tabSize": 4,
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.wordWrap": "off",
+        "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.organizeImports": "explicit"
         }
     },
     "black-formatter.importStrategy": "useBundled",
     "editor.fontFamily": "'Ubuntu Mono', monospace",
-    "editor.formatOnSave": true,
     "[cpp]": {
         "editor.formatOnSave": false
     },
@@ -56,7 +56,8 @@
         "files.trimTrailingWhitespace": false,
     },
     "[shellscript]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "mkhl.shfmt"
     },
     "markdownlint.config": {
         "MD024": {
@@ -264,7 +265,7 @@
         ]
     },
     "terminal.integrated.enableMultiLinePasteWarning": "never",
-    "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.inheritEnv": true,
     "notebook.lineNumbers": "on",
     "notebook.output.wordWrap": true,
     "notebook.output.scrolling": true,
@@ -297,4 +298,7 @@
     "editor.indentSize": "tabSize",
     "editor.detectIndentation": false,
     "cmake.options.statusBarVisibility": "visible",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "workbench.externalBrowser": "firefox",
+    "dataWrangler.experiments.useJupyterProposedAPI": false,
 }
