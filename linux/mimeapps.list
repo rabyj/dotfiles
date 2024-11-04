@@ -36,6 +36,7 @@ text/x-matlab=code.desktop;
 text/x-chdr=code.desktop;
 video/x-sgi-movie=kazam.desktop;
 application/xspf+xml=org.strawberrymusicplayer.strawberry.desktop;
+application/x-trash=code.desktop;
 
 [Default Applications]
 application/json=code.desktop
@@ -71,3 +72,4 @@ text/x-chdr=code.desktop;
 video/x-sgi-movie=kazam.desktop;
 application/xspf+xml=org.strawberrymusicplayer.strawberry.desktop;
 audio/x-opus+ogg=org.strawberrymusicplayer.strawberry.desktop;
+application/x-trash=code.desktop;
