@@ -8,6 +8,8 @@ REPOSITORY NEEDS TO EXIST ONLINE BEFORE TRYING TO PUSH TO IT.
 
 Find watched issues and such (subscriptions): <https://github.com/notifications/subscriptions>
 
+Find comments by me: <https://github.com/search?q=is%3Aissue+commenter%3A%40me&type=issues>
+
 ## General merge guidelines
 
 We want to resolve conflicts in the farthest branches from master.
@@ -59,6 +61,10 @@ git fetch --tags
 ## Recover lost commits
 
 <https://stackoverflow.com/questions/134882/undoing-a-git-rebase>
+
+## Recover discarded changes with vscode timeline
+
+<https://stackoverflow.com/a/77093855/11472153>
 
 ## git rm and its dangers
 
