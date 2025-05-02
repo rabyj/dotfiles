@@ -33,11 +33,14 @@ sudo tune2fs -e remount-ro /dev/sda1 # if kernel error, remount drive as read-on
 for path in */*.flac; do ffmpeg -i "$path" -vn -acodec libopus -ab 96k "${path%.flac}.opus"; done
 ~~~
 
-### Ubuntu Desktop
+### Gnome Window Management
 
-hold down the Super key and press ↑
+Hold down the Super key (option) and use arrows
 
-### Memory handling
+Window/Maximise: ↓, ↑
+Put left/right of screen: ←, →
+
+### Memory/swap handling
 
 reset swap: `sudo swapoff -a; sudo swapon -a`
 
@@ -55,7 +58,11 @@ err 503 --> change update server (software-properties-gtk)
 
 ### Keyboard mapping
 
+#### Page Up/Down
+
 [Ctrl + Page UP / Page Down are reversed](https://unix.stackexchange.com/questions/524250/ctrl-page-up-page-down-are-reversed)
+
+#### fn/fonction key
 
 [Fix fn/function key to work as F-X as default](https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux), not special action:
 
@@ -66,6 +73,10 @@ sudo update-initramfs -u -k all #kill service that keeps value from changing
 reboot
 ~~~
 
+#### Switching escape/caps and co
+
+##### Solution 1 - does not work well (on Ubuntu 20.04.6 LTS)
+
 Switching esc with caps lock. Resets on reboot.
 `setxkbmap -option caps:swapescape`
     caps:swapescape                Swap Esc and Caps Lock
@@ -75,6 +86,92 @@ Switching esc with caps lock. Resets on reboot.
 `-option` to reset US layout.
 
 Be careful with modifications through `gnome-tweaks`. You could forget about them when trying to modify something else.
+
+One option to survive reboot is a startup line like:  `bash -c "sleep 20 && xmodmap $HOME/.Xmodmap && setxkbmap -option caps:swapescape"`
+Making a startup scrip that runs the command works ok, but I lost the setting often on screen lock and potentially USB autosuspend.
+
+##### Solution 2 - does not work well (on Ubuntu 20.04.6 LTS)
+
+Note: Does not work well because another default gnome rule overwrites it.
+
+This seems to be messy though, maybe the keyboard powering off is reseting the setting, according to this similar problem:
+[Something surreptitiously resetting my setxkbmap settings](https://www.reddit.com/r/archlinux/comments/72jbgq/something_surreptitiously_resetting_my_setxkbmap/)
+
+Their solution is to "Enter a udev rule that detects when a keyboard is added"
+Solution created from reddit post:
+
+~~~bash
+# File 1: /etc/udev/rules.d/99-kb-reset.rules
+# This udev rule detects when a USB keyboard (matching the vendor and product IDs) is added and triggers the execution of kb_add.sh
+SUBSYSTEMS=="usb", ACTION=="add", ATTRS{idVendor}=="05ac", ATTRS{idProduct}=="024f", RUN+="/usr/local/bin/kb_add.sh"
+# idVendor and idProduct found with lsusb (Bus 001 Device 004: ID 05ac:024f Apple, Inc. Keychron K3)
+
+# File 2: /usr/local/bin/kb_add.sh
+# Calls kbd_add.sh in the background. 
+#!/bin/bash
+/home/local/USHERBROOKE/rabj2301/opt/bin/kbd_add.sh &
+
+# File 3: ~/opt/bin/kbd_add.sh
+# Applies the setting
+#!/bin/bash
+
+sleep 1
+DISPLAY=":0"
+XAUTHORITY="/run/user/1810992820/gdm/Xauthority" # GDM xauth file, found by
+export DISPLAY XAUTHORITY
+
+setxkbmap -option caps:swapescape
+~~~
+
+##### Solution 3 - doesn't work (on Ubuntu 20.04.6 LTS)
+
+[udev rule to auto load keyboard layout when usb keyboard plugged in](https://superuser.com/a/1092082)
+"Depending on your distro, you may already have a udev rule for keyboards in /lib/udev/rules.d/64-xorg-xkb.rules. On Ubuntu, this imports /etc/default/keyboard"
+"For my setup, I found that this built-in rule was executing after my custom udev rule, and was overriding my settings. Instead I changed XKBOPTIONS in /etc/default/keyboard"
+
+~~~bash
+rabj2301@uni-pc:~/.../epiclass/$ cat /lib/udev/rules.d/64-xorg-xkb.rules
+ACTION!="add|change", GOTO="xorg_xkb_end"
+SUBSYSTEM!="input", GOTO="xorg_xkb_end"
+KERNEL!="event*", GOTO="xorg_xkb_end"
+
+# import keyboard layout from /etc/default/keyboard
+ENV{ID_INPUT_KEY}=="?*", IMPORT{file}="/etc/default/keyboard"
+
+LABEL="xorg_xkb_end"
+
+rabj2301@uni-pc:~/.../epiclass/$ cat /etc/default/keyboard
+# KEYBOARD CONFIGURATION FILE
+
+# Consult the keyboard(5) manual page.
+
+XKBMODEL="pc105"
+XKBLAYOUT="ca"
+XKBVARIANT=""
+XKBOPTIONS="-option caps:swapescape" # THIS WAS ADDED
+
+BACKSPACE="guess"
+~~~
+
+##### Solution 4
+
+[How can I disable USB autosuspend on Ubuntu 18.04?](https://askubuntu.com/questions/1140925/how-can-i-disable-usb-autosuspend-on-ubuntu-18-04)
+modify `/etc/default/grub`
+
+~~~bash
+# from 
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+# to
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash usbcore.autosuspend=-1"
+~~~
+
+DOES IT WORK???
+
+##### Solution 5
+
+Note for future upgrade: Since Ubuntu 22.04 there's input-remapper which works on X11 and Wayland. It can remap any key to any other key.
+
+#### Volume increment
 
 Change default system volume increment (works for fn vol up/down keys)
 
