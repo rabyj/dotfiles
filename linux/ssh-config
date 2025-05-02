@@ -3,17 +3,21 @@ Host *
     ForwardAgent yes
     IdentityFile ~/.ssh/id_ed25519
     User rabyj
-Host narval beluga
+Host narval beluga cedar
     ControlPath ~/.ssh/cm-%r@%h:%p
     ControlMaster auto
     ControlPersist 48h
-    ForwardX11 yes
+    ForwardX11 no
 Host narval
-    HostName narval.computecanada.ca
+    HostName narval.alliancecan.ca
 Host vscode-narval
     HostName ncXXXXX
-    ProxyJump narval.computecanada.ca
+    ProxyJump narval.alliancecan.ca
 Host beluga
-    HostName beluga.computecanada.ca
+    HostName beluga.alliancecan.ca
+Host cedar
+    HostName cedar.alliancecan.ca
 Host ip29
     HostName ip29.ccs.usherbrooke.ca
+Host ip34
+    HostName ip34.ccs.usherbrooke.ca
