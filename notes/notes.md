@@ -279,6 +279,10 @@ python: To match a string which does not contain the multi-character sequence `a
 
 ## Python
 
+## pip
+
+See available package versions: `pip index versions packageName`
+
 ### Imports
 
 [Sibling package imports](https://stackoverflow.com/questions/6323860/sibling-package-imports)
@@ -398,6 +402,8 @@ tar -cvzf file.tar.gz files_to_tar # create (c) + compress to gz (z)
 tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
 tar -tvf file.tar # list files
 tar -xf file.tar path/to/file/in/tar # extract a specific file
+tar -xzf images.tar.gz --transform='s/.*\///' # flatten structure during extraction
+tar -xf file.tar -T file_list.txt # extract a list of files. paths need to match index.
 export XZ_DEFAULTS="-6e -T2" #2 cores, level 6 extreme
 
 # mv from pipe
@@ -537,6 +543,12 @@ type command
 
 # rename (perl syntax, sed syntax)
 rename 's/\s+/_/g' * # replace spaces with underscores
+# massive rename: remove part of name, rename -n for dry-run
+find . -type f | grep "part-to-remove" | xargs -I{} rename 's/part-to-remove//g' {}
+
+# comparing files, -1 and -2 remove lines unique to file 1/2, -3 removes common lines
+comm -23 <(sort file1) <(sort file2) # set(file1) - set(file2), i.e lines unique to file1
+comm -12 <(sort file1) <(sort file2) # set(file1) & set(file2), i.e. no unique lines
 
 # script location/folder/directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
