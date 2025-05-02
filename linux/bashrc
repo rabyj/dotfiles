@@ -136,9 +136,9 @@ copy() {
 
 # automount narval
 mounts="$HOME/mounts"
-alias mount-narval="sshfs -o follow_symlinks rabyj@narval.computecanada.ca:/home/rabyj/ ${mounts}/narval-mount/"
-alias mount-beluga="sshfs -o follow_symlinks rabyj@beluga.computecanada.ca:/home/rabyj/ ${mounts}/beluga-mount/"
-alias mount-ip29="sshfs -o follow_symlinks rabyj@ip29.ccs.usherbrooke.ca:/home/rabyj/ ${mounts}/ip29-mount/"
+alias mount-narval="sshfs -o follow_symlinks rabyj@narval.alliancecan.ca:/home/rabyj/ ${mounts}/narval-mount/"
+alias mount-beluga="sshfs -o follow_symlinks rabyj@beluga.alliancecan.ca:/home/rabyj/ ${mounts}/beluga-mount/"
+alias mount-cedar="sshfs -o follow_symlinks rabyj@cedar.alliancecan.ca:/home/rabyj/ ${mounts}/cedar-mount/"
 
 # tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
 myroot="$HOME/Projects"
