@@ -219,4 +219,10 @@
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.bibtex-format.trailingComma": true,
     "latex-workshop.bibtex-format.sort.enabled": true,
+    "editor.wordWrap": "on",
+    "latex-workshop.message.latexlog.exclude": [
+        "Underfull.*",
+        "Overfull.*"
+    ],
+    "latex-workshop.formatting.latex": "latexindent",
 }
