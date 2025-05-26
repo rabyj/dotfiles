@@ -17,7 +17,6 @@ alias mv="mv -v --no-clobber"
 alias pwdp="pwd -P"
 
 alias open="xdg-open"
-eval "$(thefuck --alias)" #fuck
 
 # git
 alias gs="git status"
