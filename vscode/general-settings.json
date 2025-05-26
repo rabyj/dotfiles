@@ -100,170 +100,6 @@
     "remote.SSH.remotePlatform": {
         "narval": "linux"
     },
-    "dash.languageIdToDocsetMap": {
-        "css": [
-            "css",
-            "bootstrap",
-            "foundation",
-            "less",
-            "awesome",
-            "cordova",
-            "phonegap"
-        ],
-        "cmake": [
-            "cmake"
-        ],
-        "cpp": [
-            "cpp",
-            "net",
-            "boost",
-            "qt",
-            "cvcpp",
-            "cocos2dx",
-            "c",
-            "manpages"
-        ],
-        "html": [
-            "html",
-            "svg",
-            "css",
-            "bootstrap",
-            "foundation",
-            "awesome",
-            "statamic",
-            "javascript",
-            "jquery",
-            "jqueryui",
-            "jquerym",
-            "angularjs",
-            "backbone",
-            "marionette",
-            "meteor",
-            "moo",
-            "prototype",
-            "ember",
-            "lodash",
-            "underscore",
-            "sencha",
-            "extjs",
-            "knockout",
-            "zepto",
-            "cordova",
-            "phonegap",
-            "yui"
-        ],
-        "javascript": [
-            "javascript",
-            "jquery",
-            "jqueryui",
-            "jquerym",
-            "react",
-            "angularjs",
-            "backbone",
-            "marionette",
-            "meteor",
-            "sproutcore",
-            "moo",
-            "prototype",
-            "bootstrap",
-            "foundation",
-            "lodash",
-            "underscore",
-            "ember",
-            "sencha",
-            "extjs",
-            "titanium",
-            "knockout",
-            "zepto",
-            "yui",
-            "d3",
-            "svg",
-            "dojo",
-            "coffee",
-            "nodejs",
-            "express",
-            "grunt",
-            "mongoose",
-            "moment",
-            "require",
-            "awsjs",
-            "jasmine",
-            "sails",
-            "sinon",
-            "chai",
-            "html",
-            "css",
-            "cordova",
-            "phonegap",
-            "unity3d"
-        ],
-        "latex": [
-            "latex"
-        ],
-        "less": [
-            "less"
-        ],
-        "markdown": [
-            "markdown"
-        ],
-        "perl": [
-            "perl",
-            "manpages"
-        ],
-        "php": [
-            "php",
-            "wordpress",
-            "drupal",
-            "zend",
-            "laravel",
-            "yii",
-            "joomla",
-            "ee",
-            "codeigniter",
-            "cakephp",
-            "phpunit",
-            "symfony",
-            "typo3",
-            "twig",
-            "smarty",
-            "craft",
-            "phpp",
-            "html",
-            "statamic",
-            "mysql",
-            "sqlite",
-            "mongodb",
-            "psql",
-            "redis"
-        ],
-        "python": [
-            "python",
-            "numpy",
-            "scipy",
-            "scikit",
-            "scikit-optimize",
-            "pandas",
-            "matplotlib",
-            "pytorch",
-            "torchmetrics",
-        ],
-        "r": [
-            "r"
-        ],
-        "shellscript": [
-            "bash",
-            "manpages"
-        ],
-        "sql": [
-            "mysql",
-            "sqlite",
-            "psql"
-        ],
-        "typescript": [
-            "typescript",
-            "javascript"
-        ]
-    },
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.inheritEnv": true,
     "notebook.lineNumbers": "on",
@@ -275,22 +111,12 @@
     "jupyter.askForKernelRestart": false,
     "git.autofetch": true,
     "git.openRepositoryInParentFolders": "never",
-    "github.copilot.enable": {
-        "*": true,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false,
-        "python": true,
-        "shellscript": true,
-        "cmake": true
-    },
     "extensions.ignoreRecommendations": true,
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "right"
     },
     "cmake.configureOnOpen": true,
-    "github.copilot.chat.welcomeMessage": "never",
     "python.analysis.autoFormatStrings": true,
     "python.analysis.completeFunctionParens": true,
     "notebook.diff.ignoreMetadata": true,
@@ -298,9 +124,11 @@
     "editor.indentSize": "tabSize",
     "editor.detectIndentation": false,
     "cmake.options.statusBarVisibility": "visible",
-    "github.copilot.editor.enableAutoCompletions": true,
     "workbench.externalBrowser": "firefox",
-    "dataWrangler.experiments.useJupyterProposedAPI": false,
+    "codeium.enableConfig": {
+        "*": true,
+        "bibtex": true
+    },
     "latex-workshop.latex.tools": [
 
         {
