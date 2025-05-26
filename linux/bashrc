@@ -144,6 +144,10 @@ alias mount-cedar="sshfs -o follow_symlinks rabyj@cedar.alliancecan.ca:/home/rab
 myroot="$HOME/Projects"
 alias source-epiclass=". ${myroot}/envs/epiclass/bin/activate"
 
+# Created by `pipx` on 2025-05-26 16:48:43
+export PATH="$PATH:/home/local/USHERBROOKE/rabj2301/.local/bin"
+eval "$(register-python-argcomplete pipx)"
+
 # -- Terminal prompt modifications --
 
 # Change the depth of directory showed in terminal line
@@ -175,3 +179,10 @@ fi
 if [[ -n "$TITLE_DEFAULT" ]]; then # If length of this is NONzero (see `man test`)
   set-title "$TITLE_DEFAULT"
 fi
+
+
+# -- Using a base venv because of PEP 668 (externally managed environment) + Ubuntu 22.04 --
+
+source ~/.local/base_venv/bin/activate
+eval "$(thefuck --alias)" # making fuck work (also needed to install master branch, bcz incompatible with python 3.12)
+
