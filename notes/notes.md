@@ -478,7 +478,7 @@ find . -type f | grep ".sh" | xargs -I{} chmod a-x {}
 
 # Specific formatting for printf portion
 find . -type f -printf '%s %p\n' # size + filepath
-# %c is time
+# %c is access time, %b is birth/creation time, %t is modification time
 https://man7.org/linux/man-pages/man1/find.1.html
 
 # List number of files in each folder
