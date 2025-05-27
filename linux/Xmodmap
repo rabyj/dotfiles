@@ -1,3 +1,0 @@
-! -- invert page up / page down --
-keycode 112 = Next NoSymbol Next NoSymbol Next
-keycode 117 = Prior NoSymbol Prior NoSymbol Prior
