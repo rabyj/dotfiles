@@ -1,5 +1,14 @@
 # Linux / Coding notes
 
+## Firefox
+
+### Dark Reader Extension
+
+Possible patterns for values are google.com, mail.google.com, google.*, google.com/maps etc.
+Regular expressions are supported. They should start and end with `/`, like `/www\.google\..*/`.
+In a regular expression, `/` needs to be escaped, e.g. `/docs\.google\.com\/presentation.*/`
+Source: <https://darkreader.org/help/en/>
+
 ## Slack
 
 Read all messages in a workspace: shift+esc
@@ -357,6 +366,28 @@ Unfortunately, dash-to-underscore replacement doesn't work for positional argume
 
 ## Bash
 
+### - Conditional expressions -
+
+Source: <https://stackoverflow.com/questions/13617843/unary-operator-expected-error-in-bash-if-condition>
+
+If you know you're always going to use Bash, it's much easier to always use the double bracket conditional compound command `[[ ... ]]`, instead of the POSIX-compatible single bracket version `[ ... ]`. Inside a `[[ ... ]]` compound, word-splitting and pathname expansion are not applied to words, so you can rely on
+
+`if [[ $aug1 == "and" ]];`
+
+to compare the value of `$aug1` with the string `and`.
+
+If you use `[ ... ]`, you always need to remember to double quote variables like this:
+
+`if [ "$aug1" = "and" ];`
+
+If you don't quote the variable expansion and the variable is undefined or empty, it vanishes from the scene of the crime, leaving only
+
+`if [ = "and" ];`
+
+which is not a valid syntax. (It would also fail with a different error message if `$aug1` included white space or shell metacharacters.)
+
+The modern `[[` operator has lots of other nice features, including regular expression matching.
+
 ### - Permissions -
 
 ~~~bash
@@ -383,6 +414,10 @@ setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /fold
 ### - General -
 
 ~~~bash
+# Dictory where .sh file is located.
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+
 # recursive touch
 find folder -type f -exec touch -ac {} + # a=access time, c=do not create file
 
@@ -576,6 +611,13 @@ cat 10kb_all_none_plus.list | grep -v '\.hdf5' # check for bad files/folders in 
 
 # scratch delete/purge list without empty paths
 grep -Ev '^"","' /scratch/to_delete/rabyj > ~/to_delete_rabyj.csv
+
+# Grep with a list of patterns
+grep -f pattern_list.ext target.ext
+
+# Grep using a literal string, don't need to escape anything. Faster than normal grep.
+grep -F "string" target.ext 
+grep -F -f string_list.ext target.ext # grep a list of literal strings.
 ~~~
 
 ## Job schedulers - HPC
