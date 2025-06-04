@@ -214,7 +214,8 @@
         }
     ],
     "workbench.editorAssociations": {
-        "*.pdf": "latex-workshop-pdf-hook"
+        "*.pdf": "latex-workshop-pdf-hook",
+        "*.ipynb": "jupyter-notebook"
     },
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.bibtex-format.trailingComma": true,
@@ -225,4 +226,8 @@
         "Overfull.*"
     ],
     "latex-workshop.formatting.latex": "latexindent",
+    "svg.preview.mode": "svg",
+    "notebook.dragAndDropEnabled": false,
+    "notebook.formatOnSave.enabled": true,
+    "notebook.scrolling.revealNextCellOnExecute": "firstLine",
 }
