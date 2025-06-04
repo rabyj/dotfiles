@@ -9,6 +9,13 @@ Regular expressions are supported. They should start and end with `/`, like `/ww
 In a regular expression, `/` needs to be escaped, e.g. `/docs\.google\.com\/presentation.*/`
 Source: <https://darkreader.org/help/en/>
 
+### Drag & Drop under Wayland
+
+Drag&Drop got fucked up.
+You can force Firefox to run under X11 with an env variable in .desktop file.
+Change Exec line:
+`Exec=env MOZ_ENABLE_WAYLAND=0 /usr/lib/firefox/firefox-bin %u`
+
 ## Slack
 
 Read all messages in a workspace: shift+esc
