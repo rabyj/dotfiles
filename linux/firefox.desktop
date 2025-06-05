@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=env MOZ_ENABLE_WAYLAND=0 MOZ_DISABLE_WAYLAND=1 DISABLE_WAYLAND=1 /usr/lib/firefox/firefox-bin %u
+Name=Firefox
+Icon=firefox
+Categories=GNOME;GTK;Network;WebBrowser;
+Comment=Custom definition for Firefox
+MimeType=x-scheme-handler/unknown;x-scheme-handler/about;x-scheme-handler/https;x-scheme-handler/http;text/html;
