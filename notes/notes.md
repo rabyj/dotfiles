@@ -9,6 +9,15 @@ Regular expressions are supported. They should start and end with `/`, like `/ww
 In a regular expression, `/` needs to be escaped, e.g. `/docs\.google\.com\/presentation.*/`
 Source: <https://darkreader.org/help/en/>
 
+### Google sheets
+
+Creating custom formulas:
+
+- drop-down filter view: Start row number at the first data row (usually 2)
+- conditionnal formatting: Start at the first row
+
+Example: `=NOT(REGEXMATCH(CLEAN($J1), "C-A.*_no_cell_line\.tsv|recount3.*_no_cell_line\.tsv"))`
+
 ## Slack
 
 Read all messages in a workspace: shift+esc
@@ -17,6 +26,10 @@ Reload Slack: Ctrl + Shift + R
 Slack tweaks (remove new sidebar): <https://gist.github.com/Kenny-MWI/6b1a88ad38b5ffef347527a82becf054>
 
 ## Linux
+
+## .Desktop files for launcher access
+
+Stored in `~/.local/share/applications/`
 
 ## Journals/Logs
 

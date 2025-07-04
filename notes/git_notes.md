@@ -58,7 +58,7 @@ git tag -l | xargs git tag -d # rm all tags
 git fetch --tags
 ~~~
 
-## Recover lost commits
+## Recover lost commits (git reflog)
 
 <https://stackoverflow.com/questions/134882/undoing-a-git-rebase>
 
