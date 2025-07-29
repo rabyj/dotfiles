@@ -1,0 +1,25 @@
+
+/* Turn on support for this file: about:config > toolkit.legacyUserProfileCustomizations.stylesheets = true*/
+/* Remove Sidebar: about:config > sidebar.revamp = false */
+
+/* To hide the top tab bar when using new firefox tabs-in-titlebar mode */
+#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* To hide top tabs in old layout */
+#main-window:not([tabsintitlebar="true"]) #TabsToolbar {
+    visibility: collapse !important;
+}
+
+/* For Tree Style Tab */
+#sidebar-header{
+    font-size: 1em !important;
+    padding: 5px 2px 5px 13px !important;
+  }
+
+/* Remove Function from Mute Tab Button (clickable region was too big, annoying for clicking a pinned tab below) */
+.tab-audio-button {
+    pointer-events: none !important;
+}
