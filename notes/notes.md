@@ -2,6 +2,17 @@
 
 ## Firefox
 
+### Profile problems
+
+If Zotero is opening URLs in a different Firefox window (profile),
+go in about:profiles, and find the one to delete. To change default profile manually and
+make sure you've deleted irrelevant ones, check out `/home/local/USHERBROOKE/rabj2301/.mozilla/firefox/profiles.ini`
+
+You also need to add `StartupWMClass=firefox` in the .desktop file make sure all instances open under
+the same dash icon.
+
+The .desktop file used needs to be the one created by firefox when setting firefox browser as default.
+
 ### Dark Reader Extension
 
 Possible patterns for values are google.com, mail.google.com, google.*, google.com/maps etc.

@@ -4,6 +4,6 @@ Type=Application
 Exec=env MOZ_ENABLE_WAYLAND=0 MOZ_DISABLE_WAYLAND=1 DISABLE_WAYLAND=1 /usr/lib/firefox/firefox-bin %u
 Name=Firefox
 Icon=firefox
-Categories=GNOME;GTK;Network;WebBrowser;
 Comment=Custom definition for Firefox
-MimeType=x-scheme-handler/unknown;x-scheme-handler/about;x-scheme-handler/https;x-scheme-handler/http;text/html;
+MimeType=application/x-extension-htm;application/x-extension-html;application/x-extension-shtml;application/x-extension-xht;application/x-extension-xhtml;application/xhtml+xml;image/svg+xml;text/html;x-scheme-handler/about;x-scheme-handler/chrome;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/unknown;
+StartupWMClass=firefox
