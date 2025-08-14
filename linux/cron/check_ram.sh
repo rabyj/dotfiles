@@ -17,7 +17,7 @@ set -o pipefail
 # The 'pipefail' option ensures that if `free` or `awk` fails, the script will exit.
 percent=$(free -m | awk '/^Mem:/ {printf "%.0f", $3*100/$2}')
 
-if [ "$percent" -ge 80 ]; then
+if [ "$percent" -ge 75 ]; then
   uid=$(id -u)
 
   # Export environment variables needed for a graphical session
