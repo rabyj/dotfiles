@@ -38,11 +38,11 @@ Slack tweaks (remove new sidebar): <https://gist.github.com/Kenny-MWI/6b1a88ad38
 
 ## Linux
 
-## .Desktop files for launcher access
+### .Desktop files for launcher access
 
 Stored in `~/.local/share/applications/`
 
-## Journals/Logs
+### Journals/Logs
 
 ~~~bash
 journalctl --disk-usage # check size used by journals
@@ -52,14 +52,14 @@ sudo systemctl restart systemd-journald.service # force journal rotation
 nano /etc/systemd/journald.conf # SystemMaxUse=1G for max 1G used total
 ~~~
 
-## Filesystem handling
+### Filesystem handling
 
 ~~~bash
 sudo tune2fs -c 5 /dev/sda1 # check filesystem state each 5 startup/mounts
 sudo tune2fs -e remount-ro /dev/sda1 # if kernel error, remount drive as read-only, prevents corruption spreading.
 ~~~
 
-## Music format conversion
+### Music format conversion
 
 ~~~bash
 # flac to opus, excellent for size, very probably transparent for my ears at this bitrate
@@ -149,7 +149,7 @@ print("hello world!")
 </p>
 </details>
 
-## Useful locations
+## Useful paths/locations
 
 ~~~bash
 # helios
@@ -218,7 +218,7 @@ python: To match a string which does not contain the multi-character sequence `a
 
 ## Python
 
-## pip
+### pip
 
 See available package versions: `pip index versions packageName`
 
@@ -500,6 +500,11 @@ rsync -a --no-dirs --no-relative --files-from=FILE.list narval:/ .
 # the directory structure starting from the directories that match split* will be preserved in the destination directory.
 find split* -maxdepth 2 -type f -name '*prediction.csv' -print0 | rsync -av --files-from=- --from0 ./ $HOME/Projects/epiclass/output/paper/data/harmonized_sample_ontology_intermediate/all_splits/harmonized_sample_ontology_intermediate_1l_3000n/10fold-dfreeze-2/
 
+# rync list of files while dir keeping structure
+# The filenames that are read from the FILE are all relative to the source dir
+# any leading slashes are removed and no ".." references are allowed to go higher than the source dir. 
+rsync -a --files-from=/tmp/foo /usr remote:/backup
+
 # -- other --
 
 # show true command, not alias
@@ -518,6 +523,27 @@ comm -12 <(sort file1) <(sort file2) # set(file1) & set(file2), i.e. no unique l
 # script location/folder/directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ~~~
+
+### dar - disk archiver
+
+dar archives are of the format `archive-name.i.dar` where `i` is the slice number (starts at 1).
+
+~~~bash
+# Extract single file
+dar -x archive-name -g file/to/extract
+~~~
+
+Be careful to use the same DAR version to extract as was used to compress, otherwise you might get errors.
+
+In this example, HPC `StdEnv/2020` was loaded instead of `StdEnv/2023`.
+
+~~~text
+[rabyj@narval3 bg]$ dar -x cpg_topvar_200bp_10kb_coord -O
+Final memory cleanup...
+FATAL error, aborting operation
+Not enough data to initialize storage field
+~~~
+
 
 ### Sed commands
 
