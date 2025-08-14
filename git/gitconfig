@@ -3,6 +3,7 @@
 # Veuillez adapter et décommenter les lignes suivantes :
 	name = rabyj
 	email = Joanny.Raby@usherbrooke.ca
+	signingkey = FB23FDB9
 [gc]
 	autoDetach = false
 [rerere]
@@ -28,3 +29,7 @@
 	prompt = false
 [push]
 	followTags = true
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/bin/gpg
