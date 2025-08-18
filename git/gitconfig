@@ -1,11 +1,13 @@
-# Ceci est le fichier de configuration personnel de Git.
+# git config file
 [user]
-# Veuillez adapter et décommenter les lignes suivantes :
 	name = rabyj
 	email = Joanny.Raby@usherbrooke.ca
 	signingkey = FB23FDB9
 [gc]
-	autoDetach = false
+	autoDetach = true
+	auto = 1
+	pruneExpire = 4.weeks.ago
+	reflogExpire = 120
 [rerere]
 	enabled = true
 [core]
@@ -33,3 +35,5 @@
 	gpgsign = true
 [gpg]
 	program = /usr/bin/gpg
+[receive]
+	fsckObjects = true
