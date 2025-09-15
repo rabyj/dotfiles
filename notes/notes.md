@@ -137,7 +137,7 @@ Change file picker to KDE overall, makes Ubuntu slower at login.
 
 ## Markdown
 
-### Collapsible markdown
+### Collapsible/foldable markdown
 
 <details><summary>CLICK ME</summary>
 <p>
@@ -452,6 +452,9 @@ find . -type f | cut -d/ -f2 | sort | uniq -c
 # List md5s from hdf5 (epigeec file format)
 find . -type f -name "*.hdf5" | cut -d_ -f1 | cut -d/ -f2 | sort > ../list.md5
 
+# Exclude files from find
+find . -type f -not -path "./specific/directory/to/ignore/*"
+
 # - Iterate over an array -
 array=( one two three )
 for i in "${array[@]}"; do
@@ -544,13 +547,10 @@ FATAL error, aborting operation
 Not enough data to initialize storage field
 ~~~
 
-
 ### Sed commands
 
 ~~~bash
-sed 's@/home/local/USHERBROOKE/rabj2301/Projects/epi_ml/epi_ml/python/core/data/@/home/laperlej/public/saccer3/10kb_all_none/@g'
-sed 's@1mb_gene_none/@/home/laperlej/public/hg38/1mb_gene_none/@g'
-sed -n LINE_NUMBERp file.txt
+sed -n LINE_NUMBERp file.txt # disable automatic printing
 sed -i 's/STRING_TO_REPLACE/STRING_TO_REPLACE_WITH/g' filename # inplace
 sed -i '8i This is Line 8' filename # insert text at line number (inplace)
 ~~~
