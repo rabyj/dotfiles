@@ -11,7 +11,6 @@
     background_darkness = 0.8
     background_type = transparent
     scrollback_infinite = True
-    exit_action = hold
 [layouts]
   [[default]]
     [[[child0]]]
@@ -44,7 +43,7 @@
       title = local - EpiClass
       uuid = 2d687ad0-76cd-4702-b838-c9034c1e0822
       directory = /home/local/USHERBROOKE/rabj2301/Projects/epiclass/
-      command = bash --rcfile <(echo ". ~/.bashrc && code epiclass.code-workspace ")
+      command = bash --rcfile <(echo ". ~/.bashrc && source ~/projects/envs/epiclass_py3.8/bin/activate && code epiclass.code-workspace ")
     [[[terminal4]]]
       type = Terminal
       parent = child2
@@ -53,7 +52,7 @@
       title = local - git
       uuid = 949f744d-cc13-4ae6-9ec0-c9af5e3bfb6b
       directory = /home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/
-      command = bash --rcfile <(echo ". ~/.bashrc && git fetch --all && git status")
+      command = bash --rcfile <(echo ". ~/.bashrc && source ~/projects/envs/epiclass_py3.8/bin/activate && git fetch --all && git status")
     [[[child5]]]
       type = VPaned
       parent = child1
