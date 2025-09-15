@@ -1,33 +1,33 @@
 {
     "folders": [
         {
-            "path": "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/"
+            "path": "/home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/"
         }
     ],
     "settings": {
         "python.testing.pytestArgs": [
-            "-c /home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
+            "-c /home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python/pyproject.toml"
         ],
         "black-formatter.args": [
             "--config",
-            "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
+            "/home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python/pyproject.toml"
         ],
         "isort.interpreter": [
-            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass/bin/python"
+            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.8/bin/python"
         ],
         "isort.args": [
             "--settings-path",
-            "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
+            "/home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python/pyproject.toml"
         ],
-        "python.defaultInterpreterPath": "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass/bin/python",
+        "python.defaultInterpreterPath": "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.8/bin/python",
         "pylint.args": [
-            "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python/pyproject.toml"
+            "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python/pyproject.toml"
         ],
         "pylint.path": [
-            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass/bin/pylint"
+            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.8/bin/pylint"
         ],
         "python.analysis.extraPaths": [
-            "/home/local/USHERBROOKE/rabj2301/Projects/sources/epi_ml/src/python"
+            "/home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python"
         ],
         "explorer.fileNesting.enabled": false,
         "explorer.fileNesting.expand": false,
