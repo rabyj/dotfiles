@@ -248,7 +248,7 @@ pip install -r requirements.txt
 
 ~~~bash
 # from git root
-pdoc3 --html -o docs/epi_ml/ src/python/ # --force
+pdoc3 --html -o docs/epiclass/ src/python/ # --force
 ~~~
 
 ### pylint
