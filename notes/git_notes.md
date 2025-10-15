@@ -33,7 +33,7 @@ DO NOT SQUASH FEATURE BRANCHES, YOU LOSE COMMIT HISTORY CONNECTIONS (only ok for
 
 ## How to bring commits from rabyj to dev (while being in the rabyj branch)
 
-~~~bash
+```bash
 git commit -m "commit message" # commit local chanches
 git push  # push to remote
 git checkout dev  # change to branch dev
@@ -41,11 +41,11 @@ git pull # update dev branch, pull remote changes
 git merge --no-ff rabyj  # merge rabyj into dev, no fast forward
 git push  # push local updated/merged branch to remote
 git checkout rabyj  # move back to original branch
-~~~
+```
 
 ## tags
 
-~~~bash
+```bash
 git tag -a v1.5 -m "Release v1.5 created"
 git push origin <tag_name> # push single tag
 git push --tags # push all tags
@@ -56,7 +56,7 @@ git push origin :refs/tags/tagname # delete remote tag
 # Refresh all tags (sync local w remote), https://stackoverflow.com/questions/1841341/remove-local-git-tags-that-are-no-longer-on-the-remote-repository
 git tag -l | xargs git tag -d # rm all tags
 git fetch --tags
-~~~
+```
 
 ## Recover lost commits (git reflog)
 
@@ -70,7 +70,7 @@ git fetch --tags
 
 [How to revert a "git rm -r ."?](https://stackoverflow.com/questions/2125710/how-to-revert-a-git-rm-r/48628225#48628225)
 
-~~~bash
+```bash
 # Remove from tracked files, but do not affect file on disk
 git rm --cached file
 
@@ -95,7 +95,7 @@ Uncommitted changes includes not staged changes, staged changes but not committe
 
 ## Other commands
 
-~~~bash
+```bash
 # info collectiong
 git diff --staged # see changes from "git add" but non commited
 git diff --stat --summary [from commit1] [to commit2] # See diff as you would in a fast-forward merge/pull
@@ -120,28 +120,28 @@ git stash apply "stash@{n}" # apply a stash and keep it in the stash cache
 git worktree add <path> [<branch>] # Create <path> and checkout <branch> into it. The new working directory is linked to the current repository, sharing everything except working directory specific files such as HEAD, index, etc.
 
 git rebase --interactive [new base commit, commit is not included in rebasing]
-~~~
+```
 
 ## How do I delete a Git branch locally and remotely?
 
 <https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely>
 
-~~~bash
+```bash
 # delete local branch
 git branch -D branch_name #-D forces deletion, use -d otherwise, need to have HEAD on different branch
 
 # delete remote branch
 git push <remote_name> --delete <branch_name> # <remote_name> usually origin
-~~~
+```
 
 ## How to modify source of a git (e.g. fork)
 
 <https://stackoverflow.com/questions/11619593/how-to-change-the-fork-that-a-repository-is-linked-to>
 
-~~~bash
+```bash
 git remote set-url origin git@github.com:<USER>/<GITNAME>.git #modify origin tracking
 git branch --set-upstream-to=origin/<branch> <branch> # for each branch, if they keep the same name. or use thefuck
-~~~
+```
 
 ## GITLAB
 
