@@ -58,20 +58,25 @@ git tag -l | xargs git tag -d # rm all tags
 git fetch --tags
 ```
 
-## Recover lost commits (git reflog)
+### Recover lost commits / discarded changes
+
+Ways to recover commits or working changes that were lost due to various git operations (reset, rebase, etc).
+
+#### Undoing a git rebase
 
 <https://stackoverflow.com/questions/134882/undoing-a-git-rebase>
+Permalink: <https://stackoverflow.com/q/134882>
+Summary: Use git reflog (reference log) to find the commit hash before the rebase, then reset to it.
 
-## Recover discarded changes with vscode timeline
-
-<https://stackoverflow.com/a/77093855/11472153>
-
-## git rm and its dangers
+#### git rm and its dangers
 
 [How to revert a "git rm -r ."?](https://stackoverflow.com/questions/2125710/how-to-revert-a-git-rm-r/48628225#48628225)
+Permalink: <https://stackoverflow.com/q/212571>
 
 ```bash
-# Remove from tracked files, but do not affect file on disk
+# Removes from tracked files, but do not affect file on disk
+# Will add the delete action of the file to the index
+# On commit the file will be removed from the HEAD commit
 git rm --cached file
 
 # undo git rm
@@ -84,14 +89,45 @@ git checkout HEAD dir  # restore file & index from HEAD
 
 # undo git rm -rf
 git rm -rf dir          # delete tracked files & delete uncommitted changes
-not possible           # `uncommitted changes` can not be restored.
+not possible           # `uncommitted changes` can not be directly restored
+```
 
-# LAST RESORT
+Uncommitted changes include:
+
+- not staged changes (git add not done)
+- staged changes but not committed (git add but not git commit)
+
+#### Recover from accidental reset of working changes
+
+Changes that were previously staged or stashed can be recovered using `git fsck --lost-found`, even if accidentally discarded.
+This last command finds dangling objects and places them in `.git/lost-found/`. Use `git cat-file -p <SHA>` to view content. (p=print)
+
+Turn off automatic garbage collection if more time is needed for the recovery process: `git config --global gc.auto 0`
+
+Alternatively, `git prune -n` shows files subject to garbage collection without actually deleting them. This allows targeted recovery.
+
+```bash
+# 1. See what's unreachable (don't delete yet!)
 git prune -n
-git cat-file -p <blob #>
-~~~
 
-Uncommitted changes includes not staged changes, staged changes but not committed.
+# 2. Investigate interesting SHAs
+git cat-file -p <SHA>
+git cat-file -t <SHA>  # check type: blob, commit, tree
+
+# 3. If you find your lost content, recover it
+git cat-file -p <SHA> > recovered_file.txt
+```
+
+Maybe send each one into a tmp file in a tmp directory for easier viewing (would be easy to automate).
+
+##### Recover discarded working changes in VSCode
+
+In addition, vscode timeline may help recover changes if vscode was used to edit the files.
+<https://stackoverflow.com/questions/43541167/how-do-you-undo-discard-all-changes-in-vs-code-git/77093855#77093855>
+Permalink: <https://stackoverflow.com/a/77093855>
+
+Use ctrl+P to see recently opened files.
+Use ctrl+R to see recently opened non-project files/folders.
 
 ## Other commands
 
