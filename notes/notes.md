@@ -40,7 +40,13 @@ Slack tweaks (remove new sidebar): <https://gist.github.com/Kenny-MWI/6b1a88ad38
 
 ### .Desktop files for launcher access
 
-Stored in `~/.local/share/applications/`
+Stored in
+
+- `~/.local/share/applications/`
+- `/usr/share/applications`
+
+To have windows started under the same icon, add `StartupWMClass=xxxx` in the .desktop file.
+The value can be found with `xprop WM_CLASS` and clicking on the window.
 
 ### Journals/Logs
 
@@ -118,12 +124,19 @@ Change default system volume increment (works for fn vol up/down keys)
 gsettings set org.gnome.settings-daemon.plugins.media-keys volume-step 1
 ~~~
 
+#### Caps lock out of sync
+
+Use gnome tweaks to enable "Both shifts together enable Caps Lock; one Shift key disables it" in keyboard layout compatibility options.  
+See: [Caps Lock toggle reversed and malfunctioning](https://discussion.fedoraproject.org/t/fedora-39-caps-lock-toggle-reversed-and-malfunctioning/95458/6)
+
 ### File manager
 
 #### Change file association
 
 Open-with -> change default association and save (in doublecmd, restart app)
 Manually: change ~/.config/mimeapps.list
+
+To check the mime type of a file: `file --mime-type filename`
 
 #### Double commander
 
@@ -256,7 +269,7 @@ pdoc3 --html -o docs/epiclass/ src/python/ # --force
 When installing, make sure to check for
 
 - pylint installed in venv, and pointed to in workspace/project settings
-- pylintrc file present and pointed to
+- pylintrc file present and pointed to, or a toml file with pylint section
 - old .vscode files are deleted
 - If "total problem" number does not match what is shown in panel, remove filters
 
@@ -344,7 +357,7 @@ setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /fold
 ### - General -
 
 ~~~bash
-# Dictory where .sh file is located.
+# Dictory where .sh file is located. Current folder path. Current dir path. Script dir path.
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 
@@ -519,7 +532,7 @@ rename 's/\s+/_/g' * # replace spaces with underscores
 # massive rename: remove part of name, rename -n for dry-run
 find . -type f | grep "part-to-remove" | xargs -I{} rename 's/part-to-remove//g' {}
 
-# comparing files, -1 and -2 remove lines unique to file 1/2, -3 removes common lines
+# comparing/diffing files, -1 and -2 remove lines unique to file 1/2, -3 removes common lines
 comm -23 <(sort file1) <(sort file2) # set(file1) - set(file2), i.e lines unique to file1
 comm -12 <(sort file1) <(sort file2) # set(file1) & set(file2), i.e. no unique lines
 
@@ -559,7 +572,7 @@ sed -i '8i This is Line 8' filename # insert text at line number (inplace)
 
 ~~~bash
 # Get md5sums from different files
-cat hg38.json | grep -oE '"md5sum": "[[:alnum:]]+"' # json
+cat hg38.json | grep -oE '"md5sum": "[[:alnum:]]{32}"' # json
 cat hg38_metadata.md5 | grep -oE '[[:alnum:]]{32}' | head # md5
 cut -f1 hg19_1kb_all_blklst_pearson.mat | tail -n +2 | sort -u | grep -v "^[[:space:]]*$" > hg19_1kb_all_blklst_pearson.md5 # matrix
 
