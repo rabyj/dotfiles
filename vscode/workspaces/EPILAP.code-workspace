@@ -8,23 +8,29 @@
         "python.testing.pytestArgs": [
             "-c /home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python/pyproject.toml"
         ],
+        "black-formatter.importStrategy": "fromEnvironment",
+        "black-formatter.interpreter": [
+            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.11/bin/python"
+        ],
         "black-formatter.args": [
             "--config",
             "/home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python/pyproject.toml"
         ],
+        "isort.importStrategy": "fromEnvironment",
         "isort.interpreter": [
-            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.8/bin/python"
+            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.11/bin/python"
         ],
         "isort.args": [
             "--settings-path",
             "/home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python/pyproject.toml"
         ],
-        "python.defaultInterpreterPath": "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.8/bin/python",
+        "python.defaultInterpreterPath": "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.11/bin/python",
+        "pylint.importStrategy": "fromEnvironment",
         "pylint.args": [
             "--rcfile=/home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python/pyproject.toml"
         ],
         "pylint.path": [
-            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.8/bin/pylint"
+            "/home/local/USHERBROOKE/rabj2301/Projects/envs/epiclass_py3.11/bin/pylint"
         ],
         "python.analysis.extraPaths": [
             "/home/local/USHERBROOKE/rabj2301/Projects/sources/epiclass/src/python"
