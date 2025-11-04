@@ -1,0 +1,16 @@
+#!/bin/bash
+# post-commit hook to verify GPG signature of the last commit
+# This was added because git's automatic signing sometimes seemed to fail silently.
+
+# Get the hash of the last commit
+LAST_COMMIT=$(git rev-parse HEAD)
+
+# Verify the commit signature
+if git verify-commit "$LAST_COMMIT" >/dev/null 2>&1; then
+    # echo "SUCCESS: Commit $LAST_COMMIT is GPG-signed ✅"
+    exit 0
+else
+    echo "ERROR: Commit $LAST_COMMIT is NOT GPG-signed ❌"
+    echo "Automatic signing should be on, please debug your git configuration."
+    exit 1
+fi

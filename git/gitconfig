@@ -31,9 +31,12 @@
 	prompt = false
 [push]
 	followTags = true
+	autoSetupRemote = true
 [commit]
 	gpgsign = true
 [gpg]
 	program = /usr/bin/gpg
 [receive]
 	fsckObjects = true
+[init]
+	templatedir = ~/.git-templates

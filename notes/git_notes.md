@@ -45,6 +45,8 @@ git checkout rabyj  # move back to original branch
 
 ## tags
 
+When you push your tags to a remote repository using git push --follow-tags, only the annotated tags will be pushed.
+
 ```bash
 git tag -a v1.5 -m "Release v1.5 created"
 git push origin <tag_name> # push single tag
