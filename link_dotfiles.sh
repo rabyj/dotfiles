@@ -15,6 +15,9 @@ then
   ln -svf ${SCRIPT_DIR}/linux/keyd_config.conf /etc/keyd/default.conf # for keyboard mapping
   ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
   ln -svf ${SCRIPT_DIR}/linux/mimeapps.list ~/.config/mimeapps.list
+  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg-agent.conf ~/.gnupg/
+  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg.conf ~/.gnupg/
+
   ln -svf ${SCRIPT_DIR}/git/gitconfig ~/.gitconfig
   ln -svf ${SCRIPT_DIR}/git/attributes ~/.config/git/attributes
   ln -svf ${SCRIPT_DIR}/other_programs/comet.config ~/.comet.config
@@ -35,6 +38,9 @@ then
   ln -svf ${SCRIPT_DIR}/linux/keyd_config.conf /etc/keyd/default.conf # for keyboard mapping
   ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
   ln -svf ${SCRIPT_DIR}/linux/mimeapps.list ~/.config/mimeapps.list
+  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg-agent.conf ~/.gnupg/
+  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg.conf ~/.gnupg/
+
   ln -svf ${SCRIPT_DIR}/git/gitconfig ~/.gitconfig
   ln -svf ${SCRIPT_DIR}/git/attributes ~/.config/git/attributes
   ln -svf ${SCRIPT_DIR}/other_programs/comet.config ~/.comet.config
