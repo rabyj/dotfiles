@@ -116,7 +116,7 @@
         "default": "right",
         "jupyter-notebook": "right"
     },
-    "cmake.configureOnOpen": true,
+    "cmake.configureOnOpen": false,
     "python.analysis.autoFormatStrings": true,
     "python.analysis.completeFunctionParens": true,
     "notebook.diff.ignoreMetadata": true,
@@ -230,4 +230,5 @@
     "notebook.dragAndDropEnabled": false,
     "notebook.formatOnSave.enabled": true,
     "notebook.scrolling.revealNextCellOnExecute": "firstLine",
+    "cmake.showConfigureWithDebuggerNotification": false,
 }
