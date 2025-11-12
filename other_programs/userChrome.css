@@ -1,6 +1,8 @@
-
 /* Turn on support for this file: about:config > toolkit.legacyUserProfileCustomizations.stylesheets = true*/
-/* Remove Sidebar: about:config > sidebar.revamp = false */
+
+/* Optional:
+Remove Sidebar: about:config > sidebar.revamp = false
+*/
 
 /* To hide the top tab bar when using new firefox tabs-in-titlebar mode */
 #main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar {
