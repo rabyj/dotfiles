@@ -140,8 +140,8 @@ To check the mime type of a file: `file --mime-type filename`
 
 #### Double commander
 
-Double commander won't directly open (double click / open action) executable files.
-<https://ghisler.ch/board/viewtopic.php?t=9073>
+- Double commander won't directly open (double click / open action) executable files. <https://ghisler.ch/board/viewtopic.php?t=9073>
+- Sometimes the history gets corrupted and program fails on open (EAccessViolation:). Delete it: `rm ~/.config/doublecmd/history.xml`
 
 #### KDE
 
