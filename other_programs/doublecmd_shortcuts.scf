@@ -1,139 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="1.1.26 gamma">
+<doublecmd DCVersion="1.1.30 gamma">
   <Hotkeys Version="63">
     <Form Name="Main">
       <Hotkey>
         <Shortcut>Ctrl+Shift+N</Shortcut>
         <Command>cm_MakeDir</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+D</Shortcut>
         <Command>cm_DirHotList</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+F</Shortcut>
         <Command>cm_QuickFilter</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+H</Shortcut>
         <Command>cm_DirHistory</Command>
       </Hotkey>
-
-      <Hotkey>
-        <Shortcut>Ctrl+M</Shortcut>
-        <Command>cm_MultiRename</Command>
-      </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+R</Shortcut>
         <Command>cm_Refresh</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+T</Shortcut>
         <Command>cm_NewTab</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+W</Shortcut>
         <Command>cm_CloseTab</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+Alt+Enter</Shortcut>
         <Command>cm_ShellExecute</Command>
       </Hotkey>
-
-      <Hotkey>
-        <Shortcut>Ctrl+Shift+D</Shortcut>
-        <Command>cm_ConfigDirHotList</Command>
-      </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+Shift+Tab</Shortcut>
         <Command>cm_PrevTab</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+Tab</Shortcut>
         <Command>cm_NextTab</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+.</Shortcut>
         <Command>cm_ShowSysFiles</Command>
       </Hotkey>
-
-      <Hotkey>
-        <Shortcut>Ctrl+L</Shortcut>
-        <Command>cm_EditPath</Command>
-      </Hotkey>
-
-      <Hotkey>
-        <Shortcut>Ctrl+Shift+L</Shortcut>
-        <Command>cm_EditPath</Command>
-      </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+Shift+C</Shortcut>
         <Command>cm_CopyNamesToClip</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+Shift+R</Shortcut>
         <Command>cm_RenameOnly</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+Shift+T</Shortcut>
         <Command>cm_EditNew</Command>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+Shift+F</Shortcut>
         <Command>cm_Search</Command>
       </Hotkey>
-
+      <Hotkey>
+        <Shortcut>Ctrl+Shift+P</Shortcut>
+        <Command>cm_EditPath</Command>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Ctrl+Shift+L</Shortcut>
+        <Command>cm_EditPath</Command>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Ctrl+L</Shortcut>
+        <Command>cm_EditPath</Command>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Ctrl+Shift+D</Shortcut>
+        <Command>cm_DirHotList</Command>
+      </Hotkey>
       <Hotkey>
         <Shortcut>Del</Shortcut>
         <Command>cm_Delete</Command>
         <Control>Files Panel</Control>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Shift+Del</Shortcut>
         <Command>cm_Delete</Command>
         <Param>trashcan=reversesetting</Param>
         <Control>Files Panel</Control>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+A</Shortcut>
         <Command>cm_MarkMarkAll</Command>
         <Control>Files Panel</Control>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+C</Shortcut>
         <Command>cm_CopyToClipboard</Command>
         <Control>Files Panel</Control>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+V</Shortcut>
         <Command>cm_PasteFromClipboard</Command>
         <Control>Files Panel</Control>
       </Hotkey>
-
       <Hotkey>
         <Shortcut>Ctrl+X</Shortcut>
         <Command>cm_CutToClipboard</Command>
         <Control>Files Panel</Control>
       </Hotkey>
-
     </Form>
+    <Form Name="Editor"/>
+    <Form Name="Confirmation"/>
   </Hotkeys>
 </doublecmd>
