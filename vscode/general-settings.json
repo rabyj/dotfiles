@@ -231,5 +231,7 @@
     "notebook.dragAndDropEnabled": false,
     "notebook.formatOnSave.enabled": true,
     "notebook.scrolling.revealNextCellOnExecute": "firstLine",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "github.copilot.chat.notebook.enhancedNextEditSuggestions.enabled": true,
     "cmake.showConfigureWithDebuggerNotification": false,
 }
