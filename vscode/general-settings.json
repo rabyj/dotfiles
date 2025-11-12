@@ -32,7 +32,8 @@
         ".inputrc": "shellscript",
         "inputrc": "shellscript",
         "bashrc-narval": "shellscript",
-        "bashrc": "shellscript"
+        "bashrc": "shellscript",
+        "*.yml": "yaml"
     },
     "isort.importStrategy": "fromEnvironment",
     "python.defaultInterpreterPath": "/usr/bin/python3",
