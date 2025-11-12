@@ -1,4 +1,5 @@
 # Generic aliases, not env specific. Called in ~/.bashrc
+alias htopme="htop -u ${USER}"
 
 # History Aliases
 alias h="history 30"                          # last few history commands
@@ -17,6 +18,7 @@ alias mv="mv -v --no-clobber"
 alias pwdp="pwd -P"
 
 alias open="xdg-open"
+alias pbcopy="xclip -sel clip"
 
 # git
 alias gs="git status"
