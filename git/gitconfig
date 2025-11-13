@@ -33,7 +33,9 @@
 	followTags = true
 	autoSetupRemote = true
 [commit]
-	gpgsign = true
+	gpgSign = true
+[tag]
+    gpgSign = true
 [gpg]
 	program = /usr/bin/gpg
 [receive]

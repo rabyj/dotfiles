@@ -60,17 +60,17 @@ git tag -l | xargs git tag -d # rm all tags
 git fetch --tags
 ```
 
-### Recover lost commits / discarded changes
+## Recover lost commits / discarded changes
 
 Ways to recover commits or working changes that were lost due to various git operations (reset, rebase, etc).
 
-#### Undoing a git rebase
+### Undoing a git rebase
 
 <https://stackoverflow.com/questions/134882/undoing-a-git-rebase>
 Permalink: <https://stackoverflow.com/q/134882>
 Summary: Use git reflog (reference log) to find the commit hash before the rebase, then reset to it.
 
-#### git rm and its dangers
+### git rm and its dangers
 
 [How to revert a "git rm -r ."?](https://stackoverflow.com/questions/2125710/how-to-revert-a-git-rm-r/48628225#48628225)
 Permalink: <https://stackoverflow.com/q/212571>
@@ -99,7 +99,7 @@ Uncommitted changes include:
 - not staged changes (git add not done)
 - staged changes but not committed (git add but not git commit)
 
-#### Recover from accidental reset of working changes
+### Recover from accidental reset of working changes
 
 Changes that were previously staged or stashed can be recovered using `git fsck --lost-found`, even if accidentally discarded.
 This last command finds dangling objects and places them in `.git/lost-found/`. Use `git cat-file -p <SHA>` to view content. (p=print)
@@ -122,7 +122,7 @@ git cat-file -p <SHA> > recovered_file.txt
 
 Maybe send each one into a tmp file in a tmp directory for easier viewing (would be easy to automate).
 
-##### Recover discarded working changes in VSCode
+### Recover discarded working changes in VSCode
 
 In addition, vscode timeline may help recover changes if vscode was used to edit the files.
 <https://stackoverflow.com/questions/43541167/how-do-you-undo-discard-all-changes-in-vs-code-git/77093855#77093855>
@@ -130,6 +130,25 @@ Permalink: <https://stackoverflow.com/a/77093855>
 
 Use ctrl+P to see recently opened files.
 Use ctrl+R to see recently opened non-project files/folders.
+
+## Commit signature
+
+Set up gpg signature for commits/tags ([reference](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)):
+
+To sign tags/commits by default, put `commit.gpgSign` and `tag.gpgSign` to true.
+
+To sign a single commit/tag:
+
+```bash
+git commit -S -m "my signed commit"
+git tag -s v1.0 -m "my signed tag"
+```
+
+To rebase and sign all commits after `<base-commit>` ([source](https://superuser.com/questions/397149/can-you-gpg-sign-old-commits)):
+
+```bash
+git rebase --exec 'git commit --amend --no-edit -n -S' -i <base-commit>
+```
 
 ## Other commands
 
@@ -178,7 +197,7 @@ git push <remote_name> --delete <branch_name> # <remote_name> usually origin
 
 ```bash
 git remote set-url origin git@github.com:<USER>/<GITNAME>.git #modify origin tracking
-git branch --set-upstream-to=origin/<branch> <branch> # for each branch, if they keep the same name. or use thefuck
+git branch --set-upstream-to=origin/<branch> <branch> # for each branch, if they keep the same name
 ```
 
 ## GITLAB
