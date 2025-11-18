@@ -4,6 +4,7 @@
   ask_before_closing = never
   always_split_with_profile = True
   putty_paste_style_source_clipboard = True
+  case_sensitive = False
 [keybindings]
 [profiles]
   [[default]]
@@ -32,7 +33,7 @@
       type = Notebook
       parent = child0
       order = 0
-      labels = local, narval
+      labels = local, hpc
       last_active_term = 2d687ad0-76cd-4702-b838-c9034c1e0822, d21ff444-751f-4236-898b-adf544c528ce
       active_page = 0
     [[[child2]]]
@@ -70,7 +71,7 @@
       parent = child5
       order = 0
       profile = Kat
-      title = narval - 1
+      title = hpc - 1
       uuid = d21ff444-751f-4236-898b-adf544c528ce
       command = bash --rcfile <(echo ". ~/.bashrc && ssh narval")
       directory = ""
@@ -79,7 +80,7 @@
       parent = child5
       order = 1
       profile = Kat
-      title = narval - 2
+      title = hpc - 2
       uuid = 8f02d83f-b209-465c-9227-c9614deff2e3
       command = bash --rcfile <(echo ". ~/.bashrc && ssh narval")
       directory = ""
