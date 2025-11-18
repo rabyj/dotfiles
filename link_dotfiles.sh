@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2086
-echo "Use one of the following arguments: [local, narval, home]"
+echo "Use one of the following arguments: [local, hpc, home]"
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
-
+# bashrc+ config
 ln -svf ${SCRIPT_DIR}/linux/bash_aliases ~/.bash_aliases
+ln -svf ${SCRIPT_DIR}/linux/bash_functions ~/.bash_functions
+ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
+
+# gnupg config
+ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg-agent.conf ~/.gnupg/
+ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg.conf ~/.gnupg/
 
 if [ "$1" = "local" ];
 then
-  ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
+	ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
 
   ln -svf ${SCRIPT_DIR}/linux/ssh-config ~/.ssh/config
   ln -svf ${SCRIPT_DIR}/linux/keyd_config.conf /etc/keyd/default.conf # for keyboard mapping
-  ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
   ln -svf ${SCRIPT_DIR}/linux/mimeapps.list ~/.config/mimeapps.list
-  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg-agent.conf ~/.gnupg/
-  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg.conf ~/.gnupg/
 
   ln -svf ${SCRIPT_DIR}/git/gitconfig ~/.gitconfig
   ln -svf ${SCRIPT_DIR}/git/attributes ~/.config/git/attributes
@@ -32,14 +35,10 @@ fi
 
 if [ "$1" = "home" ];
 then
-  ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
+	ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
 
   ln -svf ${SCRIPT_DIR}/linux/ssh-config ~/.ssh/config
   ln -svf ${SCRIPT_DIR}/linux/keyd_config.conf /etc/keyd/default.conf # for keyboard mapping
-  ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
-  ln -svf ${SCRIPT_DIR}/linux/mimeapps.list ~/.config/mimeapps.list
-  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg-agent.conf ~/.gnupg/
-  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg.conf ~/.gnupg/
 
   ln -svf ${SCRIPT_DIR}/git/gitconfig ~/.gitconfig
   ln -svf ${SCRIPT_DIR}/git/attributes ~/.config/git/attributes
@@ -51,18 +50,12 @@ then
   exit
 fi
 
-if [ "$1" = "narval" ];
+if [ "$1" = "hpc" ];
 then
   gen_folder=$SCRIPT_DIR
-  ln -svf "${gen_folder}/linux/inputrc" ~/.inputrc
-
-  vs_folder="${gen_folder}/vscode/workspaces"
-  ln -svf "${vs_folder}/NARVAL.code-workspace" ~/project-rabyj/NARVAL.code-workspace
-  ln -svf "${vs_folder}/narval-server-settings.json" ~/.vscode-server/data/Machine/settings.json
-  ln -svf ${gen_folder}/vscode/shellcheckrc ~/.shellcheckrc
 
   cluster_folder="${gen_folder}/clusters"
-  ln -svf "${cluster_folder}/bashrc-narval" ~/.bashrc
+  ln -svf "${cluster_folder}/bashrc-hpc" ~/.bashrc
 
   echo "Please manually copy .comet.config content (api key kept out of git)"
   exit

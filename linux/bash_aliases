@@ -12,13 +12,16 @@ alias ll='ls -hlF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Misc
+# Common commands
 alias cp="cp -v --no-clobber"
 alias mv="mv -v --no-clobber"
 alias pwdp="pwd -P"
 
+# Misc
 alias open="xdg-open"
 alias pbcopy="xclip -sel clip"
+# check if a process is stopping 'idle' status
+alias check-idle="dbus-send --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.GetInhibitors"
 
 # git
 alias gs="git status"

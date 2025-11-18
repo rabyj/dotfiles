@@ -1,0 +1,23 @@
+# ~/.bash_functions
+
+# Use the `function` keyword instead of `find() { ... }`
+# This version of `find` automatically adds the `-mount` (or `-xdev`) option
+# to prevent crossing filesystem boundaries.
+# It only works for single input paths, not multiple paths.
+if [[ $- == *i* ]]; then
+	function find {
+			# If user explicitly provided -mount or -xdev, run normally
+			case " $* " in
+					*" -mount "*|*" -xdev "*) command find "$@"; return;;
+			esac
+
+			# If first argument starts with "-", no path was given → assume "."
+			if [[ "$1" == -* || -z "$1" ]]; then
+					command find . -mount "$@"
+					return
+			fi
+
+			# First argument is the path → inject -mount immediately after it
+			command find "$1" -mount "${@:2}"
+	}
+fi

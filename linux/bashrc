@@ -117,11 +117,16 @@ fi
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
+# User specific aliases and functions, valid both locally and on HPCs
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
-# -- Convenience commands (specific to env) --
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
+# -- Convenience commands (specific to env (local)) --
 
 # Misc
 copy() {
