@@ -50,27 +50,27 @@ The value can be found with `xprop WM_CLASS` and clicking on the window.
 
 ### Journals/Logs
 
-~~~bash
+```bash
 journalctl --disk-usage # check size used by journals
 journalctl --vacuum-size=1G # remove journals until under that size
 journalctl --vacuum-time=1s --unit=slack.desktop #remove specific entries
 sudo systemctl restart systemd-journald.service # force journal rotation
 nano /etc/systemd/journald.conf # SystemMaxUse=1G for max 1G used total
-~~~
+```
 
 ### Filesystem handling
 
-~~~bash
+```bash
 sudo tune2fs -c 5 /dev/sda1 # check filesystem state each 5 startup/mounts
 sudo tune2fs -e remount-ro /dev/sda1 # if kernel error, remount drive as read-only, prevents corruption spreading.
-~~~
+```
 
 ### Music format conversion
 
-~~~bash
+```bash
 # flac to opus, excellent for size, very probably transparent for my ears at this bitrate
 for path in */*.flac; do ffmpeg -i "$path" -vn -acodec libopus -ab 96k "${path%.flac}.opus"; done
-~~~
+```
 
 ### Gnome Window Management
 
@@ -105,12 +105,12 @@ err 503 --> change update server (software-properties-gtk)
 
 [Fix fn/function key to work as F-X as default](https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux), not special action:
 
-~~~bash
+```bash
 # Change fn/function key mode
 echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
 sudo update-initramfs -u -k all #kill service that keeps value from changing
 reboot
-~~~
+```
 
 #### Switching escape/caps and co
 
@@ -120,9 +120,9 @@ Use keyd
 
 Change default system volume increment (works for fn vol up/down keys)
 
-~~~bash
+```bash
 gsettings set org.gnome.settings-daemon.plugins.media-keys volume-step 1
-~~~
+```
 
 #### Caps lock out of sync
 
@@ -155,16 +155,16 @@ Change file picker to KDE overall, makes Ubuntu slower at login.
 <details><summary>CLICK ME</summary>
 <p>
 
-~~~python
+```python
 print("hello world!")
-~~~
+```
 
 </p>
 </details>
 
 ## Useful paths/locations
 
-~~~bash
+```bash
 # helios
 /home/laperlej/public/saccer3/10kb_all_none
 # mp2b
@@ -173,7 +173,7 @@ print("hello world!")
 /nfs3_ib/10.0.219.38/jbodpool/ihec_data/share/2019-11/*/{assembly}/* #ethernet
 /nfs3_ib/ip29/ip29/jacques_group/local_ihec_data/
 /project/6007017/jacques_group/geec_share/public_dsets & /project/6007017/jacques_group/geec_share/saccer
-~~~
+```
 
 ## VSCode
 
@@ -212,11 +212,11 @@ Log on that node separatly via ssh, once you know the node. This will permit to 
 
 Now, you should be able to log via remote-ssh and proxy jump, e.g.
 
-~~~text
+```text
 Host vscode-narval
     HostName nl10401
     ProxyJump narval.computecanada.ca
-~~~
+```
 
 Make sure once the vscode server is running that you are not in restricted mode.
 
@@ -248,21 +248,21 @@ create env
 
 ### install venv from requirements
 
-~~~bash
+```bash
 virtualenv VENV
 . VENV/bin/activate
 pip list # verif, supposed to be almost empty
 pip install -r requirements.txt
-~~~
+```
 
 ### Documenting code
 
 [pdoc - best practices for GitHub pages?](https://github.com/pdoc3/pdoc/issues/55)
 
-~~~bash
+```bash
 # from git root
 pdoc3 --html -o docs/epiclass/ src/python/ # --force
-~~~
+```
 
 ### pylint
 
@@ -273,13 +273,13 @@ When installing, make sure to check for
 - old .vscode files are deleted
 - If "total problem" number does not match what is shown in panel, remove filters
 
-~~~bash
+```bash
 pylint --generate-rcfile > $HOME/.pylintrc #generate a pylint rc file with all its options present
 pylint --rcfile /path/to/pylintrc path/to/file-to-lint.py #use a specific rcfil
 
 pylint: disable=unused-argument # as a comment, disable a warning on one line
 type: ignore # as a comment, to disable pylance warning
-~~~
+```
 
 ### black formatter
 
@@ -333,7 +333,7 @@ The modern `[[` operator has lots of other nice features, including regular expr
 
 ### - Permissions -
 
-~~~bash
+```bash
 # - normal permissions -
 chown user:group file # change owners
 chmod 775 # rwxrwxr-x
@@ -352,11 +352,11 @@ getfacl folder # see acl permissions
 
 # equivalent to
 setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /folder/to/modify
-~~~
+```
 
 ### - General -
 
-~~~bash
+```bash
 # Dictory where .sh file is located. Current folder path. Current dir path. Script dir path.
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -538,7 +538,7 @@ comm -12 <(sort file1) <(sort file2) # set(file1) & set(file2), i.e. no unique l
 
 # script location/folder/directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-~~~
+```
 
 ### dar - disk archiver
 
@@ -553,24 +553,24 @@ Be careful to use the same DAR version to extract as was used to compress, other
 
 In this example, HPC `StdEnv/2020` was loaded instead of `StdEnv/2023`.
 
-~~~text
+```text
 [rabyj@narval3 bg]$ dar -x cpg_topvar_200bp_10kb_coord -O
 Final memory cleanup...
 FATAL error, aborting operation
 Not enough data to initialize storage field
-~~~
+```
 
 ### Sed commands
 
-~~~bash
+```bash
 sed -n LINE_NUMBERp file.txt # disable automatic printing
 sed -i 's/STRING_TO_REPLACE/STRING_TO_REPLACE_WITH/g' filename # inplace
 sed -i '8i This is Line 8' filename # insert text at line number (inplace)
-~~~
+```
 
 ### Grep commands
 
-~~~bash
+```bash
 # Get md5sums from different files
 cat hg38.json | grep -oE '"md5sum": "[[:alnum:]]{32}"' # json
 cat hg38_metadata.md5 | grep -oE '[[:alnum:]]{32}' | head # md5
@@ -587,7 +587,7 @@ grep -f pattern_list.ext target.ext
 # Grep using a literal string, don't need to escape anything. Faster than normal grep.
 grep -F "string" target.ext 
 grep -F -f string_list.ext target.ext # grep a list of literal strings.
-~~~
+```
 
 ## Job schedulers - HPC
 
@@ -595,9 +595,9 @@ grep -F -f string_list.ext target.ext # grep a list of literal strings.
 
 <https://wiki.calculquebec.ca/w/Moab/en>
 
-~~~bash
+```bash
 mjobctl -c Job_ID/Job_name #kill job on node
-~~~
+```
 
 When the job is created, a copy of the script file is made and that copy cannot be modified.
 <http://docs.adaptivecomputing.com/torque/4-0-2/Content/topics/commands/qsub.htm>
@@ -614,7 +614,7 @@ When the job is created, a copy of the script file is made and that copy cannot 
 
 #### Slurm job scheduler commands
 
-~~~bash
+```bash
 # useful
 squeueme # my queued jobs
 seff JOBID # job info summary
@@ -628,11 +628,11 @@ sqme > temp_sqme.txt
 cat temp_sqme.txt | grep 'chr' | tr -s ' ' | cut -d ' ' -f2,5 | sort -V -k2 > temp_jobID.txt
 cat temp_jobID.txt | grep "assay" > assay_jobID.txt
 cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
-~~~
+```
 
 #### sbatch file (.sh)
 
-~~~bash
+```bash
 #!/bin/bash
 #SBATCH --time=01:00:00
 #SBATCH --account=def-jacquesp
@@ -649,15 +649,15 @@ cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
 ${SLURM_JOB_ID} (%j)
 ${SLURM_JOB_NAME} (%x)
 $SLURM_CPUS_PER_TASK
-~~~
+```
 
 <https://stackoverflow.com/questions/65677339/how-to-retrieve-the-content-of-slurm-script>
 Recuperate launch script: `scontrol write batch_script <job_id> <optional_filename>`
 
 #### Collect resources via seff
 
-~~~bash
+```bash
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'Wall' | grep -oE '[0-9]{2}:[0-9]{2}:[0-9]{2}'
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'Memory Utilized' | grep -oE '[0-9]{1,2}\.[0-9]{1,2} .B'
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'CPU Efficiency:' | grep -oE '[0-9]{1,2}\.[0-9]{1,2}\%'
-~~~
+```
