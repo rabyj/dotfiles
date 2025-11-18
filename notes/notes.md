@@ -543,11 +543,58 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ### dar - disk archiver
 
 dar archives are of the format `archive-name.i.dar` where `i` is the slice number (starts at 1).
+The slice number is not specified during operations, dar figures it out itself. Only the base name is needed.
 
-~~~bash
-# Extract single file
-dar -x archive-name -g file/to/extract
-~~~
+More info: <http://dar.linux.free.fr/doc/man/dar.html>
+
+#### Creation
+
+Example of correct usage (`-c` for "create", `-g` for "go-into/get"):
+
+```bash
+ml StdEnv/2023
+dar --multi-thread 2 -c "${archive_name}" -g "${input_folder}" -g "${input_file}"
+# or general backup of a folder
+dar --multi-thread 2 -c "${archive_name}" -R "${folder}"
+```
+
+Note that dar does not accept Unix wild masks after `-g`.
+`-R` actually specifies the filesystem root to use (R for root and not recursive), and can be used with the restore operation too.
+
+Always make an separate index and test integrity after creating an archive:
+
+```bash
+dar -l "${archive_name}" > ${archive_name}.dar.index # list all
+dar -t "${archive_name}" > ${archive_name}.dar.test # test integrity
+```
+
+You can control the compression type using `-z` flag:
+
+```bash
+dar --multi-thread 2 -z lz4 -c "${archive_name}" -g "${input_folder}"
+``` 
+
+If `-z` is not specified, no compression is performed, but if `-z` is specified without algorithm gzip will be assumed.
+
+#### Extraction
+
+Then, to extract (`-x`) a single file into a subdirectory `restore`, use the base name and the file path:
+
+```bash
+dar -R restore/ -O -w -x ${archive_name} -v -g directory/filename
+```
+
+The flag `-O` will tell dar to ignore file ownership. The flag `-w` will disable a warning if `restore/directory` already exists.
+
+To extract an entire directory, type:
+
+```bash
+dar -R restore/ -O -w -x ${archive_name} -v -g ${directory_name}
+```
+
+#### Pitfalls
+
+-- Dar version --
 
 Be careful to use the same DAR version to extract as was used to compress, otherwise you might get errors.
 
@@ -559,6 +606,23 @@ Final memory cleanup...
 FATAL error, aborting operation
 Not enough data to initialize storage field
 ```
+
+-- Extended attributes and Lustre --
+
+On HPCs, the extended attributes can also cause problem, see this note about the Lustre filesystem:
+[Alliance dar doc](https://docs.alliancecan.ca/wiki/Dar#A_note_about_the_Lustre_filesystem)
+
+In summary, use `-u 'lustre*'` to ignore extended attributes when creating or extracting dar archives on Lustre filesystems.
+
+-- Interactive vs script usage --
+
+See the `-Q` flag description in the manual for details, but in summary, when using dar in scripts but launching from terminal (not via cron or batch job), dar might think it's in interactive mode and ask for user input, which will block the script. Use `-Q` to force non-interactive mode, e.g.
+
+```bash
+dar -Q ... 1> dar.out 2> dar.err &
+```
+
+This is the only way to make sure dar can run in background without blocking.
 
 ### Sed commands
 
