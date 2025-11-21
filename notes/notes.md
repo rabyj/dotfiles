@@ -521,6 +521,10 @@ find split* -maxdepth 2 -type f -name '*prediction.csv' -print0 | rsync -av --fi
 # any leading slashes are removed and no ".." references are allowed to go higher than the source dir. 
 rsync -a --files-from=/tmp/foo /usr remote:/backup
 
+# parallel rsync using xargs, you could also use GNU parallel
+# This will run 5 rsync in parallel, each run on one folder/file found by ls
+ls -1 /source/dir | xargs -I {} -P 5 -n 1 rsync -avh /source/dir/{} /destination/dir/
+
 # -- other --
 
 # show true command, not alias
@@ -558,8 +562,11 @@ dar --multi-thread 2 -c "${archive_name}" -g "${input_folder}" -g "${input_file}
 dar --multi-thread 2 -c "${archive_name}" -R "${folder}"
 ```
 
-Note that dar does not accept Unix wild masks after `-g`.
-`-R` actually specifies the filesystem root to use (R for root and not recursive), and can be used with the restore operation too.
+Note that:
+
+- dar does not accept Unix wild masks after `-g`.
+- `-R` actually specifies the filesystem root to use (R for root and not recursive), and can be used with the restore operation too.
+- `--multi-thread` can be written as `-G` too.
 
 Always make an separate index and test integrity after creating an archive:
 
@@ -576,6 +583,12 @@ dar --multi-thread 2 -z lz4 -c "${archive_name}" -g "${input_folder}"
 
 If `-z` is not specified, no compression is performed, but if `-z` is specified without algorithm gzip will be assumed.
 
+Complex example:
+
+```bash
+nice dar -Q --multi-thread 10 --compression=xz --slice 20G -c archive_name -u 'lustre*' -g folder1/ &> dar_archive_name.log &
+```
+
 #### Extraction
 
 Then, to extract (`-x`) a single file into a subdirectory `restore`, use the base name and the file path:
@@ -591,6 +604,14 @@ To extract an entire directory, type:
 ```bash
 dar -R restore/ -O -w -x ${archive_name} -v -g ${directory_name}
 ```
+
+Complex example:
+
+```bash
+nohup nice dar -Q --multi-thread 5 -O -x archive_name -w &> dar_restore_archive_name.log &
+```
+
+This will overwrite existing files without asking, because of the `-w` flag. (don't warn)
 
 #### Pitfalls
 

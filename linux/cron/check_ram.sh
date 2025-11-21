@@ -1,8 +1,9 @@
 #!/bin/bash
 # A robust script to check RAM usage and send a desktop notification.
-# To use, place this script in $HOME/bin/ and add a cron job to run it every minute.
-# Open crontab: 'sudo crontab -u $USER -e'
-# Cron job: '* * * * * $HOME/bin/check_ram.sh'
+# To use, place this script in $HOME/bin/ or another folder of your choice, and add a cron job to run it every minute.
+# Open crontab: 'crontab -e'
+# If this doesn't work, try 'EDITOR=nano crontab -e'
+# Cron job (line to add): '* * * * * $HOME/bin/check_ram.sh'
 
 # --- Script Safety ---
 # Exit immediately if a command exits with a non-zero status.
