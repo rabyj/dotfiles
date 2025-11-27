@@ -1,3 +1,4 @@
+#! /bin/bash
 # ~/.bash_functions
 
 # Use the `function` keyword instead of `find() { ... }`
@@ -5,19 +6,69 @@
 # to prevent crossing filesystem boundaries.
 # It only works for single input paths, not multiple paths.
 if [[ $- == *i* ]]; then
-	function find {
-			# If user explicitly provided -mount or -xdev, run normally
-			case " $* " in
-					*" -mount "*|*" -xdev "*) command find "$@"; return;;
-			esac
+  function find {
+    # If user explicitly provided -mount or -xdev, run normally
+    case " $* " in
+        *" -mount "*|*" -xdev "*) command find "$@"; return;;
+    esac
 
-			# If first argument starts with "-", no path was given → assume "."
-			if [[ "$1" == -* || -z "$1" ]]; then
-					command find . -mount "$@"
-					return
-			fi
+    # If first argument starts with "-", no path was given → assume "."
+    if [[ "$1" == -* || -z "$1" ]]; then
+        command find . -mount "$@"
+        return
+    fi
 
-			# First argument is the path → inject -mount immediately after it
-			command find "$1" -mount "${@:2}"
-	}
+    # First argument is the path → inject -mount immediately after it
+    command find "$1" -mount "${@:2}"
+  }
 fi
+
+# Complete update function
+function apt-update-all {
+  sudo -v || return 1
+
+  sudo bash -c '
+      set -e
+
+      printf "\n==== Updating package lists (update)====\n"
+      apt update
+
+      printf "\n==== Upgrading packages (upgrade)====\n"
+      apt upgrade -y
+
+      printf "\n==== Removing unused packages (autoremove)====\n"
+      apt autoremove -y
+
+      printf "\n==== Cleaning APT cache (autoclean)====\n"
+      apt autoclean
+
+      printf "\n==== All operations completed ====\n"
+  '
+}
+
+# Safer reboot function
+function reboot {
+	# Fail on errors and broken pipelines
+	set -euo pipefail
+
+	# Request sudo privileges upfront
+  sudo -v || return 1
+
+  # Unmount all sshfs filesystems
+    echo "Unmounting sshfs filesystems..."
+    if mount | grep -q 'type fuse.sshfs'; then
+        mount | grep 'type fuse.sshfs' | awk '{print $3}' \
+        | while read -r mountpoint; do
+            echo "Unmounting $mountpoint"
+            sudo umount "$mountpoint"
+        done
+    else
+        echo "No sshfs mounts found."
+    fi
+
+	printf "\n%s\n" "All sshfs mounts successfully unmounted."
+  printf "System will reboot in 5 seconds. Press Ctrl+C to cancel."
+  sleep 5
+
+	sudo /sbin/reboot
+}

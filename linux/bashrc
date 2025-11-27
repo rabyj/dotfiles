@@ -132,9 +132,6 @@ fi
 copy() {
   echo -n "$1" | xclip -selection clipboard
 }
-apt-update-all() {
-  sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-}
 
 # automount narval
 mounts="$HOME/mounts"
