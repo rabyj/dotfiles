@@ -150,7 +150,6 @@ myroot="$HOME/Projects"
 alias source-epiclass=". ${myroot}/envs/epiclass/bin/activate" # SC2139
 
 # Created by `pipx` on 2025-05-26 16:48:43
-export PATH="$PATH:$HOME/.local/bin"
 eval "$(register-python-argcomplete pipx)"
 
 # -- Terminal prompt modifications --

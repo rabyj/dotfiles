@@ -20,16 +20,9 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-
-# set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-
-export PATH="$PATH:$HOME/downloads/installations/globusconnectpersonal-3.2.3"
-
-# Created by `pipx` on 2025-05-26 16:48:43
-export PATH="$PATH:/home/local/USHERBROOKE/rabj2301/.local/bin"
 
 # Firefox xwayland:
 if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
