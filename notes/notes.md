@@ -48,6 +48,12 @@ Stored in
 To have windows started under the same icon, add `StartupWMClass=xxxx` in the .desktop file.
 The value can be found with `xprop WM_CLASS` and clicking on the window.
 
+To rebuild mimeinfo.cache (file associations):
+
+```bash
+update-desktop-database path/to/desktop/files/
+```
+
 ### Journals/Logs
 
 ```bash
@@ -579,7 +585,7 @@ You can control the compression type using `-z` flag:
 
 ```bash
 dar --multi-thread 2 -z lz4 -c "${archive_name}" -g "${input_folder}"
-``` 
+```
 
 If `-z` is not specified, no compression is performed, but if `-z` is specified without algorithm gzip will be assumed.
 
@@ -746,3 +752,14 @@ ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'Wall' | grep -oE '[0-9]{
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'Memory Utilized' | grep -oE '[0-9]{1,2}\.[0-9]{1,2} .B'
 ls *.out | grep -oE '[0-9]{7}' | xargs -n1 seff | grep 'CPU Efficiency:' | grep -oE '[0-9]{1,2}\.[0-9]{1,2}\%'
 ```
+
+## Machine Learning
+
+### pytorch - lazy loading of large datasets
+
+It would seem LRU caching is useless here, as there no repeated data in a single epoch, and the whole approach presumes the entire dataset does not fit in memory.
+See: [Pytorch comment](https://github.com/pytorch/pytorch/issues/43012#issuecomment-688786155)
+
+Quote: LRU caching might not be useful at all...AFAIK a lot training tasks require sampling without replacement, so there is little locality for the LRU cache algorithm to exploit.
+
+In other words, for multi-epoch training, caching part of the dataset is no better than caching nothing.
