@@ -9,10 +9,6 @@ ln -svf ${SCRIPT_DIR}/linux/bash_aliases ~/.bash_aliases
 ln -svf ${SCRIPT_DIR}/linux/bash_functions ~/.bash_functions
 ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
 
-# gnupg config
-ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg-agent.conf ~/.gnupg/
-ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg.conf ~/.gnupg/
-
 if [ "$1" = "local" ];
 then
 	ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
@@ -30,7 +26,6 @@ then
   ln -svf ${SCRIPT_DIR}/vscode/shellcheckrc ~/.shellcheckrc
   ln -svf ${SCRIPT_DIR}/vscode/general-settings.json ~/.config/Code/User/settings.json
   ln -svf ${SCRIPT_DIR}/vscode/workspaces/EPILAP.code-workspace ~/Projects/epilap/EPILAP.code-workspace
-  exit
 fi
 
 if [ "$1" = "home" ];
@@ -47,7 +42,7 @@ then
   ln -svf ${SCRIPT_DIR}/vscode/shellcheckrc ~/.shellcheckrc
   # ln -svf ${SCRIPT_DIR}/vscode/general-settings.json ~/.config/Code/User/settings.json
   # ln -svf ${SCRIPT_DIR}/vscode/workspaces/EPILAP.code-workspace ~/Projects/epilap/EPILAP.code-workspace
-  exit
+
 fi
 
 if [ "$1" = "hpc" ];
@@ -58,5 +53,8 @@ then
   ln -svf "${cluster_folder}/bashrc-hpc" ~/.bashrc
 
   echo "Please manually copy .comet.config content (api key kept out of git)"
-  exit
+else # home/local common config
+	# gnupg config
+	ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg-agent.conf ~/.gnupg/
+	ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg.conf ~/.gnupg/
 fi
