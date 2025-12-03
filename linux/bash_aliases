@@ -14,11 +14,16 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # Common commands
-alias cp="cp -v --no-clobber"
+alias cp="cp -v --no-clobber -preserve=timestamps"
 alias mv="mv -v --no-clobber"
 alias pwdp="pwd -P"
 alias open="xdg-open"
+
+# xclip clipboard management
 alias pbcopy="xclip -sel clip"
+function copy() {
+  echo -n "$1" | xclip -selection clipboard
+}
 
 # git
 alias gs="git status"
@@ -37,3 +42,11 @@ alias check-idle="dbus-send --print-reply --dest=org.gnome.SessionManager /org/g
 
 # pytest with auto cpu core usage (pytest-xdist required)
 alias pytest="pytest -n auto"
+
+# ctrl+ backtick will now expand aliases
+if [ -t 1 ]
+then
+    # standard output is a tty
+    # do interactive initialization
+    bind '"\C-`": alias-expand-line'
+fi

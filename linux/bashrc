@@ -128,11 +128,6 @@ fi
 
 # -- Convenience commands (specific to env (local)) --
 
-# Misc
-copy() {
-  echo -n "$1" | xclip -selection clipboard
-}
-
 # automount narval
 mounts="$HOME/mounts"
 username="rabyj"

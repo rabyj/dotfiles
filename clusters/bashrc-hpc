@@ -42,11 +42,6 @@ fi
 
 # -- Narval specific aliases and functions --
 
-alias htopme="htop -u rabyj"
-copy() {
-  echo -n "$1" | xclip -selection clipboard
-}
-
 export SLURM_TIME_FORMAT="%d %H:%M:%S"
 export SACCT_FIELDS="JobID%8,JobName%30,Timelimit,Elapsed,NCPU%5,ReqMem%7,ExitCode,State%8,Priority%8,Submit%12,Account"
 export SACCT_FIELDS2="JobID%8,JobName%100,Timelimit,Elapsed,NCPU%5,ReqMem%7,ExitCode,State%8,Priority%8,Submit%12,Account"
@@ -54,16 +49,19 @@ alias sqme="sacct -X --format=${SACCT_FIELDS}"
 alias sqme-fullname="sacct -X --format=${SACCT_FIELDS2}"
 alias sqme2="squeue -u rabyj"
 
-alias go-git="cd ~/project-rabyj/sources/epi_ml; ls; git-update"
+alias go-git="cd ~/project-rabyj/sources/epiclass; ls; git-update"
 alias go-epilap="cd ~/project-rabyj/epilap; ls"
 alias go-sub="cd ~/project-rabyj/epilap/output/sub; ls"
 alias go-logs="cd ~/project-rabyj/epilap/output/logs; ls"
 
-# -- CVMFS Modules --
-# EpiLaP pyTorch
-ml StdEnv/2020
-ml python/3.8
-ml httpproxy # for comet-ml
+
+# -- UV config files: login/compute distinction --
+UV_CONFIG_FILE="$HOME/.config/uv/login.toml"
+if [[ -n "$SLURM_JOB_ID" ]]; then
+  UV_CONFIG_FILE="$HOME/.config/uv/compute.toml"
+fi
+export UV_CONFIG_FILE
+
 
 # -- Terminal prompt modifications --
 
@@ -102,3 +100,9 @@ fi
 if [[ -n "$TITLE_DEFAULT" ]]; then # If length of this is NONzero (see `man test`)
   set-title "$TITLE_DEFAULT"
 fi
+
+# Modify prompt command to update title with current working directory
+update_title_pwd() {
+    printf '\e]0;%s:%s\a' "${HOSTNAME}" "$(pwd)"
+}
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }update_title_pwd"

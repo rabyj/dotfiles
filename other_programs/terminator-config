@@ -12,12 +12,14 @@
     scrollback_infinite = True
     disable_mousewheel_zoom = True
     use_system_font = False
+    title_hide_sizetext = True
   [[Kat]]
     background_darkness = 0.8
     background_type = transparent
     font = Ubuntu Sans Mono 10
     scrollback_infinite = True
     use_system_font = False
+    title_hide_sizetext = True
 [layouts]
   [[default]]
     [[[child0]]]
@@ -71,17 +73,13 @@
       parent = child5
       order = 0
       profile = Kat
-      title = hpc - 1
       uuid = d21ff444-751f-4236-898b-adf544c528ce
       command = bash --rcfile <(echo ". ~/.bashrc && ssh narval")
-      directory = ""
     [[[terminal7]]]
       type = Terminal
       parent = child5
       order = 1
       profile = Kat
-      title = hpc - 2
       uuid = 8f02d83f-b209-465c-9227-c9614deff2e3
       command = bash --rcfile <(echo ". ~/.bashrc && ssh narval")
-      directory = ""
 [plugins]
