@@ -8,17 +8,31 @@
         "editor.tabSize": 4,
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.wordWrap": "off",
-        "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.organizeImports": "explicit"
         }
     },
-    "black-formatter.importStrategy": "useBundled",
-    "editor.fontFamily": "'Ubuntu Mono', monospace",
     "[cpp]": {
         "editor.formatOnSave": false
     },
+    "[shellscript]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "mkhl.shfmt"
+    },
+    "[markdown]": {
+        "editor.tabSize": 2,
+        "files.trimTrailingWhitespace": false,
+    },
+    "editor.fontFamily": "'Ubuntu Mono', monospace",
+    "editor.unicodeHighlight.allowedLocales": {
+        "fr": true
+    },
     "editor.formatOnType": false,
+    "editor.formatOnSave": true,
+    "editor.indentSize": "tabSize",
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
     "editor.inlineSuggest.enabled": true,
     "editor.minimap.enabled": false,
     "editor.multiCursorModifier": "ctrlCmd",
@@ -27,45 +41,47 @@
         80,
         120
     ],
+    "editor.wordWrap": "on",
+    "editor.suggestSelection": "first",
     "files.trimTrailingWhitespace": true,
     "files.associations": {
-        ".inputrc": "shellscript",
-        "inputrc": "shellscript",
+        "*inputrc": "shellscript",
         "bashrc-narval": "shellscript",
-        "bashrc": "shellscript",
+        "*bashrc": "shellscript",
+        "*.sh": "shellscript",
         "*.yml": "yaml"
     },
-    "isort.importStrategy": "fromEnvironment",
-    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "python.defaultInterpreterPath": "/bin/python",
     "python.analysis.diagnosticMode": "openFilesOnly",
     "python.analysis.typeCheckingMode": "basic",
     "python.experiments.enabled": false,
     "python.languageServer": "Pylance",
     "python.testing.pytestEnabled": true,
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.completeFunctionParens": true,
     "python.venvFolders": [
         "/home/local/USHERBROOKE/rabj2301/miniconda3/envs/",
         "/home/local/USHERBROOKE/rabj2301/Projects/envs"
     ],
-    "workbench.colorTheme": "Monokai",
-    "workbench.editor.closeOnFileDelete": true,
-    "workbench.editor.pinnedTabSizing": "shrink",
-    "workbench.editor.scrollToSwitchTabs": true,
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.colorCustomizations": {},
-    "[markdown]": {
-        "editor.tabSize": 2,
-        "files.trimTrailingWhitespace": false,
-    },
-    "[shellscript]": {
-        "editor.tabSize": 2,
-        "editor.defaultFormatter": "mkhl.shfmt"
-    },
+    "black-formatter.importStrategy": "fromEnvironment",
+    "isort.importStrategy": "fromEnvironment",
     "markdownlint.config": {
         "MD024": {
             "siblings_only": true
         },
         "MD025": false,
         "MD033": false
+    },
+    "workbench.colorTheme": "Monokai",
+    "workbench.editor.closeOnFileDelete": true,
+    "workbench.editor.pinnedTabSizing": "shrink",
+    "workbench.editor.scrollToSwitchTabs": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorCustomizations": {},
+    "workbench.externalBrowser": "firefox",
+    "workbench.editorAssociations": {
+        "*.pdf": "latex-workshop-pdf-hook",
+        "*.ipynb": "jupyter-notebook"
     },
     // Configure glob patterns for excluding files and folders. For example, the files explorer decides which files and folders to show or hide based on this setting. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
     "files.exclude": {
@@ -96,7 +112,6 @@
         "**/logs/**": true,
         "**/hdf5/**": true
     },
-    "editor.suggestSelection": "first",
     "security.workspace.trust.untrustedFiles": "newWindow",
     "remote.SSH.remotePlatform": {
         "narval": "linux"
@@ -118,20 +133,14 @@
         "jupyter-notebook": "right"
     },
     "cmake.configureOnOpen": false,
-    "python.analysis.autoFormatStrings": true,
-    "python.analysis.completeFunctionParens": true,
     "notebook.diff.ignoreMetadata": true,
     "notebook.diff.ignoreOutputs": true,
-    "editor.indentSize": "tabSize",
-    "editor.detectIndentation": false,
     "cmake.options.statusBarVisibility": "visible",
-    "workbench.externalBrowser": "firefox",
     "codeium.enableConfig": {
         "*": true,
         "bibtex": true
     },
     "latex-workshop.latex.tools": [
-
         {
             "name": "latexmk",
             "command": "latexmk",
@@ -214,14 +223,9 @@
             ]
         }
     ],
-    "workbench.editorAssociations": {
-        "*.pdf": "latex-workshop-pdf-hook",
-        "*.ipynb": "jupyter-notebook"
-    },
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.bibtex-format.trailingComma": true,
     "latex-workshop.bibtex-format.sort.enabled": true,
-    "editor.wordWrap": "on",
     "latex-workshop.message.latexlog.exclude": [
         "Underfull.*",
         "Overfull.*"
