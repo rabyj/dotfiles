@@ -600,7 +600,7 @@ nice dar -Q --multi-thread 10 --compression=xz --slice 20G -c archive_name -u 'l
 Then, to extract (`-x`) a single file into a subdirectory `restore`, use the base name and the file path:
 
 ```bash
-dar -R restore/ -O -w -x ${archive_name} -v -g directory/filename
+dar -R restore/ -O -w -v -x ${archive_name} -g directory/filename
 ```
 
 The flag `-O` will tell dar to ignore file ownership. The flag `-w` will disable a warning if `restore/directory` already exists.
@@ -608,20 +608,20 @@ The flag `-O` will tell dar to ignore file ownership. The flag `-w` will disable
 To extract an entire directory, type:
 
 ```bash
-dar -R restore/ -O -w -x ${archive_name} -v -g ${directory_name}
+dar -R restore/ -O -w -v -x ${archive_name} -g ${directory_or_filename}
 ```
 
 Complex example:
 
 ```bash
-nohup nice dar -Q --multi-thread 5 -O -x archive_name -w &> dar_restore_archive_name.log &
+nohup nice dar -Q --multi-thread 5 -O -w -x archive_name &> dar_restore_archive_name.log &
 ```
 
 This will overwrite existing files without asking, because of the `-w` flag. (don't warn)
 
 #### Pitfalls
 
--- Dar version --
+##### Dar version
 
 Be careful to use the same DAR version to extract as was used to compress, otherwise you might get errors.
 
@@ -634,14 +634,23 @@ FATAL error, aborting operation
 Not enough data to initialize storage field
 ```
 
--- Extended attributes and Lustre --
+##### Extended attributes and Lustre
 
 On HPCs, the extended attributes can also cause problem, see this note about the Lustre filesystem:
 [Alliance dar doc](https://docs.alliancecan.ca/wiki/Dar#A_note_about_the_Lustre_filesystem)
 
-In summary, use `-u 'lustre*'` to ignore extended attributes when creating or extracting dar archives on Lustre filesystems.
+When extracting to the compute node scratch/tmpdir, the extended attributes might also cause problems, for example:
 
--- Interactive vs script usage --
+- `system.posix_acl_access`
+- `lustre.*` attributes in general
+
+To ignore extended attributes, use the `-u mask` flag when creating or extracting dar archives.
+The mask can include wildcards.
+
+- Use `-u 'lustre*'` for Lustre filesystems.
+- Use `-u '*'` to ignore all extended attributes.
+
+##### Interactive vs script usage
 
 See the `-Q` flag description in the manual for details, but in summary, when using dar in scripts but launching from terminal (not via cron or batch job), dar might think it's in interactive mode and ask for user input, which will block the script. Use `-Q` to force non-interactive mode, e.g.
 
