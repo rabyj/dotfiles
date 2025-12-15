@@ -725,21 +725,22 @@ cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
 
 ```bash
 #!/bin/bash
-#SBATCH --time=01:00:00
-#SBATCH --account=def-jacquesp
-#SBATCH --job-name=a_job_name
-#SBATCH --output=%x-%j.out
-#SBATCH --mem=32G
-#SBATCH --cpus-per-task=1
-#SBATCH --gres=gpu:1
-#SBATCH --mail-user=joanny.raby@usherbrooke.ca
+#SBATCH --time=01:00:00 # hh:mm:ss
+#SBATCH --account=def-jacquesp # project/account name
+#SBATCH --job-name=a_job_name # name of job
+#SBATCH --output=%x-job%j.out # output file name (%x=job name, %j=job id)
+#SBATCH --mem=32G # memory per node
+#SBATCH --cpus-per-task=1 # number of cpu cores per task
+#SBATCH --gres=gpu:1 # number of gpus per node, if needed. Ususally remove this line.
+#SBATCH --mail-user=prenom.nom@usherbrooke.ca
 #SBATCH --mail-type=END
-#SBATCH --dependency=afterok:<JOBID>
+#SBATCH --dependency=afterok:<JOBID> # job dependency, optional
 
-#Variables
-${SLURM_JOB_ID} (%j)
-${SLURM_JOB_NAME} (%x)
-$SLURM_CPUS_PER_TASK
+#Useful variables
+echo ${SLURM_JOB_ID} # equivalent to '%j' in SBATCH header
+echo ${SLURM_JOB_NAME} # equivalent to '%x' in SBATCH header
+echo $SLURM_CPUS_PER_TASK
+echo $SLURM_TMPDIR # path to temporary folder on compute node, very fast for IO
 ```
 
 <https://stackoverflow.com/questions/65677339/how-to-retrieve-the-content-of-slurm-script>
