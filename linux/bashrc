@@ -111,6 +111,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
 # -- Alias definitions --
 
 # You may want to put all your additions into a separate file like
@@ -126,6 +127,7 @@ if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 fi
 
+
 # -- Convenience commands (specific to env (local)) --
 
 # automount narval
@@ -133,16 +135,24 @@ mounts="$HOME/mounts"
 username="rabyj"
 
 # SC2139: Aliases expand variables only when defined, not when used. Fine here since we want to use the current value of the variable at execution time.
-alias mount-narval="sshfs -o follow_symlinks ${username}@narval.alliancecan.ca:/home/rabyj/ ${mounts}/narval-mount/"
-alias mount-beluga="sshfs -o follow_symlinks ${username}@beluga.alliancecan.ca:/home/rabyj/ ${mounts}/beluga-mount/"
-alias mount-cedar="sshfs -o follow_symlinks ${username}@cedar.alliancecan.ca:/home/rabyj/ ${mounts}/cedar-mount/"
+alias mount-narval="sshfs -o follow_symlinks ${username}@narval.alliancecan.ca:/home/${username}/ ${mounts}/narval-mount/"
+alias mount-beluga="sshfs -o follow_symlinks ${username}@beluga.alliancecan.ca:/home/${username}/ ${mounts}/beluga-mount/"
+alias mount-cedar="sshfs -o follow_symlinks ${username}@cedar.alliancecan.ca:/home/${username}/ ${mounts}/cedar-mount/"
 
 # tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
 myroot="$HOME/Projects"
 alias source-epiclass=". ${myroot}/envs/epiclass/bin/activate" # SC2139
 
-# Created by `pipx` on 2025-05-26 16:48:43
-eval "$(register-python-argcomplete pipx)"
+
+# -- OTHER --
+
+# -- Using a base venv because of PEP 668 (externally managed environment) + Ubuntu 22.04 --
+source ~/.local/base_venv/bin/activate
+
+# Make sure GPG/pinentr curses can see current terminal
+GPG_TTY=$(tty)
+export GPG_TTY
+
 
 # -- Terminal prompt modifications --
 
@@ -177,6 +187,12 @@ if [[ -n "$TITLE_DEFAULT" ]]; then # If length of this is NONzero (see `man test
 fi
 
 
+# -- Modifications by other programs --
+
+# Created by `pipx` on 2025-05-26 16:48:43
+eval "$(register-python-argcomplete pipx)"
+
+
 # pip bash completion start
 _pip_completion()
 {
@@ -186,6 +202,7 @@ _pip_completion()
 }
 complete -o default -F _pip_completion pip
 # pip bash completion end
+
 
 export CONDA_AUTO_ACTIVATE_BASE=false
 # >>> conda initialize >>>
@@ -202,10 +219,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# -- Using a base venv because of PEP 668 (externally managed environment) + Ubuntu 22.04 --
-source ~/.local/base_venv/bin/activate
-
-# Make sure GPG/pinentr curses can see current terminal
-GPG_TTY=$(tty)
-export GPG_TTY
