@@ -37,9 +37,6 @@
         ],
         "explorer.fileNesting.enabled": false,
         "explorer.fileNesting.expand": false,
-        "workbench.editorAssociations": {
-            "file:/**/*.tsv": "jupyter-data-wrangler",
-            "file:/**/*.csv": "jupyter-data-wrangler"
-        },
+        "workbench.editorAssociations": {},
     }
 }

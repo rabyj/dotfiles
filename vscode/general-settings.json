@@ -238,4 +238,12 @@
     "github.copilot.nextEditSuggestions.enabled": true,
     "github.copilot.chat.notebook.enhancedNextEditSuggestions.enabled": true,
     "cmake.showConfigureWithDebuggerNotification": false,
+    "dataWrangler.enabledFileTypes": {
+        "csv": false,
+        "tsv": false,
+        "jsonl": false,
+        "xls": false,
+        "xlsx": false,
+        "parquet": false
+    },
 }
