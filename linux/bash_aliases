@@ -1,4 +1,8 @@
-#!/bin/bash
+# shellcheck shell=bash
+
+# Ignore non-interactive shells
+[[ $- == *i* ]] || return
+
 # Generic aliases, not env specific. Called in ~/.bashrc
 alias htopme="htop -u ${USER}"
 
@@ -14,7 +18,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # Common commands
-alias cp="cp -v --no-clobber -preserve=timestamps"
+alias cp="cp -vi --preserve=timestamps"
 alias mv="mv -v --no-clobber"
 alias pwdp="pwd -P"
 alias open="xdg-open"
