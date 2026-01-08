@@ -47,11 +47,11 @@ function apt-update-all {
 }
 
 # Safer reboot function
-function reboot {
-	# Fail on errors and broken pipelines
-	set -euo pipefail
+function reboot() (
+  # Fail on errors and broken pipelines
+  set -euo pipefail
 
-	# Request sudo privileges upfront
+  # Request sudo privileges upfront
   sudo -v || return 1
 
   # Unmount all sshfs filesystems
@@ -66,9 +66,9 @@ function reboot {
         echo "No sshfs mounts found."
     fi
 
-	printf "\n%s\n" "All sshfs mounts successfully unmounted."
+  printf "\n%s\n" "All sshfs mounts successfully unmounted."
   printf "System will reboot in 5 seconds. Press Ctrl+C to cancel."
   sleep 5
 
-	sudo /sbin/reboot
-}
+  sudo /sbin/reboot
+)
