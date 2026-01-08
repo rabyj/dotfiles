@@ -17,9 +17,16 @@
     },
     "[shellscript]": {
         "editor.tabSize": 2,
+        "editor.insertSpaces": true,
         "editor.formatOnSave": false,
-        "editor.defaultFormatter": "mkhl.shfmt"
+        "editor.defaultFormatter": "mkhl.shfmt",
     },
+    "shfmt.executableArgs": [
+        "-i",
+        "2",
+        "-ci",
+        "-sr",
+    ],
     "[markdown]": {
         "editor.tabSize": 2,
         "files.trimTrailingWhitespace": false,
@@ -30,8 +37,9 @@
     },
     "editor.formatOnType": false,
     "editor.formatOnSave": true,
-    "editor.indentSize": "tabSize",
     "editor.detectIndentation": false,
+    "editor.indentSize": "tabSize",
+    "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.inlineSuggest.enabled": true,
     "editor.minimap.enabled": false,
