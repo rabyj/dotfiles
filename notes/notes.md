@@ -146,7 +146,7 @@ To check the mime type of a file: `file --mime-type filename`
 
 #### Double commander
 
-- Double commander won't directly open (double click / open action) executable files. <https://ghisler.ch/board/viewtopic.php?t=9073>
+- Problem topic: Double commander won't directly open (double click / open action) executable files. <https://ghisler.ch/board/viewtopic.php?t=9073>
 - Sometimes the history gets corrupted and program fails on open (EAccessViolation:). Delete it: `rm ~/.config/doublecmd/history.xml`
 
 #### KDE
@@ -303,6 +303,26 @@ The `pytest -lvs` command is a combination of multiple options used with pytest.
 
 Disable warnings in config:
 [action:message:category:module:line](https://docs.python.org/3/library/warnings.html#warning-filter)
+
+### Quarto Notebooks
+
+[Quarto website cell layout/formatting](https://quarto.org/docs/authoring/article-layout.html#overflowing-content)
+
+```text
+#| column: body-outset-left
+#| column: page-left
+#| column: screen-inset-left
+```
+
+Example
+
+````qmd
+```{python}
+#| label: supp-fig1e-plot
+#| column: page-left
+plot_prediction_scores_distribution()
+```
+````
 
 ### Problems
 
