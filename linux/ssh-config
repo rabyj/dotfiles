@@ -3,7 +3,7 @@ Host *
     ForwardAgent yes
     IdentityFile ~/.ssh/id_ed25519
     User rabyj
-Host narval* beluga cedar
+Host narval* beluga cedar rorqual
     ControlPath ~/.ssh/cm-%r@%h:%p
     ControlMaster auto
     ControlPersist 48h
