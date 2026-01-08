@@ -11,7 +11,7 @@ ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
 
 if [ "$1" = "local" ];
 then
-	ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
+  ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
 
   ln -svf ${SCRIPT_DIR}/linux/ssh-config ~/.ssh/config
   ln -svf ${SCRIPT_DIR}/linux/keyd_config.conf /etc/keyd/default.conf # for keyboard mapping
@@ -25,12 +25,12 @@ then
 
   ln -svf ${SCRIPT_DIR}/vscode/shellcheckrc ~/.shellcheckrc
   ln -svf ${SCRIPT_DIR}/vscode/general-settings.json ~/.config/Code/User/settings.json
-  ln -svf ${SCRIPT_DIR}/vscode/workspaces/EPILAP.code-workspace ~/Projects/epilap/EPILAP.code-workspace
+  ln -svf ${SCRIPT_DIR}/vscode/keybindings-tenkeyless.json ~/.config/Code/User/keybindings.json
 fi
 
 if [ "$1" = "home" ];
 then
-	ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
+  ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
 
   ln -svf ${SCRIPT_DIR}/linux/ssh-config ~/.ssh/config
   ln -svf ${SCRIPT_DIR}/linux/keyd_config.conf /etc/keyd/default.conf # for keyboard mapping
@@ -40,9 +40,7 @@ then
   ln -svf ${SCRIPT_DIR}/other_programs/comet.config ~/.comet.config
 
   ln -svf ${SCRIPT_DIR}/vscode/shellcheckrc ~/.shellcheckrc
-  # ln -svf ${SCRIPT_DIR}/vscode/general-settings.json ~/.config/Code/User/settings.json
-  # ln -svf ${SCRIPT_DIR}/vscode/workspaces/EPILAP.code-workspace ~/Projects/epilap/EPILAP.code-workspace
-
+  ln -svf ${SCRIPT_DIR}/vscode/general-settings.json ~/.config/Code/User/settings.json
 fi
 
 if [ "$1" = "hpc" ];
@@ -54,7 +52,7 @@ then
 
   echo "Please manually copy .comet.config content (api key kept out of git)"
 else # home/local common config
-	# gnupg config
-	ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg-agent.conf ~/.gnupg/
-	ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg.conf ~/.gnupg/
+  # gnupg config
+  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg-agent.conf ~/.gnupg/
+  ln -svf ${SCRIPT_DIR}/linux/gnupg/gpg.conf ~/.gnupg/
 fi

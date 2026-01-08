@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="1.1.30 gamma">
+<doublecmd DCVersion="1.1.31 gamma">
   <Hotkeys Version="63">
     <Form Name="Main">
       <Hotkey>
@@ -35,11 +35,11 @@
         <Command>cm_ShellExecute</Command>
       </Hotkey>
       <Hotkey>
-        <Shortcut>Ctrl+Shift+Tab</Shortcut>
+        <Shortcut>Ctrl+PgDn</Shortcut>
         <Command>cm_PrevTab</Command>
       </Hotkey>
       <Hotkey>
-        <Shortcut>Ctrl+Tab</Shortcut>
+        <Shortcut>Ctrl+PgUp</Shortcut>
         <Command>cm_NextTab</Command>
       </Hotkey>
       <Hotkey>
