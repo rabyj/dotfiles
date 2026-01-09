@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="1.1.31 gamma">
+<doublecmd DCVersion="1.1.32 gamma">
   <Hotkeys Version="63">
     <Form Name="Main">
       <Hotkey>
@@ -109,8 +109,24 @@
         <Command>cm_CutToClipboard</Command>
         <Control>Files Panel</Control>
       </Hotkey>
+      <Hotkey>
+        <Shortcut>Shift+Tab</Shortcut>
+        <Command>cm_FocusSwap</Command>
+        <Control>Files Panel</Control>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Alt+Up</Shortcut>
+        <Command>cm_FocusSwap</Command>
+        <Control>Files Panel</Control>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Alt+Down</Shortcut>
+        <Command>cm_FocusSwap</Command>
+        <Control>Files Panel</Control>
+      </Hotkey>
     </Form>
     <Form Name="Editor"/>
     <Form Name="Confirmation"/>
+    <Form Name="Viewer"/>
   </Hotkeys>
 </doublecmd>
