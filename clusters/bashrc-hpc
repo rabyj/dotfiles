@@ -33,10 +33,24 @@ export PROMPT_COMMAND='history -a'
 HISTTIMEFORMAT='' # Save the timestamp, but don't output it
 #HISTTIMEFORMAT='%F_%T ' # output the time in 'history' see "ht" alias
 
+
+# -- UV config files: login/compute distinction --
+
+UV_CONFIG_FILE="$HOME/.config/uv/login.toml"
+if [[ -n "$SLURM_JOB_ID" ]]; then
+  UV_CONFIG_FILE="$HOME/.config/uv/compute.toml"
+fi
+export UV_CONFIG_FILE
+
+# -- Rest is not useful for non-interactive shells --
+
+# exit if not running interactively
+[[ $- != *i* ]] && return
+
 # -- Alias definitions --
 
 # Generic aliases in ~/.bash_aliases
-if [ -f ~/.bash_aliases ]; then
+if [[ -f ~/.bash_aliases ]]; then
   . ~/.bash_aliases
 fi
 
@@ -53,14 +67,6 @@ alias go-git="cd ~/project-rabyj/sources/epiclass; ls; git-update"
 alias go-epilap="cd ~/project-rabyj/epilap; ls"
 alias go-sub="cd ~/project-rabyj/epilap/output/sub; ls"
 alias go-logs="cd ~/project-rabyj/epilap/output/logs; ls"
-
-
-# -- UV config files: login/compute distinction --
-UV_CONFIG_FILE="$HOME/.config/uv/login.toml"
-if [[ -n "$SLURM_JOB_ID" ]]; then
-  UV_CONFIG_FILE="$HOME/.config/uv/compute.toml"
-fi
-export UV_CONFIG_FILE
 
 
 # -- Terminal prompt modifications --
