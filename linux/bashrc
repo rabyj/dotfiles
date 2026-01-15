@@ -156,40 +156,6 @@ source ~/.local/base_venv/bin/activate
 GPG_TTY=$(tty)
 export GPG_TTY
 
-
-# -- Terminal prompt modifications --
-
-# Change the depth of directory showed in terminal line
-export PROMPT_DIRTRIM=2
-
-# https://web.archive.org/web/20160704140739/http://ithaca.arpinum.org/2013/01/02/git-prompt.html
-PS1="\$(__git_ps1 "[%s]")$PS1"
-
-# Function to allow a user to arbitrarily set the terminal title to anything
-# Example: `set-title this is title 1`
-set-title() {
-  # Set the PS1 title escape sequence; see "Customizing the terminal window title" here:
-  # https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Customizing_the_terminal_window_title
-  TITLE="\[\e]2;$@\a\]"
-  PS1=${PS1_BAK}${TITLE}
-}
-
-# Back up original PS1 Prompt 1 string when ~/.bashrc is first sourced upon bash opening
-if [[ -z "$PS1_BAK" ]]; then # If length of this str is zero (see `man test`)
-  PS1_BAK=$PS1
-fi
-
-# Set the title to a user-specified value if and only if TITLE_DEFAULT has been previously set and
-# exported by the user. This can be accomplished as follows:
-#   export TITLE_DEFAULT="my title"
-#   . ~/.bashrc
-# Note that sourcing the ~/.bashrc file is done automatically by bash each time you open a new bash
-# terminal, so long as it is an interactive (use `bash -i` if calling bash directly) type terminal
-if [[ -n "$TITLE_DEFAULT" ]]; then # If length of this is NONzero (see `man test`)
-  set-title "$TITLE_DEFAULT"
-fi
-
-
 # -- Modifications by other programs --
 
 # Created by `pipx` on 2025-05-26 16:48:43
@@ -207,6 +173,7 @@ complete -o default -F _pip_completion pip
 # pip bash completion end
 
 
+# CONDA
 export CONDA_AUTO_ACTIVATE_BASE=false
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -222,3 +189,71 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+# -- Terminal prompt modifications --
+# This section needs to be at the end of the file to properly modify PS1 after all other
+# modifications (e.g., virtualenv info addition to PS1)
+
+# Change the depth of directory showed in terminal line
+export PROMPT_DIRTRIM=2
+
+# Function to allow a user to arbitrarily set the terminal title to anything
+# Example: `set-title this is title 1`
+set-title() {
+  # Set the PS1 title escape sequence; see "Customizing the terminal window title" here:
+  # https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Customizing_the_terminal_window_title
+  TITLE="\[\e]2;$@\a\]"
+  PS1=${PS1_BAK}${TITLE}
+}
+
+# Back up original PS1 Prompt 1 string when ~/.bashrc is first sourced upon bash opening
+if [[ -z "$PS1_BAK" ]]; then
+  # Strip any virtualenv prefix before backing up, so it's not bashrc position dependent
+  PS1_BAK="${PS1#\(*\) }"
+fi
+
+# Set the title to a user-specified value if and only if TITLE_DEFAULT has been previously set and
+# exported by the user. This can be accomplished as follows:
+#   export TITLE_DEFAULT="my title"
+#   . ~/.bashrc
+if [[ -n "$TITLE_DEFAULT" ]]; then # If length of this is NONzero (see `man test`)
+  set-title "$TITLE_DEFAULT"
+fi
+
+# Add git branch to prompt (must be at end, after venv modifications)
+# https://web.archive.org/web/20160704140739/http://ithaca.arpinum.org/2013/01/02/git-prompt.html
+# PS1="\$(__git_ps1 "[%s]")$PS1"
+
+# Function to add git branch to prompt
+# This makes it so that the git branch is added after any virtualenv info if present
+# And it's not dependent on the position of this code in .bashrc
+__add_git_to_prompt() {
+    # Start fresh from backup each time
+    local base_ps1="$PS1_BAK"
+
+    # Add virtualenv prefix if currently in one
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        base_ps1="($(basename "$VIRTUAL_ENV"))$base_ps1"
+    fi
+
+    # Add git info between venv and the rest
+    if type __git_ps1 &>/dev/null; then
+        local git_info
+        git_info=$(__git_ps1 "[%s]")
+        if [[ -n "$git_info" ]]; then
+            # Insert after venv prefix if present
+            if [[ -n "$VIRTUAL_ENV" ]]; then
+                base_ps1="($(basename "$VIRTUAL_ENV"))$git_info${PS1_BAK}"
+            else
+                base_ps1="$git_info$base_ps1"
+            fi
+        fi
+    fi
+
+    PS1="$base_ps1"
+}
+
+# Add to PROMPT_COMMAND so it runs before each prompt
+PROMPT_COMMAND="__add_git_to_prompt${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+
