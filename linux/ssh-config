@@ -11,14 +11,11 @@ Host narval* beluga cedar rorqual
 Host narval
     HostName narval.alliancecan.ca
 Host narval1
-    HostName narval1.alliancecan.ca
+    HostName narval1.calculquebec.ca
 Host narval2
-    HostName narval2.alliancecan.ca
+    HostName narval2.calculquebec.ca
 Host narval3
-    HostName narval3.alliancecan.ca
-Host vscode-narval
-    HostName ncXXXXX
-    ProxyJump narval.alliancecan.ca
+    HostName narval3.calculquebec.ca
 Host beluga
     HostName beluga.alliancecan.ca
 Host rorqual

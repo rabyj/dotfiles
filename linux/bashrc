@@ -136,6 +136,9 @@ username="rabyj"
 
 # SC2139: Aliases expand variables only when defined, not when used. Fine here since we want to use the current value of the variable at execution time.
 alias mount-narval="sshfs -o follow_symlinks ${username}@narval.alliancecan.ca:/home/${username}/ ${mounts}/narval-mount/"
+alias mount-narval1="sshfs -o follow_symlinks ${username}@narval1.calculquebec.ca:/home/${username}/ ${mounts}/narval-mount/"
+alias mount-narval2="sshfs -o follow_symlinks ${username}@narval2.calculquebec.ca:/home/${username}/ ${mounts}/narval-mount/"
+alias mount-narval3="sshfs -o follow_symlinks ${username}@narval3.calculquebec.ca:/home/${username}/ ${mounts}/narval-mount/"
 alias mount-beluga="sshfs -o follow_symlinks ${username}@beluga.alliancecan.ca:/home/${username}/ ${mounts}/beluga-mount/"
 alias mount-cedar="sshfs -o follow_symlinks ${username}@cedar.alliancecan.ca:/home/${username}/ ${mounts}/cedar-mount/"
 
