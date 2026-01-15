@@ -89,6 +89,9 @@ Put left/right of screen: ←, →
 
 reset swap: `sudo swapoff -a; sudo swapon -a`
 
+You can set swappiness value (0-200, default 60) to control how often swap is used. It's a ratio.
+File: `/etc/sysctl.d/66-swappiness.conf`
+
 ### Gnome / Ubuntu specific extensions
 
 Use an [extension](https://extensions.gnome.org/) manager to modify some things on Ubuntu (gnome),
@@ -148,6 +151,7 @@ To check the mime type of a file: `file --mime-type filename`
 
 - Problem topic: Double commander won't directly open (double click / open action) executable files. <https://ghisler.ch/board/viewtopic.php?t=9073>
 - Sometimes the history gets corrupted and program fails on open (EAccessViolation:). Delete it: `rm ~/.config/doublecmd/history.xml`
+- When a mount is slow (e.g. high latency HPC), doublecmd can freeze, and will keep freezing when reopened. To fix, delete or modify `~/.config/doublecmd/tabs.xml`
 
 #### KDE
 
