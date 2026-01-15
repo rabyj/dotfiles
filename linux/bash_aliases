@@ -24,10 +24,10 @@ alias pwdp="pwd -P"
 alias open="xdg-open"
 
 # xclip clipboard management
-alias pbcopy="xclip -sel clip"
-function copy() {
-  echo -n "$1" | xclip -selection clipboard
-}
+# alias pbcopy="xclip -sel clip"
+# function copy() {
+#   echo -n "$1" | xclip -selection clipboard
+# }
 
 # git
 alias gs="git status"
