@@ -72,3 +72,25 @@ function reboot() (
 
   sudo /sbin/reboot
 )
+
+# Copy physical path to clipboard
+pp() {
+    local dir
+    dir="$(pwd -P)"
+
+    if [[ -z "${SSH_CLIENT:-}" ]]; then
+        # Not connected via SSH, just print and copy locally
+        echo "$dir"
+        if command -v wl-copy >/dev/null; then
+            echo -n "$dir" | wl-copy
+        elif command -v xclip >/dev/null; then
+            echo -n "$dir" | xclip -selection clipboard
+        elif command -v pbcopy >/dev/null; then
+            echo -n "$dir" | pbcopy
+        else
+            echo "No clipboard tool available" >&2
+            return 1
+        fi
+        return
+    fi
+}
