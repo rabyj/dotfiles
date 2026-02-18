@@ -147,11 +147,17 @@ Manually: change ~/.config/mimeapps.list
 
 To check the mime type of a file: `file --mime-type filename`
 
-#### Double commander
+#### Double commander - doublecmd
 
-- Problem topic: Double commander won't directly open (double click / open action) executable files. <https://ghisler.ch/board/viewtopic.php?t=9073>
+- Won't directly open (double click / open action) executable files. <https://ghisler.ch/board/viewtopic.php?t=9073>
 - Sometimes the history gets corrupted and program fails on open (EAccessViolation:). Delete it: `rm ~/.config/doublecmd/history.xml`
 - When a mount is slow (e.g. high latency HPC), doublecmd can freeze, and will keep freezing when reopened. To fix, delete or modify `~/.config/doublecmd/tabs.xml`
+- Hypothesis for EAccessViolation: conflict with gnome extension Smart Auto Move, which remembers window positions. The window position seemed to not be restored sometimes, when closing and opening doublecmd from terminal. Ignoring doublecmd in that extension SEEMS to have fixed that problem.
+
+Saved config:
+
+- Directory hotlist in `doublecmd.xml` at `DirectoryHotList`. (can be backed up to a separate file and imported later)
+- Size of file attribute columns in `doublecmd.xml` at `ColumnsSets`.
 
 #### KDE
 
@@ -339,7 +345,7 @@ Unfortunately, dash-to-underscore replacement doesn't work for positional argume
 
 ## Bash
 
-### - Conditional expressions -
+### Conditional expressions
 
 Source: <https://stackoverflow.com/questions/13617843/unary-operator-expected-error-in-bash-if-condition>
 
@@ -361,7 +367,7 @@ which is not a valid syntax. (It would also fail with a different error message 
 
 The modern `[[` operator has lots of other nice features, including regular expression matching.
 
-### - Permissions -
+### Permissions
 
 ```bash
 # - normal permissions -
@@ -384,12 +390,90 @@ getfacl folder # see acl permissions
 setfacl --recursive --modify "user:USERNAME:rwX,default:user:USERNAME:rwX" /folder/to/modify
 ```
 
-### - General -
+### rsync
+
+```bash
+rsync -ra rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios
+
+rsync --progress -va spam bam # show progress bar and file names
+rsync --info=progress2 -va spam bam # show alternative progress information: how many files have been found, and how many are transfered
+
+rsync --dry-run -va spam bam # see what would be copied
+
+# Add news files from source to ".". Trailing slash important, means copy content and not parent directory.
+rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch/frosig/local_ihec_data/EpiAtlas-WGBS-100kb/hg38/hdf5/100kb_all_none/ .
+
+# Following recursively syncs a folder tree and it's final csvs to a specified location
+# -R = Relative
+# /./ marks beginning of folder to sync
+# <https://unix.stackexchange.com/questions/321219/rsync-using-part-of-a-relative-path>
+rsync -aR narval:~/path/to/folder/./folder/tree/to/sync/*.csv /destination/folder
+
+# mirror directory structure (no files)
+rsync -a --include='*/' --exclude='*' source/ destination/
+
+# Copy list of files from a list of absolute paths (without first root /) to current folder
+# sort list beforehand
+# https://unix.stackexchange.com/questions/174674/rsync-a-list-of-directories-with-absolute-path-in-text-file
+# https://stackoverflow.com/questions/16647476/how-to-rsync-only-a-specific-list-of-files/30176688#30176688
+rsync -a --no-dirs --no-relative --files-from=FILE.list narval:/ .
+
+# find file + rsync with dir structure preserved
+# the directory structure starting from the directories that match split* will be preserved in the destination directory.
+find split* -maxdepth 2 -type f -name '*prediction.csv' -print0 | rsync -av --files-from=- --from0 ./ $HOME/Projects/epiclass/output/paper/data/harmonized_sample_ontology_intermediate/all_splits/harmonized_sample_ontology_intermediate_1l_3000n/10fold-dfreeze-2/
+
+# rync list of files while dir keeping structure
+# The filenames that are read from the FILE are all relative to the source dir
+# any leading slashes are removed and no ".." references are allowed to go higher than the source dir. 
+rsync -a --files-from=/tmp/foo /usr remote:/backup
+
+# parallel rsync using xargs, you could also use GNU parallel
+# This will run 5 rsync in parallel, each run on one folder/file found by ls
+ls -1 /source/dir | xargs -I {} -P 5 -n 1 rsync -avh /source/dir/{} /destination/dir/
+```
+
+### find
+
+```bash
+# list/count number of files in multiple directories
+find . -type f | cut -d/ -f2 | sort | uniq -c
+
+# list files with full paths in directory (give full path to find)
+a_path=$(pwd -P)
+find ${a_path} -mindepth 1 | grep "value.hdf5" | sort -u > a_list.list
+
+# list non directory on current level
+find . -maxdepth 1 -type f
+
+# seek specific files
+find . -type f | grep ".sh"
+
+# Do an action on each file with result of find
+find . -type f | grep ".sh" | xargs -I{} chmod a-x {}
+
+# Specific formatting for printf portion
+find . -type f -printf '%s %p\n' # size + filepath
+# %c is access time, %b is birth/creation time, %t is modification time
+https://man7.org/linux/man-pages/man1/find.1.html
+
+# List number of files in each folder
+find . -type f | cut -d/ -f2 | sort | uniq -c
+
+# List md5s from hdf5 (epigeec file format)
+find . -type f -name "*.hdf5" | cut -d_ -f1 | cut -d/ -f2 | sort > ../list.md5
+
+# Exclude files from find
+find . -type f -not -path "./specific/directory/to/ignore/*"
+
+# Compute md5sums of files found
+find . -type f -name "pattern" | xargs md5sum > ../md5sums.txt
+```
+
+### General
 
 ```bash
 # Dictory where .sh file is located. Current folder path. Current dir path. Script dir path.
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
 
 # recursive touch
 find folder -type f -exec touch -ac {} + # a=access time, c=do not create file
@@ -401,18 +485,6 @@ nohup sh -c 'XZ_DEFAULTS="-6e -T2" && tar --xz -cf 2023-01-epiatlas-freeze.tar.x
 ctrl+z
 bg
 disown -h # jobs will ignore hangup signal, but stay in the job table
-
-# tar commands
-tar -cf folder_name.tar folder_to_tar # c=create, create tar without compressing
-tar -xvzf file.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
-tar -xf file.tar.extension # recognizes many compression extensions
-tar -cvzf file.tar.gz files_to_tar # create (c) + compress to gz (z)
-tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
-tar -tvf file.tar # list files
-tar -xf file.tar path/to/file/in/tar # extract a specific file
-tar -xzf images.tar.gz --transform='s/.*\///' # flatten structure during extraction
-tar -xf file.tar -T file_list.txt # extract a list of files. paths need to match index.
-export XZ_DEFAULTS="-6e -T2" #2 cores, level 6 extreme
 
 # mv from pipe
 ls spam | grep -v "bam" | xargs mv -t destination
@@ -467,37 +539,6 @@ tree -L [number] # depth of tree
 tree -D # print date (day)
 tree --timefmt "%F %T" . #(iso day + time)
 
-# -- find --
-# list/count number of files in multiple directories
-find . -type f | cut -d/ -f2 | sort | uniq -c
-
-# list files with full paths in directory (give full path to find)
-a_path=$(pwd -P)
-find ${a_path} -mindepth 1 | grep "value.hdf5" | sort -u > a_list.list
-
-# list non directory on current level
-find . -maxdepth 1 -type f
-
-# seek specific files
-find . -type f | grep ".sh"
-
-# Do an action on each file with result of find
-find . -type f | grep ".sh" | xargs -I{} chmod a-x {}
-
-# Specific formatting for printf portion
-find . -type f -printf '%s %p\n' # size + filepath
-# %c is access time, %b is birth/creation time, %t is modification time
-https://man7.org/linux/man-pages/man1/find.1.html
-
-# List number of files in each folder
-find . -type f | cut -d/ -f2 | sort | uniq -c
-
-# List md5s from hdf5 (epigeec file format)
-find . -type f -name "*.hdf5" | cut -d_ -f1 | cut -d/ -f2 | sort > ../list.md5
-
-# Exclude files from find
-find . -type f -not -path "./specific/directory/to/ignore/*"
-
 # - Iterate over an array -
 array=( one two three )
 for i in "${array[@]}"; do
@@ -516,45 +557,6 @@ du -sh
 ncdu
 diskusage_report # for hpc
 
-# -- rsync --
-rsync -ra rabyj@helios.calculquebec.ca:/home/laperlej/public/hg38/1mb_gene_none /scratch/rabyj/public/hg38/  #copy data from helios
-
-rsync --progress -va spam bam # show progress bar and file names
-rsync --info=progress2 -va spam bam # show alternative progress information: how many files have been found, and how many are transfered
-
-rsync --dry-run -va spam bam # see what would be copied
-
-# Add news files from source to ".". Trailing slash important, means copy content and not parent directory.
-rsync --ignore-existing -ave ssh rabyj@beluga.computecanada.ca:/lustre04/scratch/frosig/local_ihec_data/EpiAtlas-WGBS-100kb/hg38/hdf5/100kb_all_none/ .
-
-# Following recursively syncs a folder tree and it's final csvs to a specified location
-# -R = Relative
-# /./ marks beginning of folder to sync
-# <https://unix.stackexchange.com/questions/321219/rsync-using-part-of-a-relative-path>
-rsync -aR narval:~/path/to/folder/./folder/tree/to/sync/*.csv /destination/folder
-
-# mirror directory structure (no files)
-rsync -a --include='*/' --exclude='*' source/ destination/
-
-# Copy list of files from a list of absolute paths (without first root /) to current folder
-# sort list beforehand
-# https://unix.stackexchange.com/questions/174674/rsync-a-list-of-directories-with-absolute-path-in-text-file
-# https://stackoverflow.com/questions/16647476/how-to-rsync-only-a-specific-list-of-files/30176688#30176688
-rsync -a --no-dirs --no-relative --files-from=FILE.list narval:/ .
-
-# find file + rsync with dir structure preserved
-# the directory structure starting from the directories that match split* will be preserved in the destination directory.
-find split* -maxdepth 2 -type f -name '*prediction.csv' -print0 | rsync -av --files-from=- --from0 ./ $HOME/Projects/epiclass/output/paper/data/harmonized_sample_ontology_intermediate/all_splits/harmonized_sample_ontology_intermediate_1l_3000n/10fold-dfreeze-2/
-
-# rync list of files while dir keeping structure
-# The filenames that are read from the FILE are all relative to the source dir
-# any leading slashes are removed and no ".." references are allowed to go higher than the source dir. 
-rsync -a --files-from=/tmp/foo /usr remote:/backup
-
-# parallel rsync using xargs, you could also use GNU parallel
-# This will run 5 rsync in parallel, each run on one folder/file found by ls
-ls -1 /source/dir | xargs -I {} -P 5 -n 1 rsync -avh /source/dir/{} /destination/dir/
-
 # -- other --
 
 # show true command, not alias
@@ -572,6 +574,22 @@ comm -12 <(sort file1) <(sort file2) # set(file1) & set(file2), i.e. no unique l
 
 # script location/folder/directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+```
+
+### tar
+
+```bash
+# tar commands
+tar -cf folder_name.tar folder_to_tar # c=create, create tar without compressing
+tar -xvzf file.tar.gz # x=eXtract, v=verbose, z=gz, f=file, will untar directly in cwd
+tar -xf file.tar.extension # recognizes many compression extensions
+tar -cvzf file.tar.gz files_to_tar # create (c) + compress to gz (z)
+tar cf - no_proper_relu/ | xz -z -3 -T 8 -v - > no_proper_relu.tar.xz #tar and compress (level 3, with 8 threads)
+tar -tvf file.tar # list files
+tar -xf file.tar path/to/file/in/tar # extract a specific file
+tar -xzf images.tar.gz --transform='s/.*\///' # flatten structure during extraction
+tar -xf file.tar -T file_list.txt # extract a list of files. paths need to match index.
+export XZ_DEFAULTS="-6e -T2" #2 cores, level 6 extreme
 ```
 
 ### dar - disk archiver
@@ -616,8 +634,18 @@ If `-z` is not specified, no compression is performed, but if `-z` is specified 
 Complex example:
 
 ```bash
-nice dar -Q --multi-thread 10 --compression=xz --slice 20G -c archive_name -u 'lustre*' -g folder1/ &> dar_archive_name.log &
+nice dar -Q --multi-thread 10 --compression=xz:9 --slice 20G -u 'lustre*' -c archive_name -g folder1/ &> dar_archive_name.log &
 ```
+
+Here, we specified compression level 9 for xz. The max for zstd is 22.
+
+##### Parallelism
+
+dar uses block-level parallelism only, not file-level parallelism.
+
+If you're archiving many small files (smaller than your block size), dar's -G threading won't help you much. To get parallelism, your block size needs to be smaller than your files. With 10 MiB files, the 240 KiB default block size happens to work well. If you were archiving files under ~200 KiB, you'd essentially be stuck at single-threaded performance regardless of how many threads you assign.
+
+Using block-level compression instead of streaming (the default) also reduces the maximum compression possible. It's a speed/size tradeoff. It also enables multi-thread decompression.
 
 #### Extraction
 
@@ -627,7 +655,11 @@ Then, to extract (`-x`) a single file into a subdirectory `restore`, use the bas
 dar -R restore/ -O -w -v -x ${archive_name} -g directory/filename
 ```
 
-The flag `-O` will tell dar to ignore file ownership. The flag `-w` will disable a warning if `restore/directory` already exists.
+- The flag `-O` will tell dar to ignore file ownership.
+- The flag `-w` will disable a warning if `restore/directory` already exists (and overwrite files).
+- The flag `-v` will make dar verbose during extraction.
+- The flag `-R` specifies the root directory where to extract files.
+- The flag `-f` extracts as a flat structure, without recreating the directory tree. (flatten)
 
 To extract an entire directory, type:
 
@@ -711,6 +743,9 @@ grep -f pattern_list.ext target.ext
 # Grep using a literal string, don't need to escape anything. Faster than normal grep.
 grep -F "string" target.ext 
 grep -F -f string_list.ext target.ext # grep a list of literal strings.
+
+# case-insensitive / lowercase
+grep -i # -i=--ignore-case
 ```
 
 ## Job schedulers - HPC

@@ -179,6 +179,14 @@ git worktree add <path> [<branch>] # Create <path> and checkout <branch> into it
 git rebase --interactive [new base commit, commit is not included in rebasing]
 ```
 
+### Getting all commit messages between two commits
+
+```bash
+tag1=v0.9.3 # can be any commit hash, not necessarily a tag
+tag2=v0.9.4
+git log ${tag1}..${tag2} --pretty=format:"---%n%B" > ${tag1}_to_${tag2}.txt
+```
+
 ## How do I delete a Git branch locally and remotely?
 
 <https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely>
