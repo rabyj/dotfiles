@@ -94,3 +94,8 @@ pp() {
         fi
     fi
 }
+
+login_epiatlas_sftp() {
+    sshpass -f <(gpg --quiet --decrypt ~/.secrets/bcgsc_sftp_pass.gpg) \
+        sftp DATA-231_pjacques@sftp.bcgsc.ca
+}
