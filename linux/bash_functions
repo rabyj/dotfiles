@@ -73,24 +73,24 @@ function reboot() (
   sudo /sbin/reboot
 )
 
-# Copy physical path to clipboard
+# Copy physical path to clipboard + act as an alias for `pwd -P`
 pp() {
     local dir
     dir="$(pwd -P)"
 
+    # stdout: value only (Compatible with '$(pp)' on command line)
+    printf '%s\n' "$dir"
+
+    # clipboard side-effect (fully detached, no job control)
     if [[ -z "${SSH_CLIENT:-}" ]]; then
-        # Not connected via SSH, just print and copy locally
-        echo "$dir"
         if command -v wl-copy >/dev/null; then
-            echo -n "$dir" | wl-copy
+            printf '%s' "$dir" | setsid wl-copy >/dev/null 2>&1
         elif command -v xclip >/dev/null; then
-            echo -n "$dir" | xclip -selection clipboard
+            printf '%s' "$dir" | xclip -selection clipboard >/dev/null 2>&1
         elif command -v pbcopy >/dev/null; then
-            echo -n "$dir" | pbcopy
+            printf '%s' "$dir" | pbcopy
         else
-            echo "No clipboard tool available" >&2
-            return 1
+            echo "No clipboard utility found (wl-copy, xclip, or pbcopy)." >&2
         fi
-        return
     fi
 }
