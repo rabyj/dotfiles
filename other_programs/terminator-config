@@ -53,7 +53,7 @@
       title = local - EpiClass
       uuid = 2d687ad0-76cd-4702-b838-c9034c1e0822
       directory = /home/local/USHERBROOKE/rabj2301/Projects/epiclass/
-      command = bash --rcfile <(echo ". ~/.bashrc && source ~/projects/envs/epiclass_py3.11/bin/activate && code epiclass.code-workspace ")
+      command = bash --rcfile <(echo ". ~/.bashrc && source ~/projects/envs/epiclass_py3.11/bin/activate && code --ozone-platform=x11 epiclass.code-workspace")
     [[[terminal4]]]
       type = Terminal
       parent = child2

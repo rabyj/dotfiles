@@ -146,6 +146,7 @@ alias mount-cedar="sshfs -o follow_symlinks ${username}@cedar.alliancecan.ca:/ho
 myroot="$HOME/Projects"
 alias source-epiclass=". ${myroot}/envs/epiclass/bin/activate" # SC2139
 
+alias code="code --ozone-platform=x11" # Fixes alt+click follow link not working on ubunty wayland, need to also add it to .desktop
 
 # -- OTHER --
 
