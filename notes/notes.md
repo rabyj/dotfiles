@@ -247,6 +247,12 @@ python: To match a string which does not contain the multi-character sequence `a
 
 ## Python
 
+### Managing environments and install on HPCs
+
+- make sure all dependencies can be installed with no internet (no htttpproxy)
+- make a local wheelhouse for any packages that are not pre-compiled by computecanada. If it's a package that has important speed considerations, consider asking for a new build.
+- new gpu systems are only compatible with StdEnv2023, so make sure everything works with python >=3.11 (drop support for 3.8 to 3.10, they are EOL)
+
 ### pip
 
 See available package versions: `pip index versions packageName`
@@ -270,6 +276,14 @@ virtualenv VENV
 pip list # verif, supposed to be almost empty
 pip install -r requirements.txt
 ```
+
+### uv
+
+On a DRAC system
+
+- don't use `uv run`, it will try to install local packages that won't work on compute nodes
+- Have uv config file that links pertinent indexes (local wheelhouse, cvmfs 2023 links in order, pypi fallback or not)
+  Use it in a bash script with `export UV_CONFIG_FILE`
 
 ### Documenting code
 
@@ -574,6 +588,9 @@ comm -12 <(sort file1) <(sort file2) # set(file1) & set(file2), i.e. no unique l
 
 # script location/folder/directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+# 1000 first lines excluding three first lines
+tail -n +3 dar_archive.index | head -n 1000
 ```
 
 ### tar
@@ -634,7 +651,10 @@ If `-z` is not specified, no compression is performed, but if `-z` is specified 
 Complex example:
 
 ```bash
-nice dar -Q --multi-thread 10 --compression=xz:9 --slice 20G -u 'lustre*' -c archive_name -g folder1/ &> dar_archive_name.log &
+nohup nice dar -Q --multi-thread 10 --compression=xz:9 --slice 20G -u 'lustre*' -c archive_name -g folder1/ &> dar_archive_name.log &
+
+# compression exclusion cannot take path, only full filename: -Z is equivalent
+nohup nice dar -Q --compression=zstd:15 --exclude-compression=filename -u '*' -c archive_name -g folder1/ &> dar_archive_name.log &
 ```
 
 Here, we specified compression level 9 for xz. The max for zstd is 22.
@@ -673,7 +693,74 @@ Complex example:
 nohup nice dar -Q --multi-thread 5 -O -w -x archive_name &> dar_restore_archive_name.log &
 ```
 
-This will overwrite existing files without asking, because of the `-w` flag. (don't warn)
+This will overwrite existing files without asking, because of the `-w` flag. (don't warn).
+
+To extract a list of files: `--include-from-file = -[`
+
+e.g. from this list: `cat recount3_human_100kb_all_none.dar.index | grep ".hdf5" | head -n1000 | cut -f5 > 100kb_n1000.list`
+
+##### Extraction rules
+
+You can set more complex extraction/restoration rules using `-/ , --overwriting-policy <policy>`.
+
+For example: `dar -x /path/basename -/ '{!B}[Oo] {B&!E}[Po] Pp'`
+
+Using single quotes is important to avoid `!` expansion.
+
+The policy is evaluated left to right, stopping at the first matching condition:
+
+The policy is evaluated left to right, stopping at the first matching condition:
+
+```text
+-/ "{!B}[Oo] {B&!E}[Po] Pp"
+```
+
+**Step 1: `{!B}[Oo]`**
+
+`B` is true when the in-place file is bigger or equal in size to the to-be-added file. `!B` negates that, so it's true when the in-place file is **strictly smaller** — the truncated/partial extraction case.
+
+If true → action `Oo`: overwrite both data (uppercase `O`) and EA/FSA (lowercase `o`). This re-extracts the incomplete file fully.
+
+If false → fall through to step 2.
+
+**Step 2: `{B&!E}[Po]`**
+
+We already know `B` is true (in-place is bigger or equal), so the size matches or exceeds the archive version. Now `E` checks whether in-place and to-be-added have **identical inode metadata** (uid, gid, permissions, mtime, and for plain files, size). `!E` means the metadata differs.
+
+So `B&!E` means: same size (data is complete) but something in the metadata is wrong — permissions, ownership, or timestamps didn't get restored before the node killed the process.
+
+If true → action `Po`: preserve data (uppercase `P`, no point re-writing identical content) but overwrite EA/FSA (lowercase `o`, fix the metadata).
+
+If false → fall through to step 3.
+
+**Step 3: `Pp`**
+
+This is the unconditional fallback — no condition braces, so it always applies if we reach it. At this point we know the file is the right size (`B` true) and metadata matches (`E` true), so the file was fully and correctly extracted.
+
+Action `Pp`: preserve both data and attributes. Nothing to do.
+
+**Summary of the three branches:**
+
+| Situation | Condition path | Action |
+| --- | --- | --- |
+| Truncated file (smaller than archive) | `!B` | `Oo` — rewrite everything |
+| Complete data, broken metadata | `B&!E` | `Po` — fix metadata only |
+| Fully restored | neither | `Pp` — skip |
+
+To also ignore EA and ownership when using `-O -u "*"`, you can simplify the policy to `-/ "{!B}[Oo] Pp"`.
+
+```bash
+dar -Q -v -O -f -u "*" -x ${archive_name} -R ${dest} -/ '{!B}[Oo] Pp' &> ~/path/to/log &
+```
+
+##### Remote access
+
+Set up a slave, and then start transfer, e.g.
+
+```bash
+ssh rabyj@narval.alliancecan.ca "dar_slave /lustre06/project/6007017/SHARED_EPIATLAS/recount3/recount3_human_100kb_all_none" < dar_out > dar_in &
+dar -f -w -O -u "*" -x - -i dar_in -o dar_out --include-from-file ~/downloads/100kb_n10000.list
+```
 
 #### Pitfalls
 
@@ -740,8 +827,8 @@ grep -Ev '^"","' /scratch/to_delete/rabyj > ~/to_delete_rabyj.csv
 # Grep with a list of patterns
 grep -f pattern_list.ext target.ext
 
-# Grep using a literal string, don't need to escape anything. Faster than normal grep.
-grep -F "string" target.ext 
+# Grep using a literal string, don't need to escape anything. Faster than normal grep. '--' tells it there are no more new flags.
+grep -F -- "string" target.ext 
 grep -F -f string_list.ext target.ext # grep a list of literal strings.
 
 # case-insensitive / lowercase
@@ -801,7 +888,7 @@ cat temp_jobID.txt | grep "cell" > cell_type_jobID.txt
 #SBATCH --cpus-per-task=1 # number of cpu cores per task
 #SBATCH --gres=gpu:1 # number of gpus per node, if needed. Ususally remove this line.
 #SBATCH --mail-user=prenom.nom@usherbrooke.ca
-#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL,END
 #SBATCH --dependency=afterok:<JOBID> # job dependency, optional
 
 #Useful variables
