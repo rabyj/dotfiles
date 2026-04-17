@@ -9,8 +9,14 @@
   smart_copy = False
   case_sensitive = False
 [keybindings]
+  page_up = Page_Up
+  page_down = Page_Down
+  line_up = <Primary>Up
+  line_down = <Primary>Down
+  toggle_zoom = <Primary><Shift>m
 [profiles]
   [[default]]
+    scroll_on_keystroke = False
     scrollback_infinite = True
     disable_mousewheel_zoom = True
   [[Kat]]
