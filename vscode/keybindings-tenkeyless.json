@@ -160,4 +160,18 @@
         "command": "-workbench.action.copyEditorToNewWindow",
         "when": "activeEditor"
     },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quit"
+    },
+    {
+        "key": "ctrl+shift+down",
+        "command": "-notebook.cell.focusInOutput",
+        "when": "activeEditor == 'workbench.editor.interactive' || activeEditor == 'workbench.editor.notebook' || activeEditor == 'workbench.editor.repl'"
+    },
+    {
+        "key": "ctrl+shift+up",
+        "command": "-notebook.cell.focusOutOutput",
+        "when": "notebookEditorFocused && notebookOutputFocused"
+    },
 ]
