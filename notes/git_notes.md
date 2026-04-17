@@ -60,6 +60,15 @@ git tag -l | xargs git tag -d # rm all tags
 git fetch --tags
 ```
 
+## rebase
+
+Interactive rebase commit ordered is inversed from usual order seen in a git tree, so the rebase root is at the top of the file.
+To squash two commits together, put squash in the line AFTER the other target commit
+
+--> 1. pick
+--> 2. squash # this gets squashed into 1
+--> 3. pick
+
 ## Recover lost commits / discarded changes
 
 Ways to recover commits or working changes that were lost due to various git operations (reset, rebase, etc).
