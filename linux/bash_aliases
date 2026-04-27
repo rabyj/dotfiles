@@ -44,6 +44,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # check if a process is stopping 'idle' status
 alias check-idle="dbus-send --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.GetInhibitors"
 
+# checksum
+alias xxh3="xxhsum -H3"
+
 # pytest with auto cpu core usage (pytest-xdist required)
 alias pytest="pytest -n auto"
 
