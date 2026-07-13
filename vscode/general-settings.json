@@ -254,4 +254,5 @@
         "xlsx": false,
         "parquet": false
     },
+    "workbench.editor.empty.hint": "hidden",
 }
