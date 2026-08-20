@@ -6,12 +6,13 @@ SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
 # bashrc+ config
 ln -svf ${SCRIPT_DIR}/linux/bash_aliases ~/.bash_aliases
-ln -svf ${SCRIPT_DIR}/linux/bash_functions ~/.bash_functions
+ln -svf ${SCRIPT_DIR}/linux/bash_general_functions ~/.bash_general_functions
 ln -svf ${SCRIPT_DIR}/linux/inputrc ~/.inputrc
 
 if [ "$1" = "local" ];
 then
   ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
+  ln -svf ${SCRIPT_DIR}/linux/bash_local_functions ~/.bash_local_functions
 
   ln -svf ${SCRIPT_DIR}/linux/ssh-config ~/.ssh/config
   ln -svf ${SCRIPT_DIR}/linux/keyd_config.conf /etc/keyd/default.conf # for keyboard mapping
@@ -31,6 +32,7 @@ fi
 if [ "$1" = "home" ];
 then
   ln -svf ${SCRIPT_DIR}/linux/bashrc ~/.bashrc
+  ln -svf ${SCRIPT_DIR}/linux/bash_local_functions ~/.bash_local_functions
 
   ln -svf ${SCRIPT_DIR}/linux/ssh-config ~/.ssh/config
   ln -svf ${SCRIPT_DIR}/linux/keyd_config.conf /etc/keyd/default.conf # for keyboard mapping

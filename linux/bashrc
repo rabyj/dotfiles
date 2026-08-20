@@ -119,56 +119,21 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 # User specific aliases and functions, valid both locally and on HPCs
-if [ -f ~/.bash_aliases ]; then
+if [[ -f ~/.bash_aliases ]]; then
   . ~/.bash_aliases
 fi
 
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
+if [[ -f ~/.bash_general_functions ]]; then
+  . ~/.bash_general_functions
 fi
 
 
 # -- Convenience commands (specific to env (local)) --
 
-# Mount HPC cluster via sshfs
-mount_cluster() {
-  local username="rabyj"
-  local mounts="$HOME/mounts"
-  local cluster="$1"
-  local host
-  local mount_dir
+if [[ -f ~/.bash_local_functions ]]; then
+  . ~/.bash_local_functions
+fi
 
-  case "$cluster" in
-      narval)    host="narval.alliancecan.ca"; mount_dir="${mounts}/narval-mount";;
-      narval1)   host="narval1.calculquebec.ca"; mount_dir="${mounts}/narval-mount";;
-      narval2)   host="narval2.calculquebec.ca"; mount_dir="${mounts}/narval-mount";;
-      narval3)   host="narval3.calculquebec.ca"; mount_dir="${mounts}/narval-mount";;
-      beluga)    host="beluga.alliancecan.ca"; mount_dir="${mounts}/beluga-mount";;
-      cedar)     host="cedar.alliancecan.ca"; mount_dir="${mounts}/cedar-mount";;
-      *) echo "Unknown cluster: $cluster"; echo "Available: narval narval1 narval2 narval3 beluga cedar"; return 1;;
-  esac
-
-  mkdir -p "$mount_dir"
-
-  if mountpoint -q "$mount_dir"; then
-      echo "Already mounted: $mount_dir"
-      return 0
-  fi
-
-  local sshfs_opts="-o follow_symlinks \
-                    -o reconnect \
-                    -o ServerAliveInterval=15 \
-                    -o ServerAliveCountMax=3 \
-                    -o dir_cache=yes \
-                    -o dcache_timeout=60 \
-                    -o dcache_stat_timeout=60 \
-                    -o dcache_link_timeout=60 \
-                    -o dcache_dir_timeout=60 \
-                    -o max_conns=1"
-
-  echo "Mounting $cluster at $mount_dir..."
-  sshfs $sshfs_opts "${username}@${host}:/home/${username}/" "$mount_dir"
-}
 
 # tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
 myroot="$HOME/Projects"

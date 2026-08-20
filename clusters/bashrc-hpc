@@ -51,10 +51,15 @@ export UV_LINK_MODE=copy
 
 # -- Alias definitions --
 
-# Generic aliases in ~/.bash_aliases
+# User specific aliases and functions, valid both locally and on HPCs
 if [[ -f ~/.bash_aliases ]]; then
   . ~/.bash_aliases
 fi
+
+if [[ -f ~/.bash_general_functions ]]; then
+  . ~/.bash_general_functions
+fi
+
 
 # -- Narval specific aliases and functions --
 
