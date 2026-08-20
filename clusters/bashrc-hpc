@@ -33,6 +33,8 @@ export PROMPT_COMMAND='history -a'
 HISTTIMEFORMAT='' # Save the timestamp, but don't output it
 #HISTTIMEFORMAT='%F_%T ' # output the time in 'history' see "ht" alias
 
+# Have dar archives show up as red (same as tar)
+export LS_COLORS="$LS_COLORS:*.dar=01;31"
 
 # -- UV config files: login/compute distinction --
 
@@ -70,10 +72,8 @@ alias sqme="sacct -X --format=${SACCT_FIELDS}"
 alias sqme-fullname="sacct -X --format=${SACCT_FIELDS2}"
 alias sqme2="squeue -u rabyj"
 
-alias go-git="cd ~/project-rabyj/sources/epiclass; ls; git-update"
-alias go-epilap="cd ~/project-rabyj/epilap; ls"
-alias go-sub="cd ~/project-rabyj/epilap/output/sub; ls"
-alias go-logs="cd ~/project-rabyj/epilap/output/logs; ls"
+alias go-git="cd ~/projects/def-jacquesp/rabyj/sources/epiclass; ls; git-update"
+alias go-sub="cd ~/projects/def-jacquesp/rabyj/epiclass/output/sub; ls"
 
 
 # -- Terminal prompt modifications --
