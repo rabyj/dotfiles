@@ -4,7 +4,7 @@ Host *
     IdentityFile ~/.ssh/id_ed25519
     User rabyj
 Host narval* beluga cedar rorqual ip34
-    ControlPath ~/.ssh/cm-%r@%h:%p
+    ControlPath ~/.ssh/sockets/cm-%r@%h:%p
     ControlMaster auto
     ControlPersist 48h
     ForwardX11 no
