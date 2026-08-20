@@ -36,6 +36,20 @@ Hide/Show worspaces: Ctrl + Shift + S
 Reload Slack: Ctrl + Shift + R
 Slack tweaks (remove new sidebar): <https://gist.github.com/Kenny-MWI/6b1a88ad38b5ffef347527a82becf054>
 
+### External links
+
+Slack seems to not handle links to default browser properly when it's firefox-esr.
+Need to temporarely change default browser to access admin dashboards links.
+
+```bash
+# Store initial value
+default_browser=$(xdg-settings get default-web-browser)
+# Change browser
+xdg-settings set default-web-browser org.chromium.Chromium.desktop 
+# restart slack, do the thing, then set it back
+xdg-settings set default-web-browser $default_browser
+```
+
 ## Linux
 
 ### .Desktop files for launcher access
@@ -166,6 +180,11 @@ Change file picker to KDE overall, makes Ubuntu slower at login.
 
 ## Markdown
 
+### Style preferences
+
+Avoid blockquotes (`>`) for callouts/notes — the syntax highlighting is distracting.
+Use plain text with a **bold lead-in** instead (e.g. `**Note:**`, `**Gotcha:**`).
+
 ### Collapsible/foldable markdown
 
 <details><summary>CLICK ME</summary>
@@ -244,6 +263,158 @@ vscode: regex to find and replace 'foo' and capture part of it: `'([\w \(\)\.]*)
 
 <https://stackoverflow.com/questions/977251/regular-expressions-and-negating-a-whole-character-group>
 python: To match a string which does not contain the multi-character sequence `ab`, you want to use a negative lookahead: `^(?:(?!ab).)+$`
+
+## Quarto Notebooks
+
+[Quarto website cell layout/formatting](https://quarto.org/docs/authoring/article-layout.html#overflowing-content)
+
+```text
+#| column: body-outset-left
+#| column: page-left
+#| column: screen-inset-left
+```
+
+Example
+
+````qmd
+```{python}
+#| label: supp-fig1e-plot
+#| column: page-left
+plot_prediction_scores_distribution()
+```
+````
+
+### Warning
+
+**Do not combine `column` and `fig-align` properties.**
+
+The alignment is ignored when any `column` is set ([bug #10943](https://github.com/quarto-dev/quarto-cli/issues/10943)).
+
+### Centering / filling body width in Quarto HTML
+
+The body-column width can be customized globally in `_quarto.yml`:
+
+```yaml
+format:
+  html:
+    grid:
+      sidebar-width: 200px
+      body-width: 1000px
+      margin-width: 250px
+```
+
+#### Matplotlib (static, jupyter engine)
+
+Output is a fixed-pixel PNG embedded as `<img class="figure-img">` inside `<figure><p>`.
+
+**Center at natural size:**
+
+```python
+#| fig-align: center
+```
+
+**Fill body width:**
+
+```python
+#| out-width: 100%
+```
+
+Rescales the rendered PNG via CSS. Combine with `#| fig-width:` / `#| fig-height:` (in inches) to control the underlying resolution, or `plt.figure(figsize=(w, h))` inside the function.
+
+**Wider than body:** `#| column: body-outset` or `column: page-inset` (centered, extends symmetrically). Skip `fig-align` — implicit centering applies. Watch for right-TOC overlap.
+
+#### Plotly (jupyter engine)
+
+Output is a JavaScript widget that fills 100% of its container by default.
+
+**Center / fill body:** remove `width=` from `fig.update_layout()`. With no width pinned, Plotly autosizes to the container, naturally filling and centering in the body. Keep `height=` — that's independent.
+
+**Wider than body:** `#| column: body-outset` or `page-inset` on the chunk. The figure expands to match.
+
+#### Embedded HTML (iframe)
+
+E.g. a standalone Plotly HTML file or any external page.
+
+**Responsive aspect-ratio wrapper:**
+
+```html
+<iframe src="path/to/file.html"
+        scrolling="no"
+        style="display: block; width: 100%; aspect-ratio: W / H; border: 0; overflow: hidden;">
+</iframe>
+```
+
+Replace `W / H` with the source's native dimensions (e.g. `2 / 1` for 1000×500).
+
+**Suppress in-iframe scrollbars** — `scrolling="no"` on the iframe and a body-margin reset in the source HTML:
+
+```python
+fig.write_html(
+    "out.html",
+    include_plotlyjs="cdn",
+    config={"responsive": True},
+    default_width="100%",
+    default_height="100%",
+)
+# patch: inject CSS reset
+from pathlib import Path
+p = Path("out.html")
+p.write_text(p.read_text().replace(
+    "<head>",
+    "<head><style>html,body{margin:0;padding:0;overflow:hidden;}</style>",
+    1,
+))
+```
+
+**Wider than body:** wrap the iframe in `::: {.column-body-outset}` or `::: {.column-page-inset}`.
+
+#### Inserted PNG (markdown `![]()` syntax)
+
+DO NOT SEPARATE PROPERTIES WITH COMMAS!
+
+```markdown
+![](path/to/img.png){fig-align="center" width=80%}
+```
+
+Note: `width=` takes a CSS dimension (`80%`, `600px`), **not** a class name.
+Invalid values are silently dropped.
+
+**Fill body:** `width=100%`.
+
+**Wider than body:**
+
+```markdown
+::: {.column-body-outset}
+![](path/to/img.png){fig-align="center"}
+:::
+```
+
+#### Right-TOC overlap (any item type)
+
+Anything that extends rightward — including symmetric/centered classes like `column-page`, `column-page-inset`, `column-body-outset`, `column-screen-inset` — pushes into the right TOC's column and gets visually clipped.
+
+Three escape hatches:
+
+1. Widen body via `_quarto.yml` grid (above) so figures fit without extending.
+2. `::: {.column-screen-left}` — extends leftward only, never overlaps right TOC.
+3. `toc-location: left` (per-page or globally) — frees the right column for figures.
+
+#### Stubborn cases — CSS escape hatch
+
+When `fig-align` and `column:` fight, or matplotlib output won't center, inject a `<style>` block into the qmd (or `include-in-header` in `_quarto.yml` for project-wide):
+
+````markdown
+```{=html}
+<style>
+.center-fig .cell-output-display {
+  display: flex !important;
+  justify-content: center !important;
+}
+</style>
+```
+````
+
+Then tag chunks with `#| classes: center-fig` or wrap with `::: {.center-fig} ... :::`. Flexbox bypasses cascade/specificity fights inside the `<figure>` wrapper. Requires `<style>` tags inside `{=html}` — without them the rules render as literal text.
 
 ## Python
 
@@ -328,25 +499,7 @@ The `pytest -lvs` command is a combination of multiple options used with pytest.
 Disable warnings in config:
 [action:message:category:module:line](https://docs.python.org/3/library/warnings.html#warning-filter)
 
-### Quarto Notebooks
-
-[Quarto website cell layout/formatting](https://quarto.org/docs/authoring/article-layout.html#overflowing-content)
-
-```text
-#| column: body-outset-left
-#| column: page-left
-#| column: screen-inset-left
-```
-
-Example
-
-````qmd
-```{python}
-#| label: supp-fig1e-plot
-#| column: page-left
-plot_prediction_scores_distribution()
-```
-````
+To skip all tests with a certain tag, use: `pytest -m "not [tagname]"`
 
 ### Problems
 
@@ -385,7 +538,9 @@ The modern `[[` operator has lots of other nice features, including regular expr
 
 ```bash
 # - normal permissions -
+find . -exec stat --format='%A %u:%g %n' {} \; > permissions.list # list permissions for all files: A=permissions, u=user, g=group (both numeric), n=path as passed to stat
 chown user:group file # change owners
+chgrp -R [group] [directory] # recursively change group
 chmod 775 # rwxrwxr-x
 chmod 2755 # directory IHEC_share drwxr-sr-x.
 chmod 2750 # directory IHEC_share drwxr-s---.
@@ -446,10 +601,109 @@ rsync -a --files-from=/tmp/foo /usr remote:/backup
 ls -1 /source/dir | xargs -I {} -P 5 -n 1 rsync -avh /source/dir/{} /destination/dir/
 ```
 
+### wget
+
+Bulk-download helper for HTTP(S) listings. Two input modes: a URL list via `-i list.txt`,
+or a recursive crawl of folder URLs via `-r`. The on-disk layout (preserve tree vs. flatten)
+is controlled separately from the input mode.
+
+#### Common flags
+
+```text
+-i FILE                      read URLs from FILE (one per line)
+-P, --directory-prefix       output directory (created if needed)
+-r, --recursive              follow links / crawl folder URLs
+-np, --no-parent             don't ascend above the start dir when recursing
+-nH, --no-host-directories   drop the hostname dir (no example.com/ level)
+-nd, --no-directories        flat: dump every file into the prefix, no tree
+--cut-dirs=N                 strip N leading path components from the saved path
+--force-directories          always recreate the full path tree (even for -i lists)
+-A, --accept=LIST            only keep files matching these glob patterns
+-R, --reject=LIST            skip files matching these patterns (e.g. "index.html*")
+--spider                     dry-run: discover/check URLs, download nothing
+-e robots=off                ignore robots.txt (needed for many data servers)
+--reject-regex=RE            don't follow URLs matching RE (filters before fetching)
+--regex-type=posix           use POSIX regex for --reject-regex / --accept-regex
+-nc, --no-clobber            skip files already present locally
+-c, --continue               resume partially downloaded files
+--wait=1 --random-wait       polite randomized delay between requests
+--timeout=30 --tries=3       per-request timeout and retry count
+--show-progress              per-file progress bar
+-nv, --no-verbose            one line per finished file (no live bar)
+--progress=dot:giga          dotted progress instead of a redrawing bar
+-q, --quiet                  silence everything
+```
+
+Note: `-nc` (skip existing) and `-c` (resume partial) pull in opposite directions; keep one.
+
+Note: when logging to a file (`&> wget.log`), drop `--show-progress` — it forces the
+live bar, whose carriage-return redraws become hundreds of junk lines in the log. Use
+`-nv` (one line per file) for clean logs, or `--progress=dot:giga` if you still want
+progress; `-q` silences everything.
+
+#### 1. Crawl to discover matching files (no download)
+
+`--spider` walks the listing and logs every URL that *would* be fetched, saving nothing —
+handy for previewing what an `--accept` pattern matches before committing to a download.
+
+```bash
+wget --spider -r -np -nH -R "index.html*" -e robots=off \
+     --accept='*plusRaw*bw,*minusRaw*bw' \
+     -i n3_observed.txt &> spider.log
+```
+
+#### 2. Download from a URL list
+
+Reproduce the full remote directory tree under cwd:
+
+```bash
+wget --force-directories --cut-dirs=0 \
+     --wait=1 --random-wait --continue --timeout=30 \
+     --tries=3 --no-clobber --show-progress \
+     -i urls_rna_multiple.list
+```
+
+Flat into one folder (ignore remote paths):
+
+```bash
+wget -P test_RNA/ \
+     --wait=1 --random-wait --continue --timeout=30 \
+     --tries=3 --no-clobber --show-progress \
+     -i urls_rna_multiple.list
+```
+
+(A plain `-i` list without `--force-directories` already saves flat into the prefix.)
+
+#### 3. Download from folder URLs (recursive)
+
+Preserve the remote directory structure, rooted under the prefix:
+
+```bash
+wget -r -np -nH -P new/ -R "index.html*" -e robots=off \
+     --wait=1 --random-wait --continue --timeout=30 \
+     --tries=3 --no-clobber --show-progress \
+     --accept='*bw,*bigwig' \
+     -i missing_dirs.list
+```
+
+Flat — every file directly into `new/`, no subfolders. **Add `-nd`:**
+
+```bash
+wget -r -np -nH -nd -P new/ -R "index.html*" -e robots=off \
+     --wait=1 --random-wait --continue --timeout=30 \
+     --tries=3 --no-clobber --show-progress \
+     --accept='*bw,*bigwig' \
+     -i missing_dirs.list
+```
+
+**Gotcha:** with `-r` but no `-nd`, files land in `new/<remote/path>/…`, **not** directly in `new/`. That's the "didn't write to new" surprise — `-nd` (`--no-directories`) is what flattens the recreated tree into the prefix.
+
+**Apache index noise:** a recursive crawl re-fetches the same listing once per column-sort link — `?C=N;O=D` etc. (`C`=column Name/Modified/Size/Description, `O`=order Asc/Desc). They log as `index.html?C=….tmp` and get deleted (rejected by `-R "index.html*"`), but `-R` only controls *keeping*, not *fetching* — wget still downloads each HTML page to harvest links. Suppress with `--reject-regex='\?C=' --regex-type=posix`, which drops those URLs before they're requested (and saves the per-URL `--wait`).
+
 ### find
 
 ```bash
-# list/count number of files in multiple directories
+# list/count number of files in multiple directories/folder
 find . -type f | cut -d/ -f2 | sort | uniq -c
 
 # list files with full paths in directory (give full path to find)
@@ -462,6 +716,9 @@ find . -maxdepth 1 -type f
 # seek specific files
 find . -type f | grep ".sh"
 
+# follow symlinks/symbolic
+find . -L
+
 # Do an action on each file with result of find
 find . -type f | grep ".sh" | xargs -I{} chmod a-x {}
 
@@ -470,17 +727,61 @@ find . -type f -printf '%s %p\n' # size + filepath
 # %c is access time, %b is birth/creation time, %t is modification time
 https://man7.org/linux/man-pages/man1/find.1.html
 
-# List number of files in each folder
-find . -type f | cut -d/ -f2 | sort | uniq -c
-
 # List md5s from hdf5 (epigeec file format)
 find . -type f -name "*.hdf5" | cut -d_ -f1 | cut -d/ -f2 | sort > ../list.md5
 
-# Exclude files from find
-find . -type f -not -path "./specific/directory/to/ignore/*"
-
 # Compute md5sums of files found
 find . -type f -name "pattern" | xargs md5sum > ../md5sums.txt
+```
+
+#### find logical operations
+
+OR logic (match any of several names)
+
+```bash
+# Find files named either file1.txt OR file2.txt
+find . -type f \( -name "file1.txt" -o -name "file2.txt" \)
+
+# Multiple extensions
+find . -type f \( -name "*.sh" -o -name "*.py" -o -name "*.pl" \)
+
+# Equivalent using regex
+find . -type f -regex '.*\.\(sh\|py\|pl\)$'
+```
+
+AND logic (all conditions must be true)
+
+```bash
+# Shell scripts larger than 1 MB
+find . -type f -name "*.sh" -size +1M
+
+# HDF5 files modified in last 7 days
+find . -type f -name "*.hdf5" -mtime -7
+
+# AND can be explicit
+find . -type f -name "*.sh" -a -size +1M
+```
+
+Negation (NOT)
+
+```bash
+# All files except shell scripts
+find . -type f ! -name "*.sh"
+
+# All files except .sh and .py
+find . -type f ! \( -name "*.sh" -o -name "*.py" \)
+
+# Exclude specific directory
+find . -type f -not -path "./specific/directory/to/ignore/*"
+```
+
+Complex example
+
+```bash
+# HDF5 OR BAM files that are larger than 1 GB
+find . -type f \
+    \( -name "*.hdf5" -o -name "*.bam" \) \
+    -size +1G
 ```
 
 ### General
@@ -589,8 +890,54 @@ comm -12 <(sort file1) <(sort file2) # set(file1) & set(file2), i.e. no unique l
 # script location/folder/directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-# 1000 first lines excluding three first lines
-tail -n +3 dar_archive.index | head -n 1000
+# Skip first line (start at line two)
+tail -n +2 file
+
+# Start at line three, then take 1000 lines (skip first two lines)
+tail -n +3 file | head -n 1000
+```
+
+### nohup
+
+`nohup` prevents the wrapped process from receiving SIGHUP (hangup) when the terminal/session disappears.
+
+Important nuance:
+
+- Child processes *inherit* the ignored SIGHUP by default
+- However, programs may override signal handling or exit on session loss
+- As a result, `nohup` does **not reliably protect complex scripts or pipelines**
+
+Example failure case:
+
+```bash
+nohup bash dar_archive.sh ... &
+```
+
+If a program inside the script handles or reacts to SIGHUP, it may still exit when the SSH connection drops.
+`dar` does that.
+
+---
+
+#### Solutions
+
+- Stronger detachment (quick fix)
+
+Start a completely new session:
+
+```bash
+setsid nohup bash dar_archive.sh ... > log 2>&1 &
+```
+
+- Preferred: persistent terminal
+
+Use `tmux` (or `screen`) to avoid losing the session entirely:
+
+```bash
+tmux new -s job
+bash dar_archive.sh ... &
+# Detach: Ctrl+b --> d # (my conf uses Ctrl+a)
+# Reattach later
+tmux attach -t job
 ```
 
 ### tar
@@ -606,8 +953,50 @@ tar -tvf file.tar # list files
 tar -xf file.tar path/to/file/in/tar # extract a specific file
 tar -xzf images.tar.gz --transform='s/.*\///' # flatten structure during extraction
 tar -xf file.tar -T file_list.txt # extract a list of files. paths need to match index.
+tar -cvvf file.tar files_to_tar > file.tar.index
 export XZ_DEFAULTS="-6e -T2" #2 cores, level 6 extreme
 ```
+
+### zstd
+
+#### Example
+
+Compress and tar at same time
+
+```bash
+tar -cf - -C "$parent_folder" [target] \
+    | tee >(tar -tvvf - > "${output_folder}/${archive_name}.tar.index") \
+    | nice zstd --ultra -22 -q -T4 -o "${output_folder}/${archive_name}.tar.zstd"
+```
+
+-C: Change current working directory before doing command (avoids embedding long absolute paths in the archive)
+-tee: duplicates input streams, one for index, one for compression.
+
+#### Basic zstd evaluation
+
+No obvious loss from multithreading, at -10
+
+for our hdf5 data, no clear advantage of using 15 over 10 (not enough gain).
+66G Apr 17 19:57 10kb_can.tar
+40G Apr 17 19:57 10kb_can.tar.10_4T.zstd
+40G Apr 17 19:57 10kb_can.tar.10.zstd
+40G Apr 17 19:57 10kb_can.tar.15_4T.zstd
+41G Apr 17 19:57 10kb_can.tar.5.zstd
+
+#### Real sparse file
+
+Reference file: 2018-10.tar, old IHEC release data, on Narval nearline
+
+Narval nearline as of writing (2026) does not actually send files to tape,
+so the 'apparent' vs 'actual' size difference is just due to file sparsity
+There's no transparent compression happening either on lustre filesystems
+
+ls --> apparent/ size (term by diskusage_explorer)
+
+- Apparent/Uncompressed size: 84G
+- Actual size: 67.6G (diskusage_explorer, or using du -h file)
+- if zstd max: 32G
+  - Also compresses just as well in parallel T4
 
 ### dar - disk archiver
 
@@ -667,6 +1056,16 @@ If you're archiving many small files (smaller than your block size), dar's -G th
 
 Using block-level compression instead of streaming (the default) also reduces the maximum compression possible. It's a speed/size tradeoff. It also enables multi-thread decompression.
 
+#### Catalogue
+
+Unlike the tar command, dar has not to read a whole archive nor to stick together the different parts (the slices) to access its contents: dar archives contain a table of contents (aka "catalogue") located at the end, so dar can seek into the archive to read only the required data to restore files. The "catalogue" can be copied out of the archive (operation called isolation) to be used as reference for further backup and as backup of the internal catalogue in case of archive corruption.
+
+`-C` (for 'catalogue'), or `--isolate` makes a copy of the internal catalogue to its own archive container.
+
+```bash
+dar -C catalogue_basename -A target_archive_basename
+```
+
 #### Extraction
 
 Then, to extract (`-x`) a single file into a subdirectory `restore`, use the base name and the file path:
@@ -698,6 +1097,10 @@ This will overwrite existing files without asking, because of the `-w` flag. (do
 To extract a list of files: `--include-from-file = -[`
 
 e.g. from this list: `cat recount3_human_100kb_all_none.dar.index | grep ".hdf5" | head -n1000 | cut -f5 > 100kb_n1000.list`
+
+```bash
+nohup nice dar -Q -O -w -f --include-from-file=${extract_list} -x ${archive_dir}/${archive_name} -R ${target_dir} &> dar_restore_${archive_name}.log
+```
 
 ##### Extraction rules
 

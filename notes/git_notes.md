@@ -150,8 +150,10 @@ To sign a single commit/tag:
 
 ```bash
 git commit -S -m "my signed commit"
-git tag -s v1.0 -m "my signed tag"
+git tag -s v1.0 [optional_commit_sha] -m "my signed tag"
 ```
+
+Note: "If one of -a, -s [...] is passed, the command creates a tag object, and requires a tag message"
 
 To rebase and sign all commits after `<base-commit>` ([source](https://superuser.com/questions/397149/can-you-gpg-sign-old-commits)):
 
@@ -179,6 +181,7 @@ git reset [option] HEAD@{1} #move forward one commit with option.
 # stash
 git stash list #list existing stashes
 git stash push -m "my_stash" # save a named stash, brings all working directory changes to stash
+git stash push -m "stash-name" path/file1.ext path/file2.ext # saved a named stash with specific files
 git stash pop "stash@{n}" # apply a stash and remove it from the stash list
 git stash apply "stash@{n}" # apply a stash and keep it in the stash cache
 
@@ -190,10 +193,12 @@ git rebase --interactive [new base commit, commit is not included in rebasing]
 
 ### Getting all commit messages between two commits
 
+`--name-status` specifies which files were modified.
+
 ```bash
 tag1=v0.9.3 # can be any commit hash, not necessarily a tag
 tag2=v0.9.4
-git log ${tag1}..${tag2} --pretty=format:"---%n%B" > ${tag1}_to_${tag2}.txt
+git log ${tag1}..${tag2} --pretty=format:"---%n%B" --name-status > ${tag1}_to_${tag2}.txt
 ```
 
 ## How do I delete a Git branch locally and remotely?
