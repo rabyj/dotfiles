@@ -2,7 +2,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-  . /etc/bashrc
+  source /etc/bashrc
 fi
 
 # User specific environment
@@ -53,11 +53,11 @@ export UV_LINK_MODE=copy
 
 # User specific aliases and functions, valid both locally and on HPCs
 if [[ -f ~/.bash_aliases ]]; then
-  . ~/.bash_aliases
+  source ~/.bash_aliases
 fi
 
 if [[ -f ~/.bash_general_functions ]]; then
-  . ~/.bash_general_functions
+  source ~/.bash_general_functions
 fi
 
 

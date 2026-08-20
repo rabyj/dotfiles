@@ -120,24 +120,24 @@ fi
 
 # User specific aliases and functions, valid both locally and on HPCs
 if [[ -f ~/.bash_aliases ]]; then
-  . ~/.bash_aliases
+  source ~/.bash_aliases
 fi
 
 if [[ -f ~/.bash_general_functions ]]; then
-  . ~/.bash_general_functions
+  source ~/.bash_general_functions
 fi
 
 
 # -- Convenience commands (specific to env (local)) --
 
 if [[ -f ~/.bash_local_functions ]]; then
-  . ~/.bash_local_functions
+  source ~/.bash_local_functions
 fi
 
 
 # tried to use this but failed : https://stackoverflow.com/questions/43256369/how-to-rename-a-virtualenv-in-python/68400551#68400551
 myroot="$HOME/Projects"
-alias source-epiclass=". ${myroot}/envs/epiclass_py3.11/bin/activate" # SC2139
+alias source-epiclass="source ${myroot}/envs/epiclass_py3.11/bin/activate" # SC2139
 alias go-epiclass="cd ${myroot}/sources/epiclass && git status" # SC2139
 
 alias code="code --ozone-platform=x11" # Fixes alt+click follow link not working on ubunty wayland, need to also add it to .desktop
