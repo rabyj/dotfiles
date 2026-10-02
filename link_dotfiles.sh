@@ -27,6 +27,9 @@ then
   ln -svf ${SCRIPT_DIR}/vscode/shellcheckrc ~/.shellcheckrc
   ln -svf ${SCRIPT_DIR}/vscode/general-settings.json ~/.config/Code/User/settings.json
   ln -svf ${SCRIPT_DIR}/vscode/keybindings-tenkeyless.json ~/.config/Code/User/keybindings.json
+
+  # GNOME settings (dconf is a binary db, so load a keyfile instead of symlinking)
+  dconf load / < ${SCRIPT_DIR}/linux/dconf-settings.ini
 fi
 
 if [ "$1" = "home" ];

@@ -152,6 +152,40 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys volume-step 1
 Use gnome tweaks to enable "Both shifts together enable Caps Lock; one Shift key disables it" in keyboard layout compatibility options.  
 See: [Caps Lock toggle reversed and malfunctioning](https://discussion.fedoraproject.org/t/fedora-39-caps-lock-toggle-reversed-and-malfunctioning/95458/6)
 
+#### Saving a GNOME setting (gsettings/dconf)
+
+Kept settings live in `linux/dconf-settings.ini`; `link_dotfiles.sh` applies them with `dconf load /`.
+
+To add one:
+
+1. Start watching: `dconf watch /`
+2. Change the setting in the GUI (Settings, Tweaks, etc.). The full key path is printed, then the new value indented below it:
+
+   ```text
+   /org/gnome/desktop/interface/color-scheme
+     'prefer-dark'
+   ```
+
+3. Stop with Ctrl+C. Convert for the `.ini` file:
+   - section = path **without the leading `/` and without the last part** → `[org/gnome/desktop/interface]`
+   - key = last part → `color-scheme`
+   - value = copied exactly as printed, quotes included → `'prefer-dark'`
+
+   ```ini
+   [org/gnome/desktop/interface]
+   color-scheme='prefer-dark'
+   ```
+
+   If the section already exists in the file, add the line under it instead of repeating the section.
+
+4. Apply and check: `dconf load / < ~/dotfiles/linux/dconf-settings.ini`, then `dconf read /org/gnome/desktop/interface/color-scheme`
+
+Notes:
+
+- Skip keys that change on their own (`*-timestamp`, window sizes/positions); only keep deliberate choices.
+- See a whole section's current values: `dconf dump /org/gnome/desktop/interface/`
+- If nothing is printed in step 2, the app probably doesn't store that setting in dconf (some use their own config files).
+
 ### File manager
 
 #### Change file association
