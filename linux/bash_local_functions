@@ -53,6 +53,28 @@ function reboot() (
   # Request sudo privileges upfront
   sudo -v || return 1
 
+  # Quit Double Commander cleanly so it saves tabs and history.
+  # Its SIGTERM handler calls frmMain.Close, the same code path as cm_Exit.
+  # Done here as a precaution, so the save does not depend on the timing of
+  # systemd's own shutdown.
+  local dc_pids
+  dc_pids="$(pgrep -u "$USER" -x doublecmd || true)"
+  if [[ -n "$dc_pids" ]]; then
+    echo "Closing Double Commander..."
+    kill -TERM $dc_pids 2>/dev/null || true  # it may have exited already
+    local waited=0
+    while pgrep -u "$USER" -x doublecmd >/dev/null; do
+      if (( waited >= 30 )); then
+        echo "Double Commander still running after 30s (active file operation" \
+          "or unsaved editor?). Reboot aborted." >&2
+        return 1
+      fi
+      sleep 1
+      waited=$((waited + 1))
+    done
+    echo "Double Commander closed."
+  fi
+
   # Unmount all sshfs filesystems
     echo "Unmounting sshfs filesystems..."
     if mount | grep -q 'type fuse.sshfs'; then
